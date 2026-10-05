@@ -1,0 +1,2095 @@
+/* =========================
+   HOLOVISION AI - STYLE
+   PART 1
+   ========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: white;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #123c63 0%,
+            transparent 40%
+        ),
+        linear-gradient(
+            135deg,
+            #020617,
+            #071a2f,
+            #0f172a
+        );
+
+    overflow-x: hidden;
+}
+
+
+/* =========================
+   LOGIN BOX
+   ========================= */
+
+.login-box {
+    width: 100%;
+    max-width: 400px;
+
+    margin: 0 auto;
+    padding: 35px 28px;
+
+    text-align: center;
+
+    background: rgba(255, 255, 255, 0.07);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(0, 229, 255, 0.25);
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 0 25px rgba(0, 229, 255, 0.15),
+        inset 0 0 20px rgba(255, 255, 255, 0.03);
+}
+
+
+/* LOGIN LOGO */
+
+.login-logo {
+    width: 75px;
+    height: 75px;
+
+    margin: 0 auto 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #00e5ff;
+
+    font-size: 30px;
+    font-weight: bold;
+
+    letter-spacing: -3px;
+
+    border: 1px solid rgba(0, 229, 255, 0.45);
+
+    border-radius: 14px;
+
+    background: rgba(0, 229, 255, 0.04);
+
+    text-shadow:
+        0 0 8px #00e5ff,
+        0 0 20px #00e5ff;
+
+    box-shadow:
+        0 0 15px rgba(0, 229, 255, 0.25);
+}
+
+
+/* LOGIN TITLE */
+
+.login-box h1 {
+    margin: 10px 0 5px;
+
+    color: #00e5ff;
+
+    font-size: 28px;
+
+    text-shadow:
+        0 0 8px #00e5ff,
+        0 0 20px rgba(0, 229, 255, 0.4);
+}
+
+.subtitle {
+    margin-bottom: 25px;
+
+    color: #9bdff0;
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+}
+
+
+/* LOGIN INPUT */
+
+.login-box input {
+    width: 100%;
+
+    padding: 14px;
+
+    margin: 8px 0;
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+
+    border-radius: 12px;
+
+    outline: none;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    color: white;
+
+    font-size: 15px;
+}
+
+.login-box input::placeholder {
+    color: #b7c5d4;
+}
+
+.login-box input:focus {
+    border-color: #00e5ff;
+
+    box-shadow:
+        0 0 12px rgba(0, 229, 255, 0.25);
+}
+
+
+/* LOGIN BUTTONS */
+
+.login-btn,
+.signup-btn {
+    width: 100%;
+
+    padding: 14px;
+
+    margin-top: 12px;
+
+    border-radius: 12px;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+
+/* LOGIN */
+
+.login-btn {
+    border: none;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0891b2,
+            #00e5ff
+        );
+
+    color: #001018;
+
+    box-shadow:
+        0 0 15px rgba(0, 229, 255, 0.2);
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 0 25px rgba(0, 229, 255, 0.55);
+}
+
+
+/* CREATE ACCOUNT */
+
+.signup-btn {
+    border: 1px solid rgba(0, 229, 255, 0.3);
+
+    background: transparent;
+
+    color: #dffaff;
+}
+
+.signup-btn:hover {
+    background: rgba(0, 229, 255, 0.08);
+
+    border-color: #00e5ff;
+
+    box-shadow:
+        0 0 15px rgba(0, 229, 255, 0.2);
+}
+
+
+/* FOOTER */
+
+.footer {
+    margin-top: 22px;
+
+    color: #64748b;
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================
+   HOLOGRAM HV LOGO
+   ========================= */
+
+.hologram-core {
+    position: relative;
+
+    width: 180px;
+    height: 180px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 0;
+
+    background: transparent;
+
+    box-shadow: none;
+
+    animation: holoFloat 4s ease-in-out infinite;
+
+    z-index: 3;
+}
+
+
+.core-inner {
+    width: auto;
+    height: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 0;
+
+    background: transparent;
+
+    color: transparent;
+
+    font-size: 0;
+
+    letter-spacing: 0;
+
+    box-shadow: none;
+}
+
+/* =========================
+   NEON HV
+   ========================= */
+
+.core-inner::after {
+
+    content: "HV";
+
+    font-family: Arial, sans-serif;
+
+    font-size: 72px;
+
+    font-weight: 900;
+
+    letter-spacing: -8px;
+
+    color: transparent;
+
+    background:
+        linear-gradient(
+            135deg,
+            #00eaff,
+            #67e8f9,
+            #b64dff,
+            #e879f9
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-stroke:
+        1.5px rgba(0, 240, 255, 0.65);
+
+    filter:
+        drop-shadow(
+            0 0 5px
+            rgba(0, 234, 255, 0.7)
+        )
+        drop-shadow(
+            0 0 12px
+            rgba(139, 77, 255, 0.35)
+        );
+
+    animation:
+        hvGlow 3s ease-in-out infinite;
+}
+
+
+/* =========================
+   HV GLOW ANIMATION
+   ========================= */
+
+@keyframes hvGlow {
+
+    0%,
+    100% {
+
+        transform: scale(1);
+
+        filter:
+            drop-shadow(
+                0 0 5px
+                rgba(0, 234, 255, 0.7)
+            )
+            drop-shadow(
+                0 0 12px
+                rgba(139, 77, 255, 0.35)
+            );
+    }
+
+    50% {
+
+        transform: scale(1.04);
+
+        filter:
+            drop-shadow(
+                0 0 8px
+                rgba(0, 234, 255, 0.8)
+            )
+            drop-shadow(
+                0 0 18px
+                rgba(182, 77, 255, 0.45)
+            );
+    }
+}
+
+
+/* =========================
+   HOLOGRAM FLOAT
+   ========================= */
+
+@keyframes holoFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 480px) {
+
+    body {
+        padding: 15px;
+    }
+
+    .login-box {
+        padding: 30px 22px;
+    }
+
+    .login-logo {
+        width: 68px;
+        height: 68px;
+    }
+
+    .login-box h1 {
+        font-size: 25px;
+    }
+
+    .login-box input {
+        font-size: 14px;
+        padding: 13px;
+    }
+
+    .login-btn,
+    .signup-btn {
+        padding: 13px;
+    }
+}
+
+
+@media (max-width: 800px) {
+
+    .hologram-core {
+        width: 130px;
+        height: 130px;
+    }
+
+    .core-inner::after {
+
+        font-size: 52px;
+
+        -webkit-text-stroke:
+            1.2px rgba(0, 240, 255, 0.6);
+    }
+}
+
+/* LOGIN PAGE CENTER */
+
+.login-page {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+}
+
+
+/* ========================================
+   PART 3 - 3D VISUALISATION
+======================================== */
+
+.visual3d-box {
+    margin-top: 25px;
+    padding: 25px;
+    border: 1px solid rgba(0, 234, 255, 0.35);
+    border-radius: 20px;
+    background: rgba(2, 15, 30, 0.85);
+    text-align: center;
+    box-shadow:
+        0 0 20px rgba(0, 220, 255, 0.15);
+}
+
+.visual3d-box h2 {
+    color: #00eaff;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.visual3d-box p {
+    color: #d8f7ff;
+    font-size: 17px;
+}
+
+
+/* 3D COMPUTER */
+
+.computer-3d {
+    width: 260px;
+    height: 230px;
+    margin: 35px auto;
+    position: relative;
+    perspective: 700px;
+}
+
+
+/* MONITOR */
+
+.monitor {
+    width: 220px;
+    height: 135px;
+    position: absolute;
+    top: 10px;
+    left: 20px;
+
+    background: linear-gradient(
+        145deg,
+        #071b30,
+        #03101e
+    );
+
+    border: 3px solid #00eaff;
+    border-radius: 12px;
+
+    transform:
+        rotateX(4deg)
+        rotateY(-8deg);
+
+    box-shadow:
+        0 0 15px rgba(0, 234, 255, 0.5),
+        inset 0 0 20px rgba(0, 234, 255, 0.08);
+}
+
+
+/* SCREEN */
+
+.screen {
+    width: 185px;
+    height: 100px;
+
+    margin: 14px auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0, 234, 255, 0.18),
+            rgba(0, 10, 25, 0.95)
+        );
+
+    border: 1px solid rgba(0, 234, 255, 0.5);
+    border-radius: 6px;
+
+    color: #00eaff;
+
+    font-family: 'Orbitron', sans-serif;
+    font-size: 15px;
+
+    overflow: hidden;
+
+    box-shadow:
+        inset 0 0 15px rgba(0, 234, 255, 0.15);
+}
+
+
+/* MONITOR STAND */
+
+.stand {
+    position: absolute;
+
+    width: 45px;
+    height: 55px;
+
+    left: 108px;
+    top: 140px;
+
+    background: linear-gradient(
+        90deg,
+        #071525,
+        #0b3045,
+        #071525
+    );
+
+    transform:
+        perspective(200px)
+        rotateX(8deg);
+
+    border-left: 2px solid #00dfff;
+    border-right: 2px solid #00dfff;
+}
+
+
+/* BASE */
+
+.base {
+    position: absolute;
+
+    width: 125px;
+    height: 25px;
+
+    left: 68px;
+    top: 190px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #061525,
+            #0b3950,
+            #061525
+        );
+
+    border: 2px solid #00eaff;
+
+    border-radius: 50%;
+
+    transform:
+        perspective(200px)
+        rotateX(55deg);
+
+    box-shadow:
+        0 0 15px rgba(0, 234, 255, 0.4);
+}
+
+
+.visual3d-info {
+    margin-top: 10px;
+    color: #8defff !important;
+}
+
+/* ========================================
+   HOLOVISION AI
+   PART 3 - 3D VISUALISATION
+   ======================================== */
+
+.visual3d-box {
+    width: 100%;
+    margin-top: 25px;
+    padding: 25px 15px;
+    box-sizing: border-box;
+    text-align: center;
+
+    border: 1px solid #00eaff;
+    border-radius: 20px;
+
+    background: rgba(0, 15, 30, 0.85);
+
+    box-shadow:
+        0 0 20px rgba(0, 234, 255, 0.18),
+        inset 0 0 20px rgba(0, 234, 255, 0.05);
+}
+
+.visual3d-box h2 {
+    color: #ffffff !important;
+    font-size: 32px;
+    margin: 5px 0 10px;
+}
+
+.visual3d-box p {
+    color: #d8faff !important;
+}
+
+
+/* ========================================
+   3D COMPUTER
+   ======================================== */
+
+.visual3d-box .computer-3d {
+
+    position: relative !important;
+
+    display: block !important;
+
+    width: 280px !important;
+    height: 270px !important;
+
+    margin: 35px auto !important;
+
+    visibility: visible !important;
+    opacity: 1 !important;
+
+    transform-style: preserve-3d ;
+
+    transform:
+        perspective(700px)
+        rotateX(-8deg)
+        rotateY(-18deg) !important;
+
+    animation: hvComputerFloat 4s ease-in-out infinite;
+
+    overflow: visible !important;
+}
+
+
+/* ========================================
+   MONITOR
+   ======================================== */
+
+.visual3d-box .monitor {
+
+    position: absolute !important;
+
+    display: block !important;
+
+    width: 230px !important;
+    height: 145px !important;
+
+    left: 25px !important;
+    top: 10px !important;
+
+    border: 3px solid #00eaff !important;
+
+    border-radius: 12px !important;
+
+    background: #071827 !important;
+
+    visibility: visible !important;
+    opacity: 1 !important;
+
+    transform: translateZ(25px);
+
+    box-shadow:
+        0 0 12px #00eaff,
+        0 0 30px rgba(0, 234, 255, 0.35),
+        inset 0 0 20px rgba(0, 234, 255, 0.15);
+}
+
+
+/* ========================================
+   SCREEN
+   ======================================== */
+
+.visual3d-box .screen {
+
+    position: absolute !important;
+
+    display: flex !important;
+
+    left: 12px !important;
+    right: 12px !important;
+    top: 12px !important;
+    bottom: 12px !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    overflow: hidden !important;
+
+    border-radius: 7px !important;
+
+    background:
+        radial-gradient(
+            circle,
+            #073b52,
+            #020b14 75%
+        ) !important;
+
+    color: #00eaff !important;
+
+    font-size: 20px !important;
+    font-weight: bold;
+
+    visibility: visible !important;
+    opacity: 1 !important;
+
+    text-shadow:
+        0 0 8px #00eaff,
+        0 0 20px #00eaff;
+
+    box-shadow:
+        inset 0 0 20px rgba(0, 234, 255, 0.3);
+}
+
+
+/* ========================================
+   SCREEN SCAN
+   ======================================== */
+
+.visual3d-box .screen::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    top: 0;
+
+    height: 2px;
+
+    background: #00eaff;
+
+    box-shadow:
+        0 0 10px #00eaff;
+
+    animation: hvScan 2.5s linear infinite;
+}
+
+
+/* ========================================
+   MONITOR STAND
+   ======================================== */
+
+.visual3d-box .stand {
+
+    position: absolute !important;
+
+    display: block !important;
+
+    width: 45px !important;
+    height: 60px !important;
+
+    left: 117px !important;
+    top: 150px !important;
+
+    background:
+        linear-gradient(
+            90deg,
+            #06354a,
+            #00eaff,
+            #06354a
+        ) !important;
+
+    visibility: visible !important;
+    opacity: 1 !important;
+
+    transform: translateZ(10px);
+
+    box-shadow:
+        0 0 12px rgba(0, 234, 255, 0.5);
+}
+
+
+/* ========================================
+   COMPUTER BASE
+   ======================================== */
+
+.visual3d-box .base {
+
+    position: absolute !important;
+
+    display: block !important;
+
+    width: 130px !important;
+    height: 25px !important;
+
+    left: 75px !important;
+    top: 205px !important;
+
+    border: 2px solid #00eaff !important;
+
+    border-radius: 50% !important;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(0, 234, 255, 0.35),
+            #021522
+        ) !important;
+
+    visibility: visible !important;
+    opacity: 1 !important;
+
+    transform:
+        rotateX(65deg)
+        translateZ(5px);
+
+    box-shadow:
+        0 0 20px rgba(0, 234, 255, 0.5);
+}
+
+
+/* ========================================
+   FLOATING ANIMATION
+   ======================================== */
+
+@keyframes hvComputerFloat {
+
+    0%, 100% {
+        transform:
+            perspective(700px)
+            rotateX(-8deg)
+            rotateY(-18deg)
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            perspective(700px)
+            rotateX(-8deg)
+            rotateY(-18deg)
+            translateY(-10px);
+    }
+}
+
+
+/* ========================================
+   SCAN ANIMATION
+   ======================================== */
+
+@keyframes hvScan {
+
+    0% {
+        top: 0;
+    }
+
+    100% {
+        top: 100%;
+    }
+}
+
+
+/* ========================================
+   INFO
+   ======================================== */
+
+.visual3d-box .visual3d-info {
+
+    color: #8eeeff !important;
+
+    font-size: 14px;
+
+    letter-spacing: 1px;
+
+    margin-top: 15px;
+}
+
+
+/* ========================================
+   MOBILE
+   ======================================== */
+
+@media (max-width: 600px) {
+
+    .visual3d-box .computer-3d {
+
+        transform:
+            perspective(600px)
+            scale(0.82)
+            rotateX(-8deg)
+            rotateY(-18deg) !important;
+    }
+
+}
+
+
+/* 3D TEST */
+#visual3dArea {
+    border: 5px solid red !important;
+    min-height: 400px !important;
+}
+
+#visual3dArea .computer-3d {
+    display: block !important;
+    width: 300px !important;
+    height: 300px !important;
+    margin: 30px auto !important;
+    background: red !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+
+/* ================================= */
+/* HOLOVISION CUSTOM QUIZ RADIO */
+/* ================================= */
+
+.quiz-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+
+/* Hide original radio */
+
+.quiz-option input[type="radio"] {
+    display: none;
+}
+
+
+/* Custom circle */
+
+.custom-radio {
+    width: 18px;
+    height: 18px;
+
+    border: 2px solid white;
+    border-radius: 50%;
+
+    display: inline-block;
+    flex-shrink: 0;
+
+    background: transparent;
+}
+
+
+/* Normal selected - BLUE */
+
+.quiz-option input[type="radio"]:checked + .custom-radio {
+    border-color: #00eaff;
+    background: #00eaff;
+}
+
+
+/* Correct answer - GREEN */
+
+.custom-radio.correct-option {
+    border-color: #00ff66 !important;
+    background: #00ff66 !important;
+}
+
+
+/* Wrong answer - RED */
+
+.custom-radio.wrong-option {
+    border-color: #ff0000 !important;
+    background: #ff0000 !important;
+}
+
+
+/* ================================= */
+/* QUIZ PROGRESS BAR */
+/* ================================= */
+
+.quiz-progress-container {
+    margin: 15px 0;
+}
+
+
+#quizProgressText {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+
+.progress-bar {
+    width: 100%;
+    height: 10px;
+
+    background: #102633;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+
+.progress-fill {
+    width: 0%;
+
+    height: 100%;
+
+    background: #00eaff;
+
+    border-radius: 10px;
+
+    transition: width 0.4s ease;
+}
+
+/* ========================================
+   HOLOVISION AI - 3D LEARNING
+   PARTS + AI EXPLANATION
+======================================== */
+
+.parts-box {
+    display: none;
+    width: 90%;
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+
+    border: 1px solid #00eaff;
+    border-radius: 18px;
+
+    background: rgba(0, 20, 30, 0.85);
+
+    box-shadow:
+        0 0 20px rgba(0, 234, 255, 0.25);
+}
+
+.parts-box h2 {
+    color: #8ffaff;
+    text-align: center;
+    margin: 0 0 15px;
+}
+
+.part-item {
+    padding: 13px;
+    margin: 8px 0;
+
+    border-left: 3px solid #00eaff;
+    border-radius: 8px;
+
+    background: rgba(0, 234, 255, 0.06);
+
+    color: #d9fbff;
+
+    text-align: left;
+
+    transition: 0.3s;
+}
+
+.part-item:hover {
+    background: rgba(0, 234, 255, 0.12);
+
+    transform: translateX(4px);
+
+    box-shadow:
+        0 0 12px rgba(0, 234, 255, 0.15);
+}
+
+
+/* ========================================
+   AI EXPLANATION
+======================================== */
+
+.explanation-box {
+    display: none;
+
+    width: 90%;
+    max-width: 900px;
+
+    margin: 20px auto 30px;
+
+    padding: 24px;
+
+    border: 1px solid #00eaff;
+    border-radius: 20px;
+
+    background: rgba(0, 15, 25, 0.95);
+
+    box-shadow:
+        0 0 25px rgba(0, 234, 255, 0.25),
+        inset 0 0 20px rgba(0, 234, 255, 0.04);
+}
+
+.explanation-box h2 {
+    color: #00eaff;
+
+    margin: 0 0 18px;
+
+    text-align: center;
+
+    font-size: 24px;
+
+    text-shadow:
+        0 0 10px rgba(0, 234, 255, 0.5);
+}
+
+#explanationText {
+    color: #e7fcff;
+
+    font-size: 16px;
+
+    line-height: 1.8;
+
+    text-align: left;
+
+    white-space: pre-line;
+}
+
+
+/* ========================================
+   SPEECH BUTTON
+======================================== */
+
+#speechBtn {
+    display: none;
+
+    margin: 15px auto;
+
+    padding: 12px 22px;
+
+    border: 1px solid #00eaff;
+
+    border-radius: 12px;
+
+    background: rgba(0, 234, 255, 0.08);
+
+    color: #00eaff;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+#speechBtn:hover {
+    background: rgba(0, 234, 255, 0.18);
+
+    box-shadow:
+        0 0 18px rgba(0, 234, 255, 0.35);
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 600px) {
+
+    .parts-box,
+    .explanation-box {
+        width: 94%;
+        padding: 16px;
+    }
+
+    .part-item {
+        font-size: 14px;
+    }
+
+    #explanationText {
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+    .explanation-box h2 {
+        font-size: 20px;
+    }
+}
+
+/* =========================================================
+   HOLOVISION AI - CHAT UI FINAL FIX
+   ========================================================= */
+
+/* ---------- CHAT MESSAGE AREA ---------- */
+
+.hv-chat-message {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 18px 0;
+    padding: 0 16px;
+    position: relative;
+}
+
+.hv-message-content {
+    display: flex;
+    flex-direction: column;
+    max-width: min(78%, 720px);
+}
+
+
+/* ---------- USER MESSAGE ---------- */
+
+.hv-user-message {
+    justify-content: flex-end;
+}
+
+.hv-user-message .hv-message-content {
+    align-items: flex-end;
+}
+
+.hv-user-message .hv-bubble {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0, 229, 255, 0.14),
+            rgba(20, 45, 75, 0.72)
+        );
+
+    border: 1px solid rgba(0, 229, 255, 0.35);
+
+    border-radius: 18px 18px 5px 18px;
+
+    color: #e9fbff;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.25),
+        0 0 12px rgba(0, 229, 255, 0.06);
+}
+
+
+/* ---------- AI MESSAGE ---------- */
+
+.hv-ai-message {
+    justify-content: flex-start;
+}
+
+.hv-ai-message .hv-message-content {
+    align-items: flex-start;
+}
+
+.hv-ai-message .hv-bubble {
+    background:
+        rgba(7, 22, 38, 0.96);
+
+    border: 1px solid rgba(0, 229, 255, 0.16);
+
+    border-radius: 5px 18px 18px 18px;
+
+    color: #e8f7ff;
+
+    box-shadow:
+        0 5px 22px rgba(0, 0, 0, 0.25);
+}
+
+
+/* ---------- COMMON BUBBLE ---------- */
+
+.hv-bubble {
+    padding: 14px 17px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 15px;
+
+    line-height: 1.65;
+
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+
+    text-align: left;
+}
+
+
+/* ---------- USER BUBBLE ---------- */
+
+.hv-user-bubble {
+    min-width: 60px;
+}
+
+
+/* ---------- AI BUBBLE ---------- */
+
+.hv-ai-bubble {
+    min-width: 80px;
+}
+
+
+/* ---------- AI AVATAR ---------- */
+
+.hv-avatar {
+    width: 36px;
+    height: 36px;
+
+    flex: 0 0 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    user-select: none;
+}
+
+.hv-ai-avatar {
+    color: #00eaff;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0, 234, 255, 0.12),
+            rgba(93, 50, 180, 0.12)
+        );
+
+    border: 1px solid rgba(0, 234, 255, 0.35);
+
+    box-shadow:
+        0 0 12px rgba(0, 234, 255, 0.12);
+}
+
+
+/* ---------- MESSAGE TIME ---------- */
+
+.hv-message-time {
+    margin-top: 5px;
+
+    padding: 0 4px;
+
+    color: #71869a;
+
+    font-size: 10px;
+
+    line-height: 1.2;
+}
+
+
+/* ---------- REMOVE OLD AI TITLE ---------- */
+
+.hv-ai-name {
+    display: none !important;
+}
+
+
+/* ---------- AI ANSWER TEXT ---------- */
+
+.hv-answer-text {
+    color: #e8f7ff;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+
+    text-align: left;
+}
+
+
+/* ---------- HEADINGS INSIDE AI ANSWER ---------- */
+
+.hv-answer-text h3,
+.hv-answer-text h4 {
+    margin: 16px 0 8px;
+
+    color: #00eaff;
+
+    font-weight: 700;
+
+    line-height: 1.35;
+}
+
+.hv-answer-text h3 {
+    font-size: 18px;
+}
+
+.hv-answer-text h4 {
+    font-size: 16px;
+}
+
+
+/* ---------- BULLET POINTS ---------- */
+
+.hv-answer-text .hv-bullet {
+    margin: 7px 0;
+
+    padding-left: 3px;
+
+    color: #dffaff;
+
+    line-height: 1.65;
+}
+
+
+/* ---------- NUMBERED POINTS ---------- */
+
+.hv-answer-text .hv-number-point {
+    margin: 8px 0;
+
+    color: #dffaff;
+
+    line-height: 1.65;
+}
+
+.hv-answer-text .hv-number-point strong {
+    color: #00eaff;
+}
+
+
+/* ---------- BOLD ---------- */
+
+.hv-answer-text strong {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+
+/* ---------- LOADING MESSAGE ---------- */
+
+.hv-loading-message {
+    margin-top: 14px;
+}
+
+.hv-loading-bubble {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    padding: 12px 15px;
+
+    color: #8faabb;
+
+    font-size: 13px;
+}
+
+
+/* Thinking dots */
+
+.hv-thinking {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.hv-thinking span {
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: #00eaff;
+
+    animation: hvThinking 1.2s infinite ease-in-out;
+}
+
+.hv-thinking span:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.hv-thinking span:nth-child(3) {
+    animation-delay: 0.30s;
+}
+
+.hv-thinking em {
+    margin-left: 5px;
+
+    color: #8faabb;
+
+    font-size: 12px;
+
+    font-style: normal;
+}
+
+@keyframes hvThinking {
+
+    0%,
+    60%,
+    100% {
+        opacity: 0.3;
+        transform: translateY(0);
+    }
+
+    30% {
+        opacity: 1;
+        transform: translateY(-2px);
+    }
+}
+
+
+/* ---------- ERROR MESSAGE ---------- */
+
+.hv-error-bubble {
+    border-color: rgba(255, 100, 100, 0.25) !important;
+
+    background:
+        rgba(45, 15, 20, 0.7) !important;
+}
+
+
+/* =========================================================
+   CHAT WELCOME AREA
+   ========================================================= */
+
+.hv-chat-welcome {
+    text-align: center;
+}
+
+.hv-chat-welcome h2,
+.hv-chat-welcome h3 {
+    margin-bottom: 10px;
+}
+
+
+/* =========================================================
+   REMOVE UNWANTED STATUS GREEN DOT
+   ========================================================= */
+
+.ai-status-dot,
+.ai-online-dot,
+.hv-status-dot,
+.hv-online-dot,
+.status-dot,
+.online-dot,
+#aiStatusDot,
+#onlineDot {
+    display: none !important;
+}
+
+
+/* =========================================================
+   REMOVE UNWANTED FLOATING SETTINGS / GEAR
+   Only floating duplicates are hidden.
+   Normal navigation settings button is NOT affected.
+   ========================================================= */
+
+.floating-settings,
+.settings-floating,
+.floating-settings-btn,
+.chat-floating-settings,
+.chat-settings-float,
+.hv-floating-settings,
+#floatingSettings,
+#floatingSettingsBtn {
+    display: none !important;
+}
+
+
+/* =========================================================
+   REMOVE OLD 3D TEST RED STYLING
+   ========================================================= */
+
+#visual3dArea {
+    border: 1px solid rgba(0, 234, 255, 0.22) !important;
+
+    background:
+        rgba(2, 15, 30, 0.65) !important;
+
+    min-height: 0 !important;
+}
+
+#visual3dArea .computer-3d {
+    background: transparent !important;
+}
+
+
+/* =========================================================
+   MOBILE CHAT
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .hv-chat-message {
+        gap: 8px;
+
+        margin: 14px 0;
+
+        padding: 0 10px;
+    }
+
+    .hv-message-content {
+        max-width: 84%;
+    }
+
+    .hv-avatar {
+        width: 32px;
+        height: 32px;
+
+        flex-basis: 32px;
+
+        border-radius: 9px;
+
+        font-size: 10px;
+    }
+
+    .hv-bubble {
+        padding: 11px 13px;
+
+        font-size: 14px;
+
+        line-height: 1.6;
+    }
+
+    .hv-answer-text {
+        font-size: 14px;
+
+        line-height: 1.65;
+    }
+
+    .hv-answer-text h3 {
+        font-size: 17px;
+    }
+
+    .hv-answer-text h4 {
+        font-size: 15px;
+    }
+
+    .hv-message-time {
+        font-size: 9px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .hv-message-content {
+        max-width: 87%;
+    }
+
+    .hv-bubble {
+        padding: 10px 12px;
+
+        font-size: 13px;
+    }
+
+    .hv-answer-text {
+        font-size: 13px;
+    }
+}
+
+/* =========================================================
+   HOLOVISION AI - CHAT SCROLL + IMAGE ANALYSIS FINAL
+   ========================================================= */
+
+/* ---------- PAGE SCROLL FIX ---------- */
+
+html {
+    width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto !important;
+    height: auto !important;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    height: auto !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y !important;
+}
+
+
+/* ---------- CHAT PAGE SCROLL ---------- */
+
+.hv-chat-message,
+.hv-message-content,
+.hv-bubble {
+    touch-action: pan-y;
+}
+
+
+/* Don't clip the conversation vertically */
+#answerBox,
+#chatMessages,
+.chat-messages,
+.hv-chat-container,
+.hv-chat-box {
+    max-height: none !important;
+    height: auto !important;
+    overflow-y: visible !important;
+}
+
+
+/* ---------- IMAGE PREVIEW INSIDE CHAT ---------- */
+
+.hv-image-preview-box {
+    width: 100%;
+    max-width: 360px;
+    padding: 10px;
+    margin-top: 8px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    background: rgba(8, 25, 42, 0.92);
+    border: 1px solid rgba(0, 229, 255, 0.18);
+    border-radius: 14px;
+}
+
+
+/* Image itself */
+
+.hv-preview-image {
+    width: 100%;
+    max-width: 340px;
+    max-height: 260px;
+
+    object-fit: contain;
+    display: block;
+
+    border-radius: 10px;
+    background: #020b14;
+}
+
+
+/* ---------- IMAGE ACTIONS ---------- */
+
+.hv-image-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+
+/* Analyze */
+
+.hv-analyze-image-btn {
+    border: 1px solid rgba(0, 229, 255, 0.35);
+
+    border-radius: 9px;
+
+    padding: 9px 13px;
+
+    background: rgba(0, 229, 255, 0.08);
+
+    color: #bff7ff;
+
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.hv-analyze-image-btn:hover {
+    background: rgba(0, 229, 255, 0.14);
+    border-color: rgba(0, 229, 255, 0.55);
+}
+
+.hv-analyze-image-btn:disabled {
+    opacity: 0.55;
+    cursor: wait;
+}
+
+
+/* Remove */
+
+.hv-remove-image {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+
+    border-radius: 9px;
+
+    padding: 9px 13px;
+
+    background: rgba(255, 255, 255, 0.04);
+
+    color: #aebdca;
+
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+
+    cursor: pointer;
+}
+
+.hv-remove-image:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+
+/* =========================================================
+   PROFESSIONAL IMAGE ANALYSIS RESULT
+   ========================================================= */
+
+.hv-image-result-message .hv-bubble {
+    width: 100%;
+    max-width: 720px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(7, 25, 42, 0.98),
+            rgba(4, 17, 30, 0.98)
+        );
+
+    border: 1px solid rgba(0, 229, 255, 0.20);
+
+    box-shadow:
+        0 8px 28px rgba(0, 0, 0, 0.28);
+}
+
+
+/* Analysis header */
+
+.hv-image-analysis-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 12px;
+
+    padding-bottom: 9px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+    color: #dffbff;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+
+/* Analysis icon */
+
+.hv-image-analysis-title i {
+    color: #00eaff;
+    font-size: 13px;
+}
+
+
+/* Analysis text */
+
+.hv-image-result-message .hv-answer-text {
+    color: #e8f5fa;
+
+    font-size: 14px;
+
+    line-height: 1.75;
+}
+
+
+/* Analysis headings */
+
+.hv-image-result-message .hv-answer-text h3,
+.hv-image-result-message .hv-answer-text h4 {
+    color: #bceff5;
+
+    margin-top: 15px;
+    margin-bottom: 7px;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   IMAGE ANALYSIS LOADING
+   ========================================================= */
+
+.hv-image-loading .hv-bubble {
+    padding: 12px 15px;
+}
+
+.hv-image-loading .hv-image-analysis-title {
+    margin-bottom: 8px;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    html,
+    body {
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+        height: auto !important;
+        min-height: 100vh;
+        touch-action: pan-y !important;
+    }
+
+    .hv-image-preview-box {
+        max-width: 100%;
+    }
+
+    .hv-preview-image {
+        width: 100%;
+        max-width: 100%;
+        max-height: 230px;
+    }
+
+    .hv-image-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .hv-analyze-image-btn,
+    .hv-remove-image {
+        width: 100%;
+        min-height: 40px;
+    }
+
+    .hv-image-result-message .hv-bubble {
+        max-width: 100%;
+    }
+}
+
+
+/* =========================================================
+   PREVENT FIXED/CLIPPED CHAT CONTENT
+   ========================================================= */
+
+.hv-chat-message {
+    position: relative !important;
+}
+
+.hv-ai-message,
+.hv-user-message {
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   KEEP INPUT AREA USABLE
+   ========================================================= */
+
+textarea,
+input,
+button {
+    touch-action: manipulation;
+}
+
+textarea,
+input {
+    -webkit-user-select: text;
+    user-select: text;
+}
+
+
+/* ========================================
+   PART LOCATION MARKER
+======================================== */
+
+.hv-part-location {
+  position: absolute;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  pointer-events: none;
+
+  transform: translate(-50%, -50%);
+}
+
+
+/* ========================================
+   LOCATION ARROW
+======================================== */
+
+.hv-part-location-arrow {
+  display: flex;
+
+  width: 42px;
+  height: 42px;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 32px;
+  font-weight: 900;
+
+  color: #00eaff;
+
+  background: rgba(0, 20, 35, 0.9);
+
+  border: 2px solid #00eaff;
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 12px rgba(0, 234, 255, 0.8),
+    0 0 25px rgba(0, 234, 255, 0.45);
+
+  animation:
+    hvPartArrowPulse 1s infinite;
+}
+
+
+/* ========================================
+   PART LABEL
+======================================== */
+
+.hv-part-location-label {
+  display: flex;
+  flex-direction: column;
+
+  padding: 8px 12px;
+
+  min-width: 110px;
+
+  color: #ffffff;
+
+  background: rgba(0, 15, 30, 0.92);
+
+  border: 1px solid #00eaff;
+  border-radius: 10px;
+
+  box-shadow:
+    0 0 15px rgba(0, 234, 255, 0.35);
+}
+
+.hv-part-location-label strong {
+  color: #00eaff;
+  font-size: 15px;
+}
+
+.hv-part-location-label span {
+  color: #a9c9d5;
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+
+/* ========================================
+   ARROW ANIMATION
+======================================== */
+
+@keyframes hvPartArrowPulse {
+
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.12);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+
+}
