@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>HoloVision AI</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,body{
+    width:100%;
+    min-height:100%;
+}
+
+body{
+    background:#020611;
+    color:#fff;
+    font-family:'Poppins',sans-serif;
+    overflow-x:hidden;
+}
+
+.home{
+    min-height:100vh;
+    position:relative;
+    overflow:hidden;
+
+    background:
+    radial-gradient(
+        circle at 50% 45%,
+        rgba(0,210,255,.06),
+        transparent 32%
+    ),
+    radial-gradient(
+        circle at 20% 70%,
+        rgba(80,40,255,.05),
+        transparent 30%
+    ),
+    #020611;
+}
+
+.home::before{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:
+    radial-gradient(circle at 10% 20%,#00d9ff 0,transparent 2px),
+    radial-gradient(circle at 85% 25%,#7c4dff 0,transparent 2px),
+    radial-gradient(circle at 70% 70%,#00eaff 0,transparent 2px),
+    radial-gradient(circle at 30% 80%,#b94cff 0,transparent 2px);
+
+    opacity:.55;
+
+    animation:stars 5s ease-in-out infinite alternate;
+}
+
+@keyframes stars{
+
+    from{
+        transform:translateY(0);
+        opacity:.35;
+    }
+
+    to{
+        transform:translateY(-20px);
+        opacity:.7;
+    }
+}
+
+
+/* =========================
+   HEADER
+   ========================= */
+
+.header{
+
+    height:100px;
+
+    padding:20px 45px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    position:relative;
+
+    z-index:20;
+
+    border-bottom:
+    1px solid rgba(0,220,255,.18);
+}
+
+
+/* =========================
+   HEADER LOGO
+   ========================= */
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+}
+
+.logo img{
+
+    width:78px;
+    height:78px;
+
+    object-fit:contain;
+
+    filter:
+    drop-shadow(0 0 6px rgba(0,234,255,.7))
+    drop-shadow(0 0 12px rgba(139,77,255,.35));
+
+    animation:
+    logoGlow 3s ease-in-out infinite;
+}
+
+@keyframes logoGlow{
+
+    50%{
+
+        filter:
+        drop-shadow(0 0 10px rgba(0,234,255,.8))
+        drop-shadow(0 0 18px rgba(160,77,255,.4));
+    }
+}
+
+.brand-title{
+
+    font-family:'Orbitron',sans-serif;
+
+    font-size:25px;
+
+    font-weight:700;
+
+    letter-spacing:2px;
+}
+
+.brand-subtitle{
+
+    margin-top:6px;
+
+    font-size:10px;
+
+    letter-spacing:3px;
+
+    color:#00dfff;
+}
+
+
+/* =========================
+   LOGOUT
+   ========================= */
+
+.logout{
+
+    padding:13px 25px;
+
+    border:1px solid #00dfff;
+
+    border-radius:13px;
+
+    background:rgba(3,20,40,.75);
+
+    color:#fff;
+
+    font-family:'Poppins',sans-serif;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+    box-shadow:
+    0 0 12px rgba(0,220,255,.18);
+}
+
+.logout:hover{
+
+    transform:translateY(-2px);
+
+    color:#00eaff;
+
+    border-color:#b04dff;
+
+    box-shadow:
+    0 0 20px rgba(0,220,255,.55),
+    0 0 35px rgba(160,70,255,.25);
+}
+
+
+/* =========================
+   HOLOGRAM
+   ========================= */
+
+.hologram{
+
+    height:540px;
+
+    position:relative;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    z-index:5;
+}
+
+
+/* =========================
+   HOLOGRAM GLOBE
+   ========================= */
+
+.globe{
+
+    width:420px;
+    height:420px;
+
+    position:absolute;
+
+    border-radius:50%;
+
+    border:
+    1px solid rgba(0,220,255,.25);
+
+    /* REDUCED GLOW */
+
+    box-shadow:
+    inset 0 0 25px rgba(0,220,255,.05),
+    0 0 18px rgba(0,220,255,.07);
+
+    animation:
+    globeRotate 18s linear infinite;
+}
+
+.globe::before,
+.globe::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:25px;
+
+    border-radius:50%;
+
+    border:
+    1px dashed rgba(120,120,255,.18);
+}
+
+.globe::after{
+
+    inset:65px;
+
+    border-color:
+    rgba(0,240,255,.16);
+}
+
+@keyframes globeRotate{
+
+    from{
+        transform:rotateY(0deg);
+    }
+
+    to{
+        transform:rotateY(360deg);
+    }
+}
+
+
+/* =========================
+   ORBITS
+   ========================= */
+
+.orbit{
+
+    position:absolute;
+
+    width:500px;
+    height:130px;
+
+    border:
+    1px solid rgba(0,234,255,.7);
+
+    border-radius:50%;
+
+    transform:rotateX(65deg);
+
+    box-shadow:
+    0 0 8px rgba(0,220,255,.25);
+
+    animation:
+    orbit 7s linear infinite;
+}
+
+.orbit.two{
+
+    width:400px;
+    height:100px;
+
+    border-color:
+    rgba(163,77,255,.65);
+
+    animation-duration:10s;
+
+    animation-direction:reverse;
+}
+
+@keyframes orbit{
+
+    from{
+
+        transform:
+        rotateX(65deg)
+        rotateZ(0deg);
+    }
+
+    to{
+
+        transform:
+        rotateX(65deg)
+        rotateZ(360deg);
+    }
+}
+
+
+/* =========================
+   CENTRE HV
+   ========================= */
+
+.holo-logo{
+
+    width:180px;
+    height:180px;
+
+    position:absolute;
+
+    z-index:8;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    /* BORDER KEPT */
+
+    border:
+    2px solid rgba(0,230,255,.65);
+
+    background:
+    rgba(0,30,60,.06);
+
+    /* VERY SOFT GLOW */
+
+    box-shadow:
+    0 0 12px rgba(0,220,255,.25),
+    inset 0 0 10px rgba(0,220,255,.05);
+
+    transform:rotate(45deg);
+
+    animation:
+    holoPulse 3s ease-in-out infinite;
+}
+
+
+/* =========================
+   HV TEXT
+   ========================= */
+
+.holo-logo span{
+
+    font-family:'Orbitron',sans-serif;
+
+    font-size:60px;
+
+    font-weight:800;
+
+    color:#00eaff;
+
+    /* REDUCED TEXT GLOW */
+
+    text-shadow:
+    0 0 5px rgba(0,234,255,.8),
+    0 0 12px rgba(0,234,255,.35),
+    0 0 20px rgba(182,77,255,.2);
+
+    transform:rotate(-45deg);
+}
+
+
+/* =========================
+   SOFT HV PULSE
+   ========================= */
+
+@keyframes holoPulse{
+
+    0%,100%{
+
+        box-shadow:
+        0 0 10px rgba(0,220,255,.18),
+        inset 0 0 8px rgba(0,220,255,.04);
+    }
+
+    50%{
+
+        box-shadow:
+        0 0 18px rgba(0,220,255,.3),
+        inset 0 0 12px rgba(0,220,255,.07);
+    }
+}
+
+
+/* =========================
+   BEAM
+   ========================= */
+
+.beam{
+
+    position:absolute;
+
+    width:150px;
+    height:210px;
+
+    top:285px;
+
+    background:
+    linear-gradient(
+        to bottom,
+        rgba(0,230,255,.12),
+        transparent
+    );
+
+    clip-path:
+    polygon(
+        35% 0,
+        65% 0,
+        100% 100%,
+        0 100%
+    );
+
+    animation:
+    beam 2s ease-in-out infinite;
+}
+
+@keyframes beam{
+
+    50%{
+
+        opacity:.25;
+
+        transform:
+        scaleX(1.08);
+    }
+}
+
+
+/* =========================
+   PLATFORM
+   ========================= */
+
+.platform{
+
+    position:absolute;
+
+    bottom:5px;
+
+    width:390px;
+    height:75px;
+
+    border-radius:50%;
+
+    border:
+    2px solid rgba(0,234,255,.7);
+
+    transform:rotateX(65deg);
+
+    background:
+    radial-gradient(
+        ellipse,
+        rgba(0,230,255,.12),
+        rgba(0,10,25,.9)
+    );
+
+    box-shadow:
+
+    0 0 20px rgba(0,220,255,.35),
+    0 0 40px rgba(80,60,255,.12);
+
+    animation:
+    platformGlow 3s ease-in-out infinite;
+}
+
+@keyframes platformGlow{
+
+    50%{
+
+        box-shadow:
+
+        0 0 30px rgba(0,220,255,.45),
+        0 0 50px rgba(150,60,255,.15);
+    }
+}
+
+
+/* =========================
+   HOLOGRAM TEXT
+   ========================= */
+
+.holo-text{
+
+    position:absolute;
+
+    top:410px;
+
+    z-index:10;
+
+    text-align:center;
+
+    font-family:'Orbitron',sans-serif;
+}
+
+.holo-text h2{
+
+    font-size:30px;
+
+    letter-spacing:4px;
+
+    text-shadow:
+    0 0 8px rgba(0,234,255,.55);
+}
+
+.holo-text p{
+
+    margin-top:8px;
+
+    font-size:12px;
+
+    letter-spacing:4px;
+
+    color:#aeefff;
+}
+
+
+/* =========================
+   WELCOME
+   ========================= */
+
+.welcome{
+
+    position:relative;
+
+    z-index:15;
+
+    text-align:center;
+
+    margin-top:-15px;
+
+    animation:
+    welcomeIn 1.2s ease both;
+}
+
+@keyframes welcomeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(25px);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+    }
+}
+
+.welcome h1{
+
+    font-family:'Orbitron',sans-serif;
+
+    font-size:55px;
+
+    background:
+
+    linear-gradient(
+        90deg,
+        #00eaff,
+        #ffffff,
+        #b44dff
+    );
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+    text-shadow:
+    0 0 15px rgba(0,220,255,.2);
+}
+
+.welcome p{
+
+    margin-top:8px;
+
+    font-size:18px;
+
+    color:#d8eaff;
+
+    letter-spacing:1px;
+}
+
+
+/* =========================
+   ENTER AI LAB
+   ========================= */
+
+.enter-ai{
+
+    margin-top:30px;
+
+    width:520px;
+
+    max-width:88%;
+
+    height:72px;
+
+    border:
+    2px solid #00eaff;
+
+    border-radius:18px;
+
+    background:
+
+    linear-gradient(
+        90deg,
+        rgba(0,220,255,.08),
+        rgba(100,60,255,.15),
+        rgba(0,220,255,.08)
+    );
+
+    color:#fff;
+
+    font-family:'Orbitron',sans-serif;
+
+    font-size:20px;
+
+    font-weight:600;
+
+    letter-spacing:4px;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 0 20px rgba(0,220,255,.35);
+
+    transition:.35s;
+
+    animation:
+    buttonGlow 2.5s ease-in-out infinite;
+}
+
+@keyframes buttonGlow{
+
+    50%{
+
+        box-shadow:
+        0 0 30px rgba(0,220,255,.65),
+        0 0 55px rgba(140,60,255,.25);
+    }
+}
+
+.enter-ai:hover{
+
+    transform:
+    translateY(-5px)
+    scale(1.02);
+
+    border-color:#b94dff;
+
+    box-shadow:
+    0 0 35px #00eaff,
+    0 0 60px rgba(170,60,255,.5);
+}
+
+.arrow{
+
+    margin-left:25px;
+
+    font-size:30px;
+
+    color:#00eaff;
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media(max-width:600px){
+
+    .header{
+
+        height:82px;
+
+        padding:12px 15px;
+    }
+
+    .logo img{
+
+        width:55px;
+
+        height:55px;
+    }
+
+    .brand-title{
+
+        font-size:15px;
+
+        letter-spacing:1px;
+    }
+
+    .brand-subtitle{
+
+        font-size:7px;
+
+        letter-spacing:1.5px;
+    }
+
+    .logout{
+
+        padding:9px 12px;
+
+        font-size:11px;
+    }
+
+    .hologram{
+
+        height:480px;
+    }
+
+    .globe{
+
+        width:300px;
+
+        height:300px;
+    }
+
+    .orbit{
+
+        width:350px;
+
+        height:95px;
+    }
+
+    .orbit.two{
+
+        width:280px;
+
+        height:75px;
+    }
+
+    .holo-logo{
+
+        width:125px;
+
+        height:125px;
+    }
+
+    .holo-logo span{
+
+        font-size:42px;
+    }
+
+    .platform{
+
+        width:285px;
+
+        height:58px;
+    }
+
+    .holo-text{
+
+        top:355px;
+    }
+
+    .holo-text h2{
+
+        font-size:21px;
+    }
+
+    .holo-text p{
+
+        font-size:8px;
+    }
+
+    .welcome h1{
+
+        font-size:35px;
+    }
+
+    .welcome p{
+
+        font-size:13px;
+    }
+
+    .enter-ai{
+
+        height:62px;
+
+        font-size:15px;
+
+        letter-spacing:2px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="home">
+
+
+<!-- =========================
+     HEADER
+     ========================= -->
+
+<header class="header">
+
+    <div class="logo">
+
+        <img
+            src="logo.png"
+            alt="HoloVision AI Logo">
+
+        <div>
+
+            <div class="brand-title">
+                HOLOVISION AI
+            </div>
+
+            <div class="brand-subtitle">
+                INTELLIGENT LEARNING SYSTEM
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <button
+        class="logout"
+        type="button"
+        onclick="window.logout()">
+
+        Logout
+
+    </button>
+
+</header>
+
+
+<!-- =========================
+     HOLOGRAM
+     ========================= -->
+
+<section class="hologram">
+
+    <div class="globe"></div>
+
+    <div class="orbit"></div>
+
+    <div class="orbit two"></div>
+
+    <div class="holo-logo">
+
+        <span>HV</span>
+
+    </div>
+
+    <div class="beam"></div>
+
+    <div class="platform"></div>
+
+    <div class="holo-text">
+
+        <h2>HOLOVISION AI</h2>
+
+        <p>
+            INTELLIGENT LEARNING SYSTEM
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     WELCOME
+     ========================= -->
+
+<section class="welcome">
+
+    <h1>
+        Welcome!
+    </h1>
+
+    <p>
+        Your Intelligent Learning Assistant
+    </p>
+
+    <button
+        class="enter-ai"
+        type="button"
+        onclick="enterAILab()">
+
+        ENTER AI LAB
+
+        <span class="arrow">
+            →
+        </span>
+
+    </button>
+
+</section>
+
+
+</div>
+
+
+<script>
+
+function enterAILab(){
+
+    window.location.href =
+    "ai-chat.html";
+
+}
+
+</script>
+
+
+<!-- FIREBASE -->
+
+<script
+    type="module"
+    src="js/auth.js">
+</script>
+
+
+</body>
+
+</html>
