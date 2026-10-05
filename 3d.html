@@ -1,0 +1,7050 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+HoloVision AI - 3D Learning Lab
+</title>
+
+<link
+  rel="preconnect"
+  href="https://fonts.googleapis.com"
+>
+
+<link
+  rel="preconnect"
+  href="https://fonts.gstatic.com"
+  crossorigin
+>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
+  rel="stylesheet"
+>
+
+<style>
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Poppins,sans-serif;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(0,234,255,.06),
+      transparent 35%
+    ),
+    #020812;
+
+  color:#dffaff;
+  min-height:100vh;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+
+/* ========================================
+HEADER
+======================================== */
+
+.header{
+
+  min-height:76px;
+
+  display:flex;
+  align-items:center;
+
+  gap:14px;
+
+  padding:12px 20px;
+
+  background:rgba(3,12,24,.96);
+
+  border-bottom:
+    1px solid rgba(0,234,255,.14);
+
+  position:sticky;
+  top:0;
+
+  z-index:100;
+
+  backdrop-filter:blur(12px);
+}
+
+
+/* ========================================
+LOGO
+======================================== */
+
+.logo{
+
+  width:46px;
+  height:46px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #00eaff,
+      #7b5cff
+    );
+
+  color:#001018;
+
+  font-family:Orbitron;
+
+  font-weight:900;
+
+  box-shadow:
+    0 0 18px rgba(0,234,255,.25);
+
+  flex-shrink:0;
+}
+
+
+/* ========================================
+BRAND
+======================================== */
+
+.brand{
+  min-width:180px;
+}
+
+.brand h1{
+
+  font-family:Orbitron;
+
+  font-size:18px;
+
+  letter-spacing:.5px;
+}
+
+.brand span{
+
+  font-size:11px;
+
+  color:#7898a4;
+}
+
+
+/* ========================================
+SEARCH
+======================================== */
+
+.search{
+
+  margin-left:auto;
+
+  display:flex;
+
+  gap:8px;
+
+  width:min(560px,50%);
+}
+
+.search input{
+
+  flex:1;
+
+  min-width:0;
+
+  padding:11px 14px;
+
+  border:
+    1px solid rgba(0,234,255,.18);
+
+  border-radius:10px;
+
+  outline:none;
+
+  background:#071321;
+
+  color:#fff;
+}
+
+.search input:focus{
+
+  border-color:#00eaff;
+
+  box-shadow:
+    0 0 0 2px
+    rgba(0,234,255,.08);
+}
+
+
+/* ========================================
+BUTTON
+======================================== */
+
+.btn{
+
+  border:
+    1px solid rgba(0,234,255,.2);
+
+  border-radius:10px;
+
+  padding:10px 14px;
+
+  background:#081827;
+
+  color:#a9d7df;
+
+  transition:.2s ease;
+
+  white-space:nowrap;
+}
+
+.btn:hover{
+
+  border-color:
+    rgba(0,234,255,.55);
+
+  color:#00eaff;
+
+  transform:
+    translateY(-1px);
+}
+
+.btn.primary{
+
+  background:
+    linear-gradient(
+      135deg,
+      #00dff5,
+      #655cff
+    );
+
+  color:#001018;
+
+  font-weight:700;
+
+  border:none;
+}
+
+.btn.primary:hover{
+
+  color:#001018;
+
+  box-shadow:
+    0 0 18px
+    rgba(0,234,255,.25);
+}
+
+
+/* ========================================
+PROFILE
+======================================== */
+
+.profile{
+
+  min-width:74px;
+
+  height:42px;
+
+  padding:0 13px;
+
+  border-radius:12px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:#0b1d2b;
+
+  border:
+    1px solid rgba(0,234,255,.25);
+
+  color:#00eaff;
+
+  font-family:Orbitron;
+
+  font-size:11px;
+
+  font-weight:700;
+}
+
+
+/* ========================================
+MAIN
+======================================== */
+
+.main{
+
+  padding:18px;
+
+  max-width:1500px;
+
+  margin:auto;
+}
+
+
+/* ========================================
+VIEWER GRID
+======================================== */
+
+.viewer-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    minmax(0,1fr) 300px;
+
+  gap:16px;
+}
+
+
+/* ========================================
+CARD
+======================================== */
+
+.card{
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(5,15,28,.94),
+      rgba(3,11,22,.88)
+    );
+
+  border:
+    1px solid rgba(0,234,255,.12);
+
+  border-radius:16px;
+
+  padding:15px;
+
+  box-shadow:
+    0 10px 35px
+    rgba(0,0,0,.2);
+}
+
+
+/* ========================================
+CARD TITLE
+======================================== */
+
+.card-title{
+
+  font-family:Orbitron;
+
+  font-size:13px;
+
+  color:#00eaff;
+
+  margin-bottom:12px;
+
+  letter-spacing:.4px;
+}
+
+
+/* ========================================
+VIEWER
+======================================== */
+
+.viewer{
+
+  min-height:520px;
+
+  position:relative;
+
+  overflow:hidden;
+}
+
+
+/* ========================================
+VIEWER HEADER
+======================================== */
+
+.viewer-head{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:10px;
+
+  margin-bottom:12px;
+}
+
+.viewer-buttons{
+
+  display:flex;
+
+  gap:7px;
+}
+
+
+/* ========================================
+MODE BUTTON
+======================================== */
+
+.mode-btn{
+
+  padding:8px 12px;
+
+  border-radius:9px;
+
+  border:
+    1px solid rgba(0,234,255,.16);
+
+  background:#071321;
+
+  color:#8eb5bf;
+}
+
+.mode-btn.active{
+
+  color:#001018;
+
+  background:#00eaff;
+}
+
+
+/* ========================================
+VIEWER AREA
+======================================== */
+
+.viewer-area{
+
+  position:relative;
+
+  height:440px;
+
+  overflow:hidden;
+
+  border-radius:14px;
+
+  border:
+    1px solid rgba(0,234,255,.08);
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(0,234,255,.08),
+      transparent 55%
+    );
+}
+
+
+/* ========================================
+3D CANVAS
+======================================== */
+
+#threeCanvas{
+
+  width:100%;
+
+  height:100%;
+
+  display:block;
+}
+
+
+/* ========================================
+IMAGE VIEW
+======================================== */
+
+.image-view{
+
+  position:absolute;
+
+  inset:0;
+
+  display:none;
+
+  place-items:center;
+
+  overflow:hidden;
+}
+
+.image-view img{
+
+  max-width:90%;
+
+  max-height:90%;
+
+  object-fit:contain;
+
+  transform-origin:center;
+
+  user-select:none;
+
+  transition:
+    transform .15s ease;
+
+  cursor:grab;
+
+  filter:
+    drop-shadow(
+      0 0 20px
+      rgba(0,234,255,.18)
+    );
+}
+
+.image-view img:active{
+
+  cursor:grabbing;
+}
+
+
+/* ========================================
+EMPTY STATE
+======================================== */
+
+.empty-state{
+
+  position:absolute;
+
+  inset:0;
+
+  display:grid;
+
+  place-items:center;
+
+  text-align:center;
+
+  color:#6f929c;
+
+  padding:20px;
+
+  z-index:4;
+
+  pointer-events:none;
+}
+
+.empty-state h3{
+
+  font-family:Orbitron;
+
+  color:#00eaff;
+
+  font-size:16px;
+
+  margin-bottom:8px;
+}
+
+.empty-state p{
+
+  font-size:12px;
+}
+
+
+/* ========================================
+STATUS
+======================================== */
+
+.status{
+
+  position:absolute;
+
+  left:12px;
+
+  bottom:12px;
+
+  z-index:5;
+
+  padding:7px 10px;
+
+  border-radius:8px;
+
+  background:
+    rgba(2,8,18,.86);
+
+  border:
+    1px solid rgba(0,234,255,.1);
+
+  color:#83aab4;
+
+  font-size:11px;
+}
+
+
+/* ========================================
+VIEWER CONTROLS
+======================================== */
+
+.viewer-controls{
+
+  display:flex;
+
+  justify-content:center;
+
+  gap:8px;
+
+  flex-wrap:wrap;
+
+  margin-top:12px;
+}
+
+
+/* ========================================
+PARTS
+======================================== */
+
+.parts-list{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:8px;
+
+  max-height:440px;
+
+  overflow:auto;
+}
+
+.part-btn{
+
+  width:100%;
+
+  padding:10px 12px;
+
+  border-radius:10px;
+
+  border:
+    1px solid rgba(0,234,255,.1);
+
+  background:
+    rgba(7,17,29,.82);
+
+  color:#a7c5ce;
+
+  text-align:left;
+
+  transition:.2s;
+}
+
+.part-btn:hover,
+.part-btn.active{
+
+  border-color:
+    rgba(0,234,255,.4);
+
+  background:
+    rgba(0,234,255,.08);
+
+  color:#00eaff;
+}
+
+.empty-part{
+
+  padding:20px 10px;
+
+  text-align:center;
+
+  color:#607e87;
+
+  font-size:12px;
+}
+
+
+/* ========================================
+AI CARD
+======================================== */
+
+.ai-card{
+
+  margin-top:16px;
+}
+
+.ai-chat{
+
+  height:270px;
+
+  overflow-y:auto;
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:10px;
+
+  padding:12px;
+
+  border:
+    1px solid rgba(0,234,255,.08);
+
+  border-radius:14px;
+
+  background:
+    rgba(2,8,18,.55);
+}
+
+
+/* ========================================
+CHAT MESSAGE
+======================================== */
+
+.chat-message{
+
+  display:flex;
+
+  align-items:flex-start;
+
+  gap:10px;
+
+  padding:10px;
+
+  border-radius:12px;
+
+  max-width:88%;
+}
+
+.chat-message.ai{
+
+  align-self:flex-start;
+
+  background:
+    rgba(0,234,255,.045);
+
+  border-left:
+    2px solid #00eaff;
+}
+
+.chat-message.user{
+
+  align-self:flex-end;
+
+  background:
+    rgba(101,92,255,.09);
+
+  border-right:
+    2px solid #655cff;
+}
+
+
+/* ========================================
+CHAT LABEL
+======================================== */
+
+.chat-label{
+
+  width:34px;
+
+  height:34px;
+
+  border-radius:10px;
+
+  display:grid;
+
+  place-items:center;
+
+  flex-shrink:0;
+
+  font-family:Orbitron;
+
+  font-size:10px;
+
+  font-weight:800;
+}
+
+.chat-message.ai .chat-label{
+
+  background:
+    linear-gradient(
+      135deg,
+      #00eaff,
+      #655cff
+    );
+
+  color:#001018;
+
+  box-shadow:
+    0 0 14px
+    rgba(0,234,255,.3);
+}
+
+.chat-message.user .chat-label{
+
+  background:#0b1d2b;
+
+  color:#00eaff;
+
+  border:
+    1px solid rgba(0,234,255,.25);
+}
+
+
+/* ========================================
+CHAT BODY
+======================================== */
+
+.chat-body{
+  min-width:0;
+}
+
+.chat-name{
+
+  font-size:10px;
+
+  color:#00eaff;
+
+  font-family:Orbitron;
+
+  margin-bottom:3px;
+}
+
+.chat-text{
+
+  font-size:13px;
+
+  line-height:1.55;
+
+  color:#cdeaf0;
+
+  white-space:pre-wrap;
+
+  word-break:break-word;
+}
+
+
+/* ========================================
+AI INPUT
+======================================== */
+
+.ai-input-row{
+
+  display:flex;
+
+  gap:8px;
+
+  margin-top:12px;
+}
+
+.ai-input-row input{
+
+  flex:1;
+
+  min-width:0;
+
+  padding:12px 14px;
+
+  border-radius:10px;
+
+  border:
+    1px solid rgba(0,234,255,.15);
+
+  background:#071321;
+
+  color:#fff;
+
+  outline:none;
+}
+
+.ai-input-row input:focus{
+
+  border-color:#00eaff;
+}
+
+
+/* ========================================
+CHALLENGE
+======================================== */
+
+.challenge-card{
+
+  margin-top:16px;
+}
+
+.challenge-status{
+
+  padding:10px 12px;
+
+  border-radius:10px;
+
+  background:
+    rgba(0,234,255,.04);
+
+  border:
+    1px solid rgba(0,234,255,.08);
+
+  color:#91b4bd;
+
+  font-size:12px;
+
+  margin-bottom:14px;
+}
+
+.challenge-q{
+
+  font-family:Poppins;
+
+  font-weight:600;
+
+  font-size:16px;
+
+  line-height:1.5;
+
+  color:#e9fbff;
+
+  min-height:30px;
+}
+
+.options{
+
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:10px;
+
+  margin-top:14px;
+}
+
+.challenge-option{
+
+  display:flex;
+
+  align-items:flex-start;
+
+  gap:10px;
+
+  padding:12px;
+
+  border-radius:11px;
+
+  border:
+    1px solid rgba(0,234,255,.1);
+
+  background:#071321;
+
+  color:#ccebf0;
+
+  text-align:left;
+
+  transition:.2s;
+}
+
+.challenge-option:hover:not(:disabled){
+
+  border-color:#00eaff;
+
+  background:
+    rgba(0,234,255,.07);
+}
+
+.challenge-option:disabled{
+
+  cursor:default;
+
+  opacity:.9;
+}
+
+.option-letter{
+
+  width:28px;
+
+  height:28px;
+
+  border-radius:8px;
+
+  display:grid;
+
+  place-items:center;
+
+  flex-shrink:0;
+
+  background:#0b1d2b;
+
+  color:#00eaff;
+
+  font-family:Orbitron;
+
+  font-size:11px;
+
+  font-weight:700;
+}
+
+.option-text{
+
+  line-height:1.45;
+
+  font-size:13px;
+}
+
+.challenge-option.correct{
+
+  border-color:#00e6a8;
+
+  background:
+    rgba(0,230,168,.08);
+}
+
+.challenge-option.correct
+.option-letter{
+
+  background:#00e6a8;
+
+  color:#001b15;
+}
+
+.challenge-option.wrong{
+
+  border-color:#ff647c;
+
+  background:
+    rgba(255,100,124,.08);
+}
+
+.challenge-option.wrong
+.option-letter{
+
+  background:#ff647c;
+
+  color:#230009;
+}
+
+.challenge-feedback{
+
+  min-height:48px;
+
+  margin-top:14px;
+
+  padding:10px 12px;
+
+  border-radius:10px;
+
+  background:
+    rgba(255,255,255,.025);
+
+  color:#a9cbd3;
+
+  font-size:12px;
+
+  line-height:1.5;
+}
+
+.challenge-foot{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:10px;
+
+  margin-top:12px;
+}
+
+.score{
+
+  font-family:Orbitron;
+
+  font-size:12px;
+
+  color:#00eaff;
+}
+
+
+/* ========================================
+PART ARROW
+======================================== */
+
+.hv-part-arrow{
+
+  position:fixed;
+
+  z-index:999999;
+
+  pointer-events:none;
+
+  user-select:none;
+
+  color:#00eaff;
+
+  font-size:48px;
+
+  font-weight:900;
+
+  line-height:1;
+
+  text-shadow:
+    0 0 6px #00eaff,
+    0 0 15px #00eaff,
+    0 0 30px #0077ff;
+
+  transform:
+    translate(-50%,-100%);
+
+  animation:
+    hvArrowPulse .8s
+    infinite alternate;
+}
+
+@keyframes hvArrowPulse{
+
+  from{
+
+    filter:brightness(1);
+
+    transform:
+      translate(-50%,-100%)
+      scale(.92);
+
+  }
+
+  to{
+
+    filter:brightness(1.4);
+
+    transform:
+      translate(-50%,-100%)
+      scale(1.08);
+
+  }
+
+}
+
+
+/* ========================================
+RESPONSIVE
+======================================== */
+
+@media(max-width:850px){
+
+  .header{
+
+    flex-wrap:wrap;
+
+    padding:10px 12px;
+  }
+
+  .brand{
+
+    flex:1;
+
+    min-width:140px;
+  }
+
+  .brand h1{
+
+    font-size:15px;
+  }
+
+  .brand span{
+
+    font-size:9px;
+  }
+
+  .profile{
+
+    width:auto;
+
+    min-width:62px;
+
+    height:38px;
+  }
+
+  .search{
+
+    order:3;
+
+    width:100%;
+
+    margin-left:0;
+  }
+
+  .main{
+
+    padding:10px;
+  }
+
+  .viewer-grid{
+
+    grid-template-columns:1fr;
+  }
+
+  .viewer{
+
+    min-height:auto;
+  }
+
+  .viewer-area{
+
+    height:380px;
+  }
+
+  .parts-list{
+
+    max-height:240px;
+  }
+
+  .options{
+
+    grid-template-columns:1fr;
+  }
+
+  .ai-chat{
+
+    height:300px;
+  }
+
+  .chat-message{
+
+    max-width:96%;
+  }
+
+  .viewer-controls .btn{
+
+    padding:9px 11px;
+
+    font-size:12px;
+  }
+
+}
+
+
+@media(max-width:480px){
+
+  .header{
+
+    gap:9px;
+  }
+
+  .logo{
+
+    width:40px;
+
+    height:40px;
+
+    border-radius:11px;
+  }
+
+  .search{
+
+    display:grid;
+
+    grid-template-columns:1fr auto;
+  }
+
+  .search input{
+
+    grid-column:
+      1 / -1;
+  }
+
+  .search .btn{
+
+    width:100%;
+  }
+
+  .viewer-head{
+
+    align-items:flex-start;
+
+    flex-direction:column;
+  }
+
+  .viewer-area{
+
+    height:330px;
+  }
+
+  .ai-input-row{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+  }
+
+  .ai-input-row input{
+
+    grid-column:
+      1 / -1;
+  }
+
+  .challenge-foot{
+
+    align-items:stretch;
+  }
+
+}
+
+</style>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.module.js"
+  }
+}
+</script>
+
+</head>
+<body>
+
+<!-- ========================================
+     HEADER
+======================================== -->
+
+<header class="header">
+
+  <div class="logo">
+    HV
+  </div>
+
+  <div class="brand">
+    <h1>HoloVision AI</h1>
+    <span>3D Interactive Learning Lab</span>
+  </div>
+
+  <!-- SEARCH -->
+
+  <div class="search">
+
+    <input
+      type="text"
+      id="topicInput"
+      placeholder="Search a learning topic..."
+      autocomplete="off"
+    >
+
+    <button
+      class="btn primary"
+      id="visualiseBtn"
+      type="button"
+    >
+      Visualise
+    </button>
+
+    <button
+      class="btn"
+      id="clearBtn"
+      type="button"
+    >
+      Clear
+    </button>
+
+  </div>
+
+  <!-- PROFILE -->
+
+  <div class="profile">
+    USER
+  </div>
+
+</header>
+
+
+<!-- ========================================
+     MAIN
+======================================== -->
+
+<main class="main">
+
+  <!-- ======================================
+       VIEWER GRID
+  ======================================= -->
+
+  <section class="viewer-grid">
+
+
+    <!-- ====================================
+         MAIN VIEWER CARD
+    ===================================== -->
+
+    <div class="card viewer">
+
+      <div class="viewer-head">
+
+        <div class="card-title">
+          VISUAL LEARNING VIEWER
+        </div>
+
+        <div class="viewer-buttons">
+
+          <button
+            class="mode-btn active"
+            id="mode3DBtn"
+            type="button"
+          >
+            3D
+          </button>
+
+          <button
+            class="mode-btn"
+            id="modeImageBtn"
+            type="button"
+          >
+            IMAGE
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- ==================================
+           VIEWER AREA
+      =================================== -->
+
+      <div
+        class="viewer-area"
+        id="viewerArea"
+      >
+
+        <!-- THREE.JS CANVAS -->
+
+        <canvas
+          id="threeCanvas"
+        ></canvas>
+
+
+        <!-- IMAGE VIEW -->
+
+        <div
+          class="image-view"
+          id="imageView"
+        >
+
+          <img
+            id="topicImage"
+            src=""
+            alt="Learning visual"
+          >
+
+        </div>
+
+
+        <!-- EMPTY STATE -->
+
+        <div
+          class="empty-state"
+          id="emptyState"
+        >
+
+          <div>
+
+            <h3>
+              Select a learning topic
+            </h3>
+
+            <p>
+              Search for a topic to load its
+              3D model or educational visual.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- STATUS -->
+
+        <div
+          class="status"
+          id="viewerStatus"
+        >
+          Ready
+        </div>
+
+      </div>
+
+
+      <!-- ==================================
+           VIEWER CONTROLS
+      =================================== -->
+
+      <div class="viewer-controls">
+
+        <button
+          class="btn"
+          id="rotateBtn"
+          type="button"
+        >
+          Rotate
+        </button>
+
+        <button
+          class="btn"
+          id="zoomInBtn"
+          type="button"
+        >
+          Zoom +
+        </button>
+
+        <button
+          class="btn"
+          id="zoomOutBtn"
+          type="button"
+        >
+          Zoom -
+        </button>
+
+        <button
+          class="btn"
+          id="resetBtn"
+          type="button"
+        >
+          Reset
+        </button>
+
+        <button
+          class="btn primary"
+          id="findVisualBtn"
+          type="button"
+        >
+          Find Visual
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- ====================================
+         PARTS CARD
+    ===================================== -->
+
+    <aside class="card">
+
+      <div class="card-title">
+        MODEL PARTS
+      </div>
+
+      <div
+        class="parts-list"
+        id="partsList"
+      >
+
+        <div class="empty-part">
+          No model selected
+        </div>
+
+      </div>
+
+    </aside>
+
+  </section>
+
+
+  <!-- ======================================
+       AI ASSISTANT
+  ======================================= -->
+
+  <section class="card ai-card">
+
+    <div class="card-title">
+      HOLOVISION AI ASSISTANT
+    </div>
+
+
+    <!-- CHAT -->
+
+    <div
+      class="ai-chat"
+      id="aiChat"
+    >
+
+      <!-- DEFAULT AI MESSAGE -->
+
+      <div class="chat-message ai">
+
+        <div class="chat-label">
+          HV
+        </div>
+
+        <div class="chat-body">
+
+          <div class="chat-name">
+            HOLOVISION AI
+          </div>
+
+          <div class="chat-text">
+            Select a learning topic and ask me
+            anything about it.
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- AI INPUT -->
+
+    <div class="ai-input-row">
+
+      <input
+        type="text"
+        id="aiQuestion"
+        placeholder="Ask HoloVision AI..."
+        autocomplete="off"
+      >
+
+      <button
+        class="btn primary"
+        id="aiSendBtn"
+        type="button"
+      >
+        Ask AI
+      </button>
+
+      <button
+        class="btn"
+        id="clearAiBtn"
+        type="button"
+      >
+        Clear
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- ======================================
+       CHALLENGE MODE
+  ======================================= -->
+
+  <section class="card challenge-card">
+
+    <div class="card-title">
+      CHALLENGE MODE
+    </div>
+
+
+    <!-- CHALLENGE STATUS -->
+
+    <div
+      class="challenge-status"
+      id="challengeStatus"
+    >
+      Start the 10-question challenge
+      for the selected topic.
+    </div>
+
+
+    <!-- QUESTION -->
+
+    <div
+      class="challenge-q"
+      id="challengeQuestion"
+    >
+      No challenge started.
+    </div>
+
+
+    <!-- OPTIONS -->
+
+    <div
+      class="options"
+      id="challengeOptions"
+    ></div>
+
+
+    <!-- FEEDBACK -->
+
+    <div
+      class="challenge-feedback"
+      id="challengeFeedback"
+    >
+      Your feedback will appear here.
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="challenge-foot">
+
+      <div
+        class="score"
+        id="challengeScore"
+      >
+        Score: 0 / 10
+      </div>
+
+      <button
+        class="btn primary"
+        id="challengeBtn"
+        type="button"
+      >
+        Start 10 Question Challenge
+      </button>
+
+    </div>
+
+  </section>
+
+</main>
+<!-- ========================================
+     JAVASCRIPT
+======================================== -->
+
+<script type="module">
+
+/* ========================================
+   THREE.JS IMPORTS
+======================================== */
+
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.module.js";
+import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/jsm/controls/OrbitControls.js";
+import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/jsm/loaders/GLTFLoader.js";
+
+
+/* ========================================
+   FIREBASE / GEMINI AI
+======================================== */
+
+import {
+  model,
+  imageModel
+} from "./js/firebase-config.js";
+
+
+/* ========================================
+   DOM ELEMENTS
+======================================== */
+
+const topicInput =
+  document.getElementById("topicInput");
+
+const visualiseBtn =
+  document.getElementById("visualiseBtn");
+
+const clearBtn =
+  document.getElementById("clearBtn");
+
+const findVisualBtn =
+  document.getElementById("findVisualBtn");
+
+const mode3DBtn =
+  document.getElementById("mode3DBtn");
+
+const modeImageBtn =
+  document.getElementById("modeImageBtn");
+
+const rotateBtn =
+  document.getElementById("rotateBtn");
+
+const zoomInBtn =
+  document.getElementById("zoomInBtn");
+
+const zoomOutBtn =
+  document.getElementById("zoomOutBtn");
+
+const resetBtn =
+  document.getElementById("resetBtn");
+
+const viewerArea =
+  document.getElementById("viewerArea");
+
+const threeCanvas =
+  document.getElementById("threeCanvas");
+
+const imageView =
+  document.getElementById("imageView");
+
+const topicImage =
+  document.getElementById("topicImage");
+
+const emptyState =
+  document.getElementById("emptyState");
+
+const viewerStatus =
+  document.getElementById("viewerStatus");
+
+const partsList =
+  document.getElementById("partsList");
+
+const aiChat =
+  document.getElementById("aiChat");
+
+const aiQuestion =
+  document.getElementById("aiQuestion");
+
+const aiSendBtn =
+  document.getElementById("aiSendBtn");
+
+const clearAiBtn =
+  document.getElementById("clearAiBtn");
+
+const challengeStatus =
+  document.getElementById("challengeStatus");
+
+const challengeQuestion =
+  document.getElementById("challengeQuestion");
+
+const challengeOptions =
+  document.getElementById("challengeOptions");
+
+const challengeFeedback =
+  document.getElementById("challengeFeedback");
+
+const challengeScore =
+  document.getElementById("challengeScore");
+
+const challengeBtn =
+  document.getElementById("challengeBtn");
+
+
+/* ========================================
+   APPLICATION STATE
+======================================== */
+
+let scene = null;
+
+let camera = null;
+
+let renderer = null;
+
+let controls = null;
+
+let loader = null;
+
+let currentModel = null;
+
+let currentTopic = null;
+
+let currentImageUrl = "";
+
+let currentMode = "3D";
+
+let isRotating = false;
+
+let imageRotation = 0;
+
+let imageScale = 1;
+
+
+/* ========================================
+   CHALLENGE STATE
+======================================== */
+
+let challengeQuestions = [];
+
+let challengeIndex = 0;
+
+let challengeScoreValue = 0;
+
+let challengeAnswered = false;
+
+
+/* ========================================
+   MODEL REGISTRY
+======================================== */
+
+const MODEL_REGISTRY = {
+
+  heart: {
+    file: "models/heart.glb",
+
+    title: "Human Heart",
+
+    parts: [
+      "Aorta",
+      "Left Atrium",
+      "Right Atrium",
+      "Left Ventricle",
+      "Right Ventricle",
+      "Septum"
+    ]
+  },
+
+  brain: {
+    file: "models/Brain.glb",
+
+    title: "Human Brain",
+
+    parts: [
+      "Cerebrum",
+      "Cerebellum",
+      "Brain Stem"
+    ]
+  },
+
+  lungs: {
+    file: "models/Human lungs.glb",
+
+    title: "Human Lungs",
+
+    parts: [
+      "Right Lung",
+      "Left Lung",
+      "Trachea",
+      "Bronchi"
+    ]
+  },
+
+  kidney: {
+    file: "models/Human kidneys.glb",
+
+    title: "Human Kidney",
+
+    parts: [
+      "Cortex",
+      "Medulla",
+      "Renal Pelvis",
+      "Ureter"
+    ]
+  },
+
+  skeleton: {
+    file: "models/human skeleton.glb",
+
+    title: "Human Skeleton",
+
+    parts: [
+      "Skull",
+      "Spine",
+      "Rib Cage",
+      "Pelvis",
+      "Femur"
+    ]
+  },
+
+  ear: {
+    file: "models/human ear.glb",
+
+    title: "Human Ear",
+
+    parts: [
+      "Outer Ear",
+      "Ear Canal",
+      "Eardrum",
+      "Cochlea"
+    ]
+  }
+
+};
+
+
+/* ========================================
+   TOPIC REGISTRY
+======================================== */
+
+const TOPICS = {
+
+  heart: {
+    title: "Human Heart",
+    key: "heart"
+  },
+
+  brain: {
+    title: "Human Brain",
+    key: "brain"
+  },
+
+  lungs: {
+    title: "Human Lungs",
+    key: "lungs"
+  },
+
+  kidney: {
+    title: "Human Kidney",
+    key: "kidney"
+  },
+
+  skeleton: {
+    title: "Human Skeleton",
+    key: "skeleton"
+  },
+
+  ear: {
+    title: "Human Ear",
+    key: "ear"
+  }
+
+};
+
+
+/* ========================================
+   NORMALIZE TEXT
+======================================== */
+
+function normalizeText(value){
+
+  return String(value || "")
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s]/g, "")
+    .replace(/\s+/g, " ");
+
+}
+
+
+/* ========================================
+   FIND TOPIC
+======================================== */
+
+function findTopic(value){
+
+  const text =
+    normalizeText(value);
+
+  if(!text){
+    return null;
+  }
+
+  const aliases = {
+
+    heart: [
+      "heart",
+      "human heart",
+      "cardiac",
+      "cardiovascular system"
+    ],
+
+    brain: [
+      "brain",
+      "human brain",
+      "cerebrum",
+      "cerebellum"
+    ],
+
+    lungs: [
+      "lung",
+      "lungs",
+      "human lungs",
+      "respiratory system"
+    ],
+
+    kidney: [
+      "kidney",
+      "kidneys",
+      "human kidney",
+      "renal system"
+    ],
+
+    skeleton: [
+      "skeleton",
+      "human skeleton",
+      "bones",
+      "bone system"
+    ],
+
+    ear: [
+      "ear",
+      "human ear",
+      "hearing",
+      "auditory system"
+    ]
+
+  };
+
+
+  for(const key in aliases){
+
+    if(
+      aliases[key].some(
+        item => text === item ||
+        text.includes(item)
+      )
+    ){
+
+      return {
+        ...TOPICS[key],
+        key
+      };
+
+    }
+
+  }
+
+  return null;
+
+}
+
+
+/* ========================================
+   STATUS
+======================================== */
+
+function setStatus(message){
+
+  if(viewerStatus){
+
+    viewerStatus.textContent =
+      message || "Ready";
+
+  }
+
+}
+
+// ========================================
+// HOLOVISION AI - DEFAULT AI CONNECTION
+// ========================================
+
+let hvAIReady = false;
+let hvAIConnecting = false;
+
+async function connectHoloVisionAI(){
+
+  if(hvAIReady || hvAIConnecting){
+    return hvAIReady;
+  }
+
+  if(
+    !model ||
+    typeof model.generateContent !== "function"
+  ){
+    console.warn("HoloVision AI model unavailable.");
+    return false;
+  }
+
+  hvAIConnecting = true;
+
+  console.log("HoloVision AI connecting...");
+
+  try{
+
+    // Small connection test
+    const result =
+      await model.generateContent(
+        "Reply with only: READY"
+      );
+
+    const response =
+      result?.response?.text?.();
+
+    if(response){
+
+      hvAIReady = true;
+
+      console.log(
+        "✅ HoloVision AI is READY"
+      );
+
+      return true;
+    }
+
+  }
+  catch(error){
+
+    console.warn(
+      "HoloVision AI connection failed:",
+      error
+    );
+
+  }
+  finally{
+
+    hvAIConnecting = false;
+
+  }
+
+  return false;
+}
+
+/* ========================================
+   GEMINI AI CONNECTION
+======================================== */
+
+async function generate3DGemini(
+  prompt,
+  topic = "General Learning"
+){
+
+  if(
+    !model ||
+    typeof model.generateContent !== "function"
+  ){
+
+    console.warn(
+      "HoloVision: Gemini model unavailable."
+    );
+
+    return null;
+  }
+
+  const fullPrompt = `
+You are HoloVision AI,
+an educational AI assistant.
+
+Topic:
+${topic}
+
+User question:
+${prompt}
+
+Give a clear, accurate and
+student-friendly answer.
+
+Keep the answer concise unless
+detailed explanation is necessary.
+`;
+
+  const MAX_RETRIES = 3;
+
+  for(
+    let attempt = 1;
+    attempt <= MAX_RETRIES;
+    attempt++
+  ){
+
+    try{
+
+      console.log(
+        `HoloVision Gemini attempt ${attempt}/${MAX_RETRIES}`
+      );
+
+      const result =
+        await model.generateContent(
+          fullPrompt
+        );
+
+      if(
+        result &&
+        result.response
+      ){
+
+        const text =
+          result.response.text();
+
+        if(
+          text &&
+          text.trim()
+        ){
+
+          console.log(
+            "✅ HoloVision Gemini answer received."
+          );
+
+          return text.trim();
+        }
+      }
+
+      console.warn(
+        "HoloVision: Gemini returned an empty response."
+      );
+
+    }
+    catch(error){
+
+      const errorCode =
+        error?.code || "";
+
+      const errorMessage =
+        error?.message || "";
+
+      console.error(
+        `HoloVision Gemini attempt ${attempt} failed:`,
+        error
+      );
+
+      /* ========================================
+         HIGH DEMAND / SERVER ERROR
+      ======================================== */
+
+      const isTemporaryError =
+        errorCode === "fetch-error" ||
+        errorCode.includes("500") ||
+        errorMessage.includes("500") ||
+        errorMessage.toLowerCase().includes("high demand") ||
+        errorMessage.toLowerCase().includes("temporarily");
+
+      if(isTemporaryError){
+
+        console.warn(
+          "HoloVision: Gemini service is temporarily busy."
+        );
+
+      }
+
+      /* ========================================
+         RETRY WITH BACKOFF
+      ======================================== */
+
+      if(attempt < MAX_RETRIES){
+
+        const retryDelay =
+          1200 * attempt;
+
+        console.log(
+          `HoloVision: Retrying in ${retryDelay}ms...`
+        );
+
+        await new Promise(
+          resolve =>
+            setTimeout(
+              resolve,
+              retryDelay
+            )
+        );
+
+      }
+
+    }
+
+  }
+
+  console.warn(
+    "HoloVision Gemini unavailable after all retries."
+  );
+
+  return null;
+}
+
+/* ========================================
+   CHALLENGE JSON AI
+======================================== */
+
+async function generateChallengeAI(prompt) {
+
+  if (
+    !model ||
+    typeof model.generateContent !== "function"
+  ) {
+    console.error(
+      "HoloVision: AI model is not available."
+    );
+
+    return null;
+  }
+
+  try {
+
+    const result =
+      await model.generateContent(prompt);
+
+    if (
+      !result ||
+      !result.response
+    ) {
+      console.error(
+        "HoloVision: AI returned no response."
+      );
+
+      return null;
+    }
+
+    const text =
+      result.response.text();
+
+    if (
+      !text ||
+      !text.trim()
+    ) {
+      console.error(
+        "HoloVision: AI returned empty response."
+      );
+
+      return null;
+    }
+
+    console.log(
+      "HoloVision Challenge raw AI response:",
+      text
+    );
+
+    /*
+      Remove markdown code fences
+    */
+    let cleaned =
+      text
+        .replace(/```json/gi, "")
+        .replace(/```/g, "")
+        .trim();
+
+    /*
+      Find JSON object even if AI adds
+      extra text before or after it.
+    */
+    const firstBrace =
+      cleaned.indexOf("{");
+
+    const lastBrace =
+      cleaned.lastIndexOf("}");
+
+    if (
+      firstBrace !== -1 &&
+      lastBrace !== -1 &&
+      lastBrace > firstBrace
+    ) {
+
+      cleaned =
+        cleaned.substring(
+          firstBrace,
+          lastBrace + 1
+        );
+
+    }
+
+    /*
+      Validate JSON before returning it
+    */
+    try {
+
+      const parsed =
+        JSON.parse(cleaned);
+
+      if (
+        !parsed ||
+        !Array.isArray(parsed.questions)
+      ) {
+
+        console.error(
+          "HoloVision: Invalid challenge JSON structure.",
+          parsed
+        );
+
+        return null;
+      }
+
+      if (
+        parsed.questions.length < 10
+      ) {
+
+        console.error(
+          "HoloVision: AI returned fewer than 10 questions.",
+          parsed.questions.length
+        );
+
+        return null;
+      }
+
+      /*
+        Make sure every question has
+        the required fields.
+      */
+      const validQuestions =
+        parsed.questions
+          .slice(0, 10)
+          .filter(question =>
+            question &&
+            typeof question.question === "string" &&
+            Array.isArray(question.options) &&
+            question.options.length >= 4 &&
+            Number.isInteger(
+              Number(question.answer)
+            ) &&
+            Number(question.answer) >= 0 &&
+            Number(question.answer) <= 3
+          );
+
+      if (
+        validQuestions.length < 10
+      ) {
+
+        console.error(
+          "HoloVision: Challenge questions are incomplete.",
+          validQuestions
+        );
+
+        return null;
+      }
+
+      /*
+        Return clean JSON for
+        generateChallenge()
+      */
+      return JSON.stringify({
+        questions:
+          validQuestions.map(question => ({
+            question:
+              question.question.trim(),
+
+            options:
+              question.options
+                .slice(0, 4)
+                .map(option =>
+                  String(option).trim()
+                ),
+
+            answer:
+              Number(question.answer),
+
+            explanation:
+              question.explanation
+                ? String(
+                    question.explanation
+                  ).trim()
+                : "Good job!"
+          }))
+      });
+
+    }
+    catch (jsonError) {
+
+      console.error(
+        "HoloVision: Challenge AI returned invalid JSON.",
+        {
+          jsonError,
+          rawText: text,
+          cleanedText: cleaned
+        }
+      );
+
+      return null;
+    }
+
+  }
+  catch (error) {
+
+    console.error(
+      "HoloVision Challenge AI error:",
+      {
+        code: error?.code,
+        name: error?.name,
+        message: error?.message,
+        customData: error?.customData,
+        customErrorData:
+          error?.customErrorData,
+        fullError: error
+      }
+    );
+
+    return null;
+  }
+}
+/* ========================================
+   HOLOVISION AI IMAGE GENERATION
+======================================== */
+
+async function generateAIImage(
+  topic,
+  part = ""
+){
+
+  if(
+    !imageModel ||
+    typeof imageModel.generateContent !== "function"
+  ){
+
+    console.warn(
+      "HoloVision: Image AI model unavailable."
+    );
+
+    return null;
+  }
+
+  const imagePrompt = `
+Create a clear educational scientific illustration
+for a student learning platform.
+
+Topic:
+${topic}
+
+${part ? `Important part: ${part}` : ""}
+
+Requirements:
+- Scientifically accurate
+- Clear and easy for students to understand
+- Clean educational diagram style
+- Show the requested topic clearly
+- No decorative text
+- No watermark
+- No unrelated objects
+`;
+
+  try{
+
+    console.log(
+      "HoloVision Image AI generating:",
+      topic,
+      part
+    );
+
+    const result =
+      await imageModel.generateContent(
+        imagePrompt
+      );
+
+    const response =
+      result?.response;
+
+    if(!response){
+      console.warn(
+        "HoloVision: Image AI returned no response."
+      );
+      return null;
+    }
+
+    /*
+      Firebase Gemini image response
+      contains inline image data.
+    */
+
+    const parts =
+      response.candidates?.[0]?.content?.parts || [];
+
+    for(const responsePart of parts){
+
+      const inlineData =
+        responsePart?.inlineData;
+
+      if(
+        inlineData &&
+        inlineData.data
+      ){
+
+        const mimeType =
+          inlineData.mimeType ||
+          "image/png";
+
+        const imageData =
+          `data:${mimeType};base64,${inlineData.data}`;
+
+        console.log(
+          "✅ HoloVision AI image generated."
+        );
+
+        return imageData;
+      }
+    }
+
+    console.warn(
+      "HoloVision: No image data found in Gemini response."
+    );
+
+    return null;
+
+  }
+  catch(error){
+
+    console.error(
+      "HOLOVISION AI IMAGE ERROR",
+      {
+        code: error?.code,
+        name: error?.name,
+        message: error?.message,
+        customData: error?.customData,
+        customErrorData: error?.customErrorData
+      }
+    );
+
+    return null;
+  }
+}
+/* ========================================
+   GLOBAL AI FUNCTION
+======================================== */
+
+window.HV_GEMINI_GENERATE =
+  generate3DGemini;
+
+/* ========================================
+   INITIALIZE THREE.JS
+======================================== */
+
+function initThree(){
+
+  scene =
+    new THREE.Scene();
+
+
+  camera =
+    new THREE.PerspectiveCamera(
+      45,
+      viewerArea.clientWidth /
+      viewerArea.clientHeight,
+      0.1,
+      1000
+    );
+
+
+  camera.position.set(
+    0,
+    0,
+    5
+  );
+
+
+  renderer =
+    new THREE.WebGLRenderer({
+
+      canvas: threeCanvas,
+
+      antialias: true,
+
+      alpha: true
+
+    });
+
+
+  renderer.setPixelRatio(
+    Math.min(
+      window.devicePixelRatio || 1,
+      2
+    )
+  );
+
+
+  renderer.setSize(
+    viewerArea.clientWidth,
+    viewerArea.clientHeight
+  );
+
+
+  renderer.outputColorSpace =
+    THREE.SRGBColorSpace;
+
+
+  controls =
+    new OrbitControls(
+      camera,
+      renderer.domElement
+    );
+
+
+  controls.enableDamping = true;
+
+  controls.enablePan = true;
+
+  controls.minDistance = 1;
+
+  controls.maxDistance = 20;
+
+
+  loader =
+    new GLTFLoader();
+
+
+  /* ======================================
+     LIGHTING
+  ====================================== */
+
+  const ambientLight =
+    new THREE.AmbientLight(
+      0xffffff,
+      2
+    );
+
+  scene.add(
+    ambientLight
+  );
+
+
+  const keyLight =
+    new THREE.DirectionalLight(
+      0xffffff,
+      3
+    );
+
+  keyLight.position.set(
+    5,
+    8,
+    6
+  );
+
+  scene.add(
+    keyLight
+  );
+
+
+  const fillLight =
+    new THREE.DirectionalLight(
+      0x66ccff,
+      2
+    );
+
+  fillLight.position.set(
+    -5,
+    3,
+    4
+  );
+
+  scene.add(
+    fillLight
+  );
+
+
+  const backLight =
+    new THREE.PointLight(
+      0x7755ff,
+      2,
+      20
+    );
+
+  backLight.position.set(
+    0,
+    2,
+    -5
+  );
+
+  scene.add(
+    backLight
+  );
+
+
+  animateThree();
+
+}
+
+
+/* ========================================
+   ANIMATION
+======================================== */
+
+function animateThree(){
+
+  requestAnimationFrame(
+    animateThree
+  );
+
+
+  if(
+    currentModel &&
+    isRotating
+  ){
+
+    currentModel.rotation.y +=
+      0.008;
+
+  }
+
+
+  if(controls){
+
+    controls.update();
+
+  }
+
+
+  if(renderer && scene && camera){
+
+    renderer.render(
+      scene,
+      camera
+    );
+
+  }
+
+}
+
+
+/* ========================================
+   RESIZE
+======================================== */
+
+function resizeThree(){
+
+  if(
+    !camera ||
+    !renderer ||
+    !viewerArea
+  ){
+
+    return;
+
+  }
+
+
+  const width =
+    viewerArea.clientWidth;
+
+  const height =
+    viewerArea.clientHeight;
+
+
+  if(
+    width <= 0 ||
+    height <= 0
+  ){
+
+    return;
+
+  }
+
+
+  camera.aspect =
+    width / height;
+
+  camera.updateProjectionMatrix();
+
+
+  renderer.setSize(
+    width,
+    height,
+    false
+  );
+
+}
+
+
+/* ========================================
+   WINDOW RESIZE
+======================================== */
+
+window.addEventListener(
+  "resize",
+  resizeThree
+);
+
+
+/* ========================================
+   INITIALIZE
+======================================== */
+
+initThree();
+
+resizeThree();
+
+/* ========================================
+   DISPOSE MODEL
+======================================== */
+
+function disposeObject(object){
+
+  if(!object){
+    return;
+  }
+
+  object.traverse((child) => {
+
+    if(child.isMesh){
+
+      if(child.geometry){
+
+        child.geometry.dispose();
+
+      }
+
+      if(child.material){
+
+        const materials =
+          Array.isArray(child.material)
+            ? child.material
+            : [child.material];
+
+        materials.forEach((material) => {
+
+          if(!material){
+            return;
+          }
+
+          Object.keys(material).forEach(
+            (key) => {
+
+              const value =
+                material[key];
+
+              if(
+                value &&
+                value.isTexture
+              ){
+
+                value.dispose();
+
+              }
+
+            }
+          );
+
+          material.dispose();
+
+        });
+
+      }
+
+    }
+
+  });
+
+}
+
+
+/* ========================================
+   CLEAR CURRENT MODEL
+======================================== */
+
+function clearModel(){
+
+  if(currentModel){
+
+    scene.remove(
+      currentModel
+    );
+
+    disposeObject(
+      currentModel
+    );
+
+    currentModel = null;
+
+  }
+
+
+  if(controls){
+
+    controls.target.set(
+      0,
+      0,
+      0
+    );
+
+  }
+
+
+  if(camera){
+
+    camera.position.set(
+      0,
+      0,
+      5
+    );
+
+  }
+
+}
+
+
+/* ========================================
+   PREPARE MODEL
+======================================== */
+
+function prepareModel(modelObject){
+
+  if(!modelObject){
+    return;
+  }
+
+
+  const box =
+    new THREE.Box3()
+      .setFromObject(
+        modelObject
+      );
+
+
+  const size =
+    box.getSize(
+      new THREE.Vector3()
+    );
+
+
+  const center =
+    box.getCenter(
+      new THREE.Vector3()
+    );
+
+
+  /* CENTER MODEL */
+
+  modelObject.position.x -=
+    center.x;
+
+  modelObject.position.y -=
+    center.y;
+
+  modelObject.position.z -=
+    center.z;
+
+
+  /* ======================================
+     SCALE MODEL
+  ====================================== */
+
+  const maxDimension =
+    Math.max(
+      size.x,
+      size.y,
+      size.z
+    );
+
+
+  if(maxDimension > 0){
+
+    const scale =
+      3 / maxDimension;
+
+    modelObject.scale.setScalar(
+      scale
+    );
+
+  }
+
+
+  /* ======================================
+     SHADOW / MATERIAL SETUP
+  ====================================== */
+
+  modelObject.traverse(
+    (child) => {
+
+      if(child.isMesh){
+
+        child.castShadow = true;
+
+        child.receiveShadow = true;
+
+        if(child.material){
+
+          child.material.needsUpdate =
+            true;
+
+        }
+
+      }
+
+    }
+  );
+
+
+  scene.add(
+    modelObject
+  );
+
+
+  currentModel =
+    modelObject;
+
+currentModel.traverse((child) => {
+
+  if(child.isMesh){
+
+    console.log(
+      "HoloVision PART MESH:",
+      child.name
+    );
+
+  }
+
+});
+
+  /* ======================================
+     RESET VIEW
+  ====================================== */
+
+  if(controls){
+
+    controls.target.set(
+      0,
+      0,
+      0
+    );
+
+  }
+
+
+  camera.position.set(
+    0,
+    0,
+    5
+  );
+
+
+  if(controls){
+
+    controls.update();
+
+  }
+
+}
+
+
+/* ========================================
+   LOAD GLB MODEL
+======================================== */
+
+async function loadGLB(
+  filePath,
+  topic
+){
+
+  if(!filePath){
+
+    return false;
+
+  }
+
+
+  setStatus(
+    "Loading 3D model..."
+  );
+
+
+  try{
+
+    const gltf =
+      await new Promise(
+        (resolve, reject) => {
+
+          loader.load(
+
+            filePath,
+
+            resolve,
+
+            undefined,
+
+            reject
+
+          );
+
+        }
+      );
+
+
+    if(
+      !gltf ||
+      !gltf.scene
+    ){
+
+      throw new Error(
+        "Invalid GLB model"
+      );
+
+    }
+
+
+    clearModel();
+
+
+    prepareModel(
+      gltf.scene
+    );
+
+
+    setStatus(
+      `${topic} 3D model loaded`
+    );
+
+
+    return true;
+
+  }
+  catch(error){
+
+    console.warn(
+      "HoloVision GLB loading failed:",
+      filePath,
+      error
+    );
+
+
+    clearModel();
+
+
+    setStatus(
+      "3D model unavailable"
+    );
+
+
+    return false;
+
+  }
+
+}
+
+
+/* ========================================
+   SHOW 3D MODE
+======================================== */
+
+function show3D(){
+
+if (emptyState) {
+    emptyState.style.display = "none";
+}
+
+if (imageView) {
+    imageView.style.display = "none";
+}
+
+if (threeCanvas) {
+    threeCanvas.style.display = "block";
+}
+
+  currentMode =
+    "3D";
+
+
+  threeCanvas.style.display =
+    "block";
+
+  imageView.style.display =
+    "none";
+
+
+  mode3DBtn.classList.add(
+    "active"
+  );
+
+  modeImageBtn.classList.remove(
+    "active"
+  );
+
+
+  if(currentModel){
+
+    emptyState.style.display =
+      "none";
+
+  }
+  else{
+
+    emptyState.style.display =
+      "grid";
+
+  }
+
+
+  resizeThree();
+
+}
+
+
+/* ========================================
+   SHOW IMAGE MODE
+======================================== */
+
+function showImageMode(){
+
+  currentMode =
+    "IMAGE";
+
+
+  threeCanvas.style.display =
+    "none";
+
+  imageView.style.display =
+    "grid";
+
+
+  mode3DBtn.classList.remove(
+    "active"
+  );
+
+  modeImageBtn.classList.add(
+    "active"
+  );
+
+
+  if(currentImageUrl){
+
+    emptyState.style.display =
+      "none";
+
+  }
+  else{
+
+    emptyState.style.display =
+      "grid";
+
+  }
+
+}
+/* ========================================
+   SHOW IMAGE
+======================================== */
+
+function showImage(
+  imageUrl
+){
+
+  if(!imageUrl){
+    return;
+  }
+
+  /* ------------------------------------
+     RESET PREVIOUS IMAGE
+  ------------------------------------ */
+
+  currentImageUrl = "";
+
+  topicImage.removeAttribute("src");
+
+  topicImage.style.display =
+    "none";
+
+
+  /* ------------------------------------
+     SET NEW IMAGE
+  ------------------------------------ */
+
+  currentImageUrl =
+    imageUrl;
+
+  topicImage.alt =
+    `${currentTopic?.title || "Learning"} visual`;
+
+
+  topicImage.onload = () => {
+
+    currentImageUrl =
+      imageUrl;
+
+    topicImage.style.display =
+      "block";
+
+    emptyState.style.display =
+      "none";
+
+    imageRotation =
+      0;
+
+    imageScale =
+      1;
+
+    updateImageTransform();
+
+    setStatus(
+      "Visual ready"
+    );
+
+  };
+
+
+  topicImage.onerror = () => {
+
+    console.warn(
+      "HoloVision: Image failed to load:",
+      imageUrl
+    );
+
+    currentImageUrl =
+      "";
+
+    topicImage.removeAttribute(
+      "src"
+    );
+
+    topicImage.style.display =
+      "none";
+
+    emptyState.style.display =
+      "grid";
+
+    setStatus(
+      "Selected visual could not be loaded"
+    );
+
+  };
+
+
+  /*
+    Set src only after handlers
+    are ready.
+  */
+
+  topicImage.src =
+    imageUrl;
+
+  showImageMode();
+
+}
+
+/* ========================================
+   IMAGE TRANSFORM
+======================================== */
+
+function updateImageTransform(){
+
+  topicImage.style.transform =
+    `rotate(${imageRotation}deg)
+     scale(${imageScale})`;
+
+}
+
+
+/* ========================================
+   ROTATE
+======================================== */
+
+function rotateModel(){
+
+  if(currentMode === "IMAGE"){
+
+    imageRotation += 90;
+
+    updateImageTransform();
+
+    return;
+
+  }
+
+
+  isRotating =
+    !isRotating;
+
+
+  if(rotateBtn){
+
+    rotateBtn.textContent =
+      isRotating
+        ? "Stop Rotate"
+        : "Rotate";
+
+  }
+
+}
+
+
+/* ========================================
+   ZOOM CAMERA
+======================================== */
+
+function zoomCamera(
+  amount
+){
+
+  if(currentMode === "IMAGE"){
+
+    imageScale +=
+      amount < 0
+        ? 0.12
+        : -0.12;
+
+
+    imageScale =
+      Math.max(
+        0.5,
+        Math.min(
+          3,
+          imageScale
+        )
+      );
+
+
+    updateImageTransform();
+
+    return;
+
+  }
+
+
+  if(!camera){
+
+    return;
+
+  }
+
+
+  const direction =
+    new THREE.Vector3();
+
+
+  camera.getWorldDirection(
+    direction
+  );
+
+
+  const distance =
+    camera.position.length();
+
+
+  const newDistance =
+    Math.max(
+      1.2,
+      Math.min(
+        18,
+        distance + amount
+      )
+    );
+
+
+  camera.position.normalize()
+    .multiplyScalar(
+      newDistance
+    );
+
+
+  if(controls){
+
+    controls.update();
+
+  }
+
+}
+
+
+/* ========================================
+   ZOOM IN
+======================================== */
+
+function zoomIn(){
+
+  zoomCamera(-0.35);
+
+}
+
+
+/* ========================================
+   ZOOM OUT
+======================================== */
+
+function zoomOut(){
+
+  zoomCamera(0.35);
+
+}
+
+
+/* ========================================
+   RESET VIEW
+======================================== */
+
+function resetView(){
+
+  isRotating =
+    false;
+
+
+  if(rotateBtn){
+
+    rotateBtn.textContent =
+      "Rotate";
+
+  }
+
+
+  imageRotation = 0;
+
+  imageScale = 1;
+
+
+  updateImageTransform();
+
+
+  if(camera){
+
+    camera.position.set(
+      0,
+      0,
+      5
+    );
+
+  }
+
+
+  if(controls){
+
+    controls.target.set(
+      0,
+      0,
+      0
+    );
+
+    controls.update();
+
+  }
+
+
+  if(currentMode === "IMAGE"){
+
+    topicImage.style.transform =
+      "rotate(0deg) scale(1)";
+
+  }
+
+}
+
+
+/* ========================================
+   SET MODE
+======================================== */
+
+function setMode(
+  mode
+){
+
+  if(mode === "3D"){
+
+    show3D();
+
+  }
+  else{
+
+    showImageMode();
+
+  }
+
+}
+
+
+/* ========================================
+   CHECK LOCAL MODEL
+======================================== */
+
+async function tryLocalModel(
+  topic
+){
+
+  if(
+    !topic ||
+    !topic.key
+  ){
+
+    return false;
+
+  }
+
+
+  const registry =
+    MODEL_REGISTRY[
+      topic.key
+    ];
+
+
+  if(
+    !registry ||
+    !registry.file
+  ){
+
+    return false;
+
+  }
+
+
+  const loaded =
+    await loadGLB(
+      registry.file,
+      registry.title
+    );
+
+
+  if(loaded){
+
+    buildPartsList(
+      registry.parts
+    );
+
+    show3D();
+
+    return true;
+
+  }
+
+
+  return false;
+
+}
+
+
+/* ========================================
+   EDUCATIONAL IMAGE SEARCH
+   LOCAL/OPENVERSE SAFE FALLBACK
+======================================== */
+
+async function findEducationalImage(query){
+
+  const cleanTopic =
+    String(query || "").trim();
+
+  if(!cleanTopic){
+    return null;
+  }
+
+  const topic =
+    cleanTopic
+      .replace(/\beducational\b/gi, "")
+      .replace(/\bdiagram\b/gi, "")
+      .replace(/\bimage\b/gi, "")
+      .replace(/\bvisual\b/gi, "")
+      .trim();
+
+  if(!topic){
+    return null;
+  }
+
+  const searches = [
+    `${topic} educational diagram`,
+    `${topic} anatomy diagram`,
+    `${topic} biology`,
+    `${topic} science`,
+    topic
+  ];
+
+  for(const searchQuery of searches){
+
+    try{
+
+      const url =
+        `https://api.openverse.org/v1/images/?q=${encodeURIComponent(searchQuery)}&page_size=30`;
+
+      const response =
+        await fetch(url);
+
+      if(!response.ok){
+        console.warn(
+          "Openverse request failed:",
+          response.status
+        );
+        continue;
+      }
+
+      const data =
+        await response.json();
+
+      if(
+        !data ||
+        !Array.isArray(data.results)
+      ){
+        continue;
+      }
+
+      const topicWords =
+        topic
+          .toLowerCase()
+          .split(/\s+/)
+          .filter(
+            word => word.length >= 3
+          );
+
+      for(const item of data.results){
+
+        const imageUrl =
+          item.thumbnail ||
+          item.url ||
+          item.image;
+
+        if(!imageUrl){
+          continue;
+        }
+
+        const searchableText = `
+          ${item.title || ""}
+          ${item.description || ""}
+          ${item.creator || ""}
+          ${
+            Array.isArray(item.tags)
+              ? JSON.stringify(item.tags)
+              : ""
+          }
+        `.toLowerCase();
+
+        const matchedWords =
+          topicWords.filter(
+            word =>
+              searchableText.includes(word)
+          );
+
+        /*
+          Require at least one topic match.
+          This prevents unrelated random images.
+        */
+        if(
+          topicWords.length > 0 &&
+          matchedWords.length === 0
+        ){
+          continue;
+        }
+
+        return imageUrl;
+      }
+
+    }
+    catch(error){
+
+      console.warn(
+        "HoloVision educational image search failed:",
+        error
+      );
+
+    }
+
+  }
+
+  return null;
+}
+
+/* ========================================
+   GENERIC TOPIC PARTS
+======================================== */
+
+async function generateTopicParts(
+  topic
+){
+
+  try{
+
+    const answer =
+      await generate3DGemini(
+        `
+Give exactly 5 important
+structural parts or components
+of this learning topic.
+
+Return ONLY valid JSON in this format:
+
+{
+  "parts": [
+    "Part 1",
+    "Part 2",
+    "Part 3",
+    "Part 4",
+    "Part 5"
+  ]
+}
+
+Topic:
+${topic}
+        `,
+        topic
+      );
+
+
+    if(!answer){
+
+      return [
+  "Overview",
+  "Structure",
+  "Function",
+  "Key Features",
+  "Importance"
+];
+
+    }
+
+
+    const cleaned =
+      answer
+        .replace(
+          /```json/gi,
+          ""
+        )
+        .replace(
+          /```/g,
+          ""
+        )
+        .trim();
+
+
+    const parsed =
+      JSON.parse(
+        cleaned
+      );
+
+
+    if(
+      parsed &&
+      Array.isArray(
+        parsed.parts
+      )
+    ){
+
+      return parsed.parts
+        .slice(0,5);
+
+    }
+
+
+    return [
+  "Overview",
+  "Structure",
+  "Function",
+  "Key Features",
+  "Importance"
+];
+
+  }
+  catch(error){
+
+    console.warn(
+      "HoloVision topic parts error:",
+      error
+    );
+
+    return [
+  "Overview",
+  "Structure",
+  "Function",
+  "Key Features",
+  "Importance"
+];
+
+  }
+
+}
+/* ========================================
+   BUILD PARTS LIST
+======================================== */
+
+function buildPartsList(parts){
+
+  if(!partsList){
+    return;
+  }
+
+
+  partsList.innerHTML = "";
+
+
+  if(
+    !Array.isArray(parts) ||
+    parts.length === 0
+  ){
+
+    partsList.innerHTML = `
+      <div class="empty-part">
+        No parts available
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  parts.forEach(
+    (part, index) => {
+
+      const button =
+        document.createElement(
+          "button"
+        );
+
+
+      button.type =
+        "button";
+
+
+      button.className =
+        "part-btn";
+
+
+      button.textContent =
+        part;
+
+
+      button.dataset.part =
+        part;
+
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          document
+            .querySelectorAll(
+              ".part-btn"
+            )
+            .forEach(
+              item =>
+                item.classList.remove(
+                  "active"
+                )
+            );
+
+
+          button.classList.add(
+            "active"
+          );
+
+
+          locatePart(
+            part
+          );
+
+        }
+      );
+
+
+      partsList.appendChild(
+        button
+      );
+
+    }
+  );
+
+}
+
+
+/* ========================================
+   NORMALIZE PART NAME
+======================================== */
+
+function normalizePartName(
+  value
+){
+
+  return String(
+    value || ""
+  )
+    .toLowerCase()
+    .replace(
+      /[^a-z0-9]/g,
+      ""
+    );
+
+}
+
+
+/* ========================================
+   PART ALIASES
+======================================== */
+
+const PART_ALIASES = {
+
+  "aorta": [
+    "aorta",
+    "ascendingaorta",
+    "aorticarch"
+  ],
+
+  "left atrium": [
+    "leftatrium",
+    "leftauricle",
+    "latrium"
+  ],
+
+  "right atrium": [
+    "rightatrium",
+    "rightauricle",
+    "ratrium"
+  ],
+
+  "left ventricle": [
+    "leftventricle",
+    "lventricle",
+    "leftvent"
+  ],
+
+  "right ventricle": [
+    "rightventricle",
+    "rventricle",
+    "rightvent"
+  ],
+
+  "septum": [
+    "septum",
+    "interventricularseptum"
+  ],
+
+  "cerebrum": [
+    "cerebrum",
+    "cerebralhemisphere",
+    "brain"
+  ],
+
+  "cerebellum": [
+    "cerebellum"
+  ],
+
+  "brain stem": [
+    "brainstem",
+    "brainstem"
+  ],
+
+  "right lung": [
+    "rightlung",
+    "lungright"
+  ],
+
+  "left lung": [
+    "leftlung",
+    "lungleft"
+  ],
+
+  "trachea": [
+    "trachea",
+    "windpipe"
+  ],
+
+  "bronchi": [
+    "bronchi",
+    "bronchus"
+  ],
+
+  "cortex": [
+    "cortex",
+    "renal cortex"
+  ],
+
+  "medulla": [
+    "medulla",
+    "renalmmedulla",
+    "renalmedulla"
+  ],
+
+  "renal pelvis": [
+    "renalpelvis",
+    "pelvis"
+  ],
+
+  "ureter": [
+    "ureter"
+  ],
+
+  "skull": [
+    "skull",
+    "cranium"
+  ],
+
+  "spine": [
+    "spine",
+    "vertebralcolumn",
+    "vertebra"
+  ],
+
+  "rib cage": [
+    "ribcage",
+    "ribs"
+  ],
+
+  "pelvis": [
+    "pelvis",
+    "hipbone"
+  ],
+
+  "femur": [
+    "femur",
+    "thighbone"
+  ],
+
+  "outer ear": [
+    "outerear",
+    "pinna",
+    "auricle"
+  ],
+
+  "ear canal": [
+    "earcanal",
+    "auditorycanal"
+  ],
+
+  "eardrum": [
+    "eardrum",
+    "tympanicmembrane",
+    "tympanum"
+  ],
+
+  "cochlea": [
+    "cochlea"
+  ]
+
+};
+
+/* ========================================
+   FIND MODEL MESH FOR PART
+   SMART + SAFE MESH NAME MATCHING
+======================================== */
+
+function findPartMesh(partName){
+
+  if(!currentModel){
+    return null;
+  }
+
+  const requested =
+    normalizePartName(partName);
+
+  if(!requested){
+    return null;
+  }
+
+  const aliasKey =
+    String(partName || "")
+      .toLowerCase()
+      .trim();
+
+  const aliases =
+    PART_ALIASES[aliasKey] || [requested];
+
+  let bestMatch = null;
+  let bestScore = 0;
+
+  currentModel.traverse((child) => {
+
+    if(!child.isMesh){
+      return;
+    }
+
+    /* ------------------------------------
+       COLLECT ALL POSSIBLE MESH NAMES
+    ------------------------------------ */
+
+    const names = [];
+
+    if(child.name){
+      names.push(child.name);
+    }
+
+    if(child.parent && child.parent.name){
+      names.push(child.parent.name);
+    }
+
+    if(child.userData){
+
+      if(child.userData.name){
+        names.push(child.userData.name);
+      }
+
+      if(child.userData.part){
+        names.push(child.userData.part);
+      }
+
+      if(child.userData.partName){
+        names.push(child.userData.partName);
+      }
+
+    }
+
+    /* ------------------------------------
+       NORMALIZE NAMES
+    ------------------------------------ */
+
+    const normalizedNames =
+      names
+        .map(name =>
+          normalizePartName(name)
+        )
+        .filter(Boolean);
+
+    if(!normalizedNames.length){
+      return;
+    }
+
+    /* ------------------------------------
+       COMPARE ALIASES
+    ------------------------------------ */
+
+    for(const alias of aliases){
+
+      const normalizedAlias =
+        normalizePartName(alias);
+
+      if(!normalizedAlias){
+        continue;
+      }
+
+      for(const meshName of normalizedNames){
+
+        let score = 0;
+
+        /* Exact match */
+        if(meshName === normalizedAlias){
+
+          score = 100;
+
+        }
+
+        /* Word-safe contains */
+        else if(
+          meshName.includes(normalizedAlias) &&
+          normalizedAlias.length >= 4
+        ){
+
+          score = 90;
+
+        }
+
+        /* Alias contains mesh name */
+        else if(
+          normalizedAlias.includes(meshName) &&
+          meshName.length >= 4
+        ){
+
+          score = 80;
+
+        }
+
+        /*
+          Compare without spaces.
+          Example:
+          leftventricle
+          left_ventricle
+        */
+
+        else{
+
+          const compactMesh =
+            meshName.replace(/\s+/g,"");
+
+          const compactAlias =
+            normalizedAlias.replace(/\s+/g,"");
+
+          if(
+            compactMesh === compactAlias
+          ){
+
+            score = 95;
+
+          }
+          else if(
+            compactMesh.includes(compactAlias) &&
+            compactAlias.length >= 4
+          ){
+
+            score = 85;
+
+          }
+        }
+
+        /*
+          Small prefix match only as a
+          LAST fallback.
+        */
+
+        if(
+          score === 0 &&
+          normalizedAlias.length >= 5 &&
+          meshName.startsWith(
+            normalizedAlias.slice(0,5)
+          )
+        ){
+
+          score = 50;
+
+        }
+
+        if(score > bestScore){
+
+          bestScore =
+            score;
+
+          bestMatch =
+            child;
+
+        }
+
+      }
+
+    }
+
+  });
+
+  /* ------------------------------------
+     DEBUG
+  ------------------------------------ */
+
+  if(bestMatch){
+
+    console.log(
+      `HoloVision: "${partName}" matched with mesh:`,
+      bestMatch.name,
+      "Score:",
+      bestScore
+    );
+
+  }
+  else{
+
+    console.warn(
+      `HoloVision: No mesh found for "${partName}".`
+    );
+
+  }
+
+  return bestMatch;
+}
+
+/* ========================================
+   CREATE PART ARROW
+======================================== */
+
+function createPartArrow(){
+
+  let arrow =
+    document.querySelector(
+      ".hv-part-arrow"
+    );
+
+
+  if(arrow){
+
+    return arrow;
+
+  }
+
+
+  arrow =
+    document.createElement(
+      "div"
+    );
+
+
+  arrow.className =
+    "hv-part-arrow";
+
+
+  arrow.textContent =
+    "➜";
+
+
+  document.body.appendChild(
+    arrow
+  );
+
+
+  return arrow;
+
+}
+
+
+/* ========================================
+   REMOVE PART ARROW
+======================================== */
+
+function removePartArrow(){
+
+  const arrow =
+    document.querySelector(
+      ".hv-part-arrow"
+    );
+
+
+  if(arrow){
+
+    arrow.remove();
+
+  }
+
+}
+
+
+/* ========================================
+   GET MESH SCREEN POSITION
+======================================== */
+
+function getMeshScreenPosition(
+  mesh
+){
+
+  if(
+    !mesh ||
+    !camera ||
+    !renderer
+  ){
+
+    return null;
+
+  }
+
+
+  const box =
+    new THREE.Box3()
+      .setFromObject(
+        mesh
+      );
+
+
+  if(box.isEmpty()){
+
+    return null;
+
+  }
+
+
+  const center =
+    box.getCenter(
+      new THREE.Vector3()
+    );
+
+
+  center.project(
+    camera
+  );
+
+
+  const rect =
+    renderer.domElement.getBoundingClientRect();
+
+
+  const x =
+    rect.left +
+    (
+      center.x + 1
+    ) *
+    rect.width /
+    2;
+
+
+  const y =
+    rect.top +
+    (
+      -center.y + 1
+    ) *
+    rect.height /
+    2;
+
+
+  return {
+    x,
+    y
+  };
+
+}
+
+
+/* ========================================
+   MOVE ARROW TO PART
+======================================== */
+
+function moveArrowToPart(mesh){
+
+  if(!mesh || !camera || !renderer){
+    return;
+  }
+
+  const arrow =
+    document.querySelector(".hv-part-arrow");
+
+  if(!arrow){
+    return;
+  }
+
+  const position =
+    getMeshScreenPosition(mesh);
+
+  if(!position){
+    arrow.style.display = "none";
+    return;
+  }
+
+  /*
+    getMeshScreenPosition()
+    already returns viewport coordinates.
+
+    So DO NOT add renderer rect again.
+  */
+
+  arrow.style.left =
+    `${position.x}px`;
+
+  arrow.style.top =
+    `${position.y}px`;
+
+  arrow.style.display =
+    "block";
+}
+
+/* ========================================
+   HIGHLIGHT PART
+======================================== */
+
+function highlightPart(mesh){
+
+  if(!currentModel || !mesh){
+    return;
+  }
+
+  // Reset all previous highlights
+  currentModel.traverse((child) => {
+
+    if(!child.isMesh || !child.material){
+      return;
+    }
+
+    const materials =
+      Array.isArray(child.material)
+        ? child.material
+        : [child.material];
+
+    materials.forEach((material) => {
+
+      if(material.emissive){
+        material.emissiveIntensity = 0;
+      }
+
+    });
+
+  });
+
+  // Highlight selected part
+  const selectedMaterials =
+    Array.isArray(mesh.material)
+      ? mesh.material
+      : [mesh.material];
+
+  selectedMaterials.forEach((material) => {
+
+    if(material.emissive){
+
+      material.emissiveIntensity = 0.8;
+
+    }
+
+  });
+
+}
+
+
+/* ========================================
+   LOCATE PART
+======================================== */
+
+async function locatePart(partName){
+
+  if(!currentModel){
+
+    setStatus(
+      "Select a 3D model first"
+    );
+
+    return;
+  }
+
+
+  if(currentMode !== "3D"){
+
+    show3D();
+
+  }
+
+
+  const mesh =
+    findPartMesh(partName);
+
+
+if(!mesh){
+
+  removePartArrow();
+
+  console.warn(
+    `HoloVision: Part "${partName}" mesh not found in this model.`
+  );
+
+  setStatus(
+    `Locating ${partName}...`
+  );
+
+  if(typeof window.HV_SET_VISUAL_STATE === "function"){
+
+    window.HV_SET_VISUAL_STATE({
+      selectedPart: partName
+    });
+
+  }
+
+  /* ======================================
+     PART LOCATION FALLBACK
+     For GLB models with single mesh
+  ====================================== */
+
+  try{
+
+    /* ------------------------------------
+       Keep current 3D model visible
+    ------------------------------------ */
+
+    if(currentMode !== "3D"){
+      show3D();
+    }
+
+    /* ------------------------------------
+       Create visual location marker
+    ------------------------------------ */
+
+    let marker =
+      document.querySelector(
+        ".hv-part-location"
+      );
+
+    if(!marker){
+
+      marker =
+        document.createElement("div");
+
+      marker.className =
+        "hv-part-location";
+
+      marker.innerHTML = `
+        <div class="hv-part-location-arrow">
+          ➜
+        </div>
+
+        <div class="hv-part-location-label">
+          <strong></strong>
+          <span>Part located</span>
+        </div>
+      `;
+
+      document.body.appendChild(
+  marker
+);
+
+    }
+
+    /* ------------------------------------
+       Set selected part name
+    ------------------------------------ */
+
+    const label =
+      marker.querySelector("strong");
+
+    if(label){
+
+      label.textContent =
+        partName;
+
+    }
+
+    marker.style.display =
+      "flex";
+
+    /* ------------------------------------
+       Store selected part
+    ------------------------------------ */
+
+    marker.dataset.part =
+      partName;
+
+    /* ------------------------------------
+       Move marker to approximate
+       anatomical location
+    ------------------------------------ */
+
+    positionPartLocationMarker(
+      partName
+    );
+
+    /* ------------------------------------
+       Update status
+    ------------------------------------ */
+
+    setStatus(
+      `${partName} located`
+    );
+
+  }
+  catch(error){
+
+    console.error(
+      "HoloVision part location error:",
+      error
+    );
+
+    setStatus(
+      `${partName} location ready`
+    );
+
+  }
+
+  return;
+}
+
+  // Highlight ONLY selected part
+  highlightPart(mesh);
+
+
+  // Show arrow pointing to selected part
+  moveArrowToPart(mesh);
+
+function positionPartLocationMarker(partName){
+
+  if(!currentModel || !camera || !renderer){
+    return;
+  }
+
+  let marker =
+    document.querySelector(".hv-part-location");
+
+  if(!marker){
+    return;
+  }
+
+  const anchors = {
+
+    "Aorta":           {x:.55,y:.88,z:.55},
+    "Left Atrium":     {x:.62,y:.58,z:.55},
+    "Right Atrium":    {x:.38,y:.58,z:.55},
+    "Left Ventricle":  {x:.62,y:.32,z:.55},
+    "Right Ventricle": {x:.40,y:.32,z:.55},
+    "Septum":          {x:.50,y:.45,z:.60},
+
+    "Cerebrum":        {x:.50,y:.70,z:.55},
+    "Cerebellum":      {x:.68,y:.30,z:.55},
+    "Brain Stem":      {x:.50,y:.20,z:.55},
+
+    "Right Lung":      {x:.32,y:.50,z:.55},
+    "Left Lung":       {x:.68,y:.50,z:.55},
+    "Trachea":         {x:.50,y:.82,z:.55},
+    "Bronchi":         {x:.50,y:.68,z:.55},
+
+    "Cortex":          {x:.28,y:.55,z:.55},
+    "Medulla":         {x:.50,y:.50,z:.60},
+    "Renal Pelvis":    {x:.62,y:.50,z:.65},
+    "Ureter":          {x:.62,y:.20,z:.55},
+
+    "Skull":           {x:.50,y:.90,z:.55},
+    "Spine":           {x:.50,y:.52,z:.60},
+    "Rib Cage":        {x:.50,y:.65,z:.55},
+    "Pelvis":          {x:.50,y:.30,z:.55},
+    "Femur":           {x:.45,y:.12,z:.55},
+
+    "Outer Ear":       {x:.30,y:.60,z:.55},
+    "Ear Canal":       {x:.43,y:.52,z:.60},
+    "Eardrum":         {x:.53,y:.50,z:.62},
+    "Cochlea":        {x:.62,y:.38,z:.65}
+  };
+
+  const anchor =
+    anchors[partName] || {
+      x:.5,
+      y:.5,
+      z:.5
+    };
+
+  currentModel.updateMatrixWorld(true);
+
+  /*
+    Find model bounds in LOCAL coordinates
+  */
+
+  const box =
+    new THREE.Box3();
+
+  let hasBounds = false;
+
+  currentModel.traverse((child) => {
+
+    if(
+      !child.isMesh ||
+      !child.geometry
+    ){
+      return;
+    }
+
+    if(!child.geometry.boundingBox){
+      child.geometry.computeBoundingBox();
+    }
+
+    const geometryBox =
+      child.geometry.boundingBox;
+
+    const points = [
+      new THREE.Vector3(
+        geometryBox.min.x,
+        geometryBox.min.y,
+        geometryBox.min.z
+      ),
+      new THREE.Vector3(
+        geometryBox.min.x,
+        geometryBox.min.y,
+        geometryBox.max.z
+      ),
+      new THREE.Vector3(
+        geometryBox.min.x,
+        geometryBox.max.y,
+        geometryBox.min.z
+      ),
+      new THREE.Vector3(
+        geometryBox.min.x,
+        geometryBox.max.y,
+        geometryBox.max.z
+      ),
+      new THREE.Vector3(
+        geometryBox.max.x,
+        geometryBox.min.y,
+        geometryBox.min.z
+      ),
+      new THREE.Vector3(
+        geometryBox.max.x,
+        geometryBox.min.y,
+        geometryBox.max.z
+      ),
+      new THREE.Vector3(
+        geometryBox.max.x,
+        geometryBox.max.y,
+        geometryBox.min.z
+      ),
+      new THREE.Vector3(
+        geometryBox.max.x,
+        geometryBox.max.y,
+        geometryBox.max.z
+      )
+    ];
+
+    points.forEach((point) => {
+
+      child.localToWorld(point);
+      currentModel.worldToLocal(point);
+
+      box.expandByPoint(point);
+
+      hasBounds = true;
+
+    });
+
+  });
+
+  if(!hasBounds){
+    return;
+  }
+
+  /*
+    Actual LOCAL part point
+  */
+
+  const partPoint =
+    new THREE.Vector3(
+      THREE.MathUtils.lerp(
+        box.min.x,
+        box.max.x,
+        anchor.x
+      ),
+
+      THREE.MathUtils.lerp(
+        box.min.y,
+        box.max.y,
+        anchor.y
+      ),
+
+      THREE.MathUtils.lerp(
+        box.min.z,
+        box.max.z,
+        anchor.z
+      )
+    );
+
+  /*
+    Remove old 3D locator
+  */
+
+  const oldLocator =
+    currentModel.getObjectByName(
+      "HoloVisionPartLocator"
+    );
+
+  if(oldLocator){
+    currentModel.remove(oldLocator);
+  }
+
+  /*
+    Direction from part toward outside
+  */
+
+  const center =
+    box.getCenter(
+      new THREE.Vector3()
+    );
+
+  const outward =
+    partPoint.clone()
+      .sub(center)
+      .normalize();
+
+  /*
+    Put arrow outside the part
+    and point it TOWARD the part.
+  */
+
+  const arrowStart =
+    partPoint.clone()
+      .add(
+        outward.clone().multiplyScalar(
+          box.getSize(
+            new THREE.Vector3()
+          ).length() * 0.22
+        )
+      );
+
+  const arrowDirection =
+    partPoint.clone()
+      .sub(arrowStart)
+      .normalize();
+
+  const arrowLength =
+    box.getSize(
+      new THREE.Vector3()
+    ).length() * 0.22;
+
+  const arrow =
+    new THREE.ArrowHelper(
+      arrowDirection,
+      arrowStart,
+      arrowLength,
+      0x00eaff,
+      arrowLength * 0.28,
+      arrowLength * 0.16
+    );
+
+  arrow.name =
+    "HoloVisionPartLocator";
+
+  currentModel.add(
+    arrow
+  );
+
+  /*
+    Keep HTML label attached to
+    the 3D arrow tip.
+  */
+
+  marker.dataset.part =
+    partName;
+
+  marker.dataset.mode =
+    "3d";
+
+  marker.style.display =
+    "flex";
+
+  marker.style.visibility =
+    "visible";
+
+  marker.style.opacity =
+    "1";
+}
+  // ========================================
+  // FOCUS CAMERA ON SELECTED PART
+  // ========================================
+
+  if(
+    camera &&
+    controls
+  ){
+
+    const box =
+      new THREE.Box3()
+        .setFromObject(mesh);
+
+
+    const center =
+      box.getCenter(
+        new THREE.Vector3()
+      );
+
+
+    const size =
+      box.getSize(
+        new THREE.Vector3()
+      );
+
+
+    const maxSize =
+      Math.max(
+        size.x,
+        size.y,
+        size.z
+      );
+
+
+    const distance =
+      Math.max(
+        maxSize * 3,
+        2
+      );
+
+
+    const direction =
+      new THREE.Vector3(
+        1,
+        1,
+        1
+      ).normalize();
+
+
+    const targetPosition =
+      center.clone().add(
+        direction.multiplyScalar(
+          distance
+        )
+      );
+
+
+    camera.position.copy(
+      targetPosition
+    );
+
+
+    controls.target.copy(
+      center
+    );
+
+
+    controls.update();
+
+  }
+
+
+  // Save selected part
+  if(
+    typeof window.HV_SET_VISUAL_STATE ===
+    "function"
+  ){
+
+    window.HV_SET_VISUAL_STATE({
+
+      selectedPart:
+        partName
+
+    });
+
+  }
+
+
+  setStatus(
+    `${partName} located`
+  );
+
+}
+
+
+/* ========================================
+   UPDATE PART ARROW
+======================================== */
+
+function updatePartArrow(){
+
+  const arrow =
+    document.querySelector(".hv-part-arrow");
+
+  if(!arrow || !currentModel){
+    return;
+  }
+
+  const activePart =
+    document.querySelector(".part-btn.active");
+
+  if(!activePart){
+    return;
+  }
+
+  const partName =
+    activePart.dataset.part;
+
+  const mesh =
+    findPartMesh(partName);
+
+  if(mesh){
+    moveArrowToPart(mesh);
+  }
+
+}
+/* ========================================
+   UPDATE 3D PART LOCATION
+======================================== */
+
+function updatePartLocationMarker(){
+
+  const marker =
+    document.querySelector(".hv-part-location");
+
+  if(
+    !marker ||
+    !currentModel ||
+    !camera ||
+    !renderer
+  ){
+    return;
+  }
+
+  const arrow =
+    currentModel.getObjectByName(
+      "HoloVisionPartLocator"
+    );
+
+  if(!arrow){
+    return;
+  }
+
+  const tip =
+    arrow.position.clone();
+
+  currentModel.localToWorld(tip);
+
+  tip.project(camera);
+
+  const rect =
+    renderer.domElement.getBoundingClientRect();
+
+  const x =
+    rect.left +
+    ((tip.x + 1) / 2) *
+    rect.width;
+
+  const y =
+    rect.top +
+    ((-tip.y + 1) / 2) *
+    rect.height;
+
+  marker.style.position =
+    "fixed";
+
+  marker.style.left =
+    `${x}px`;
+
+  marker.style.top =
+    `${y}px`;
+
+  marker.style.transform =
+    "translate(-50%, -100%)";
+
+  marker.style.zIndex =
+    "2147483647";
+
+  marker.style.display =
+    "flex";
+
+  marker.style.visibility =
+    "visible";
+
+  marker.style.opacity =
+    "1";
+
+  marker.style.pointerEvents =
+    "none";
+
+}
+/* ========================================
+   UPDATE PART MARKER EVERY FRAME
+======================================== */
+
+const originalAnimateThree =
+  animateThree;
+
+const originalRendererRender =
+  renderer.render.bind(renderer);
+
+renderer.render = function(
+  sceneObject,
+  cameraObject
+){
+
+  originalRendererRender(
+    sceneObject,
+    cameraObject
+  );
+
+  updatePartArrow();
+
+  updatePartLocationMarker();
+
+};
+
+/* ========================================
+   TOPIC VISUALISATION
+======================================== */
+
+async function visualiseTopic(
+  rawTopic
+){
+
+  const searchText =
+    String(
+      rawTopic || ""
+    ).trim();
+
+
+  if(!searchText){
+
+    setStatus(
+      "Enter a learning topic"
+    );
+
+    return;
+
+  }
+
+
+  /* ======================================
+     RESET PREVIOUS VISUAL
+  ====================================== */
+
+  removePartArrow();
+
+  clearModel();
+
+  currentImageUrl =
+    "";
+
+  topicImage.src =
+    "";
+
+  imageRotation = 0;
+
+  imageScale = 1;
+
+  updateImageTransform();
+
+
+  emptyState.style.display =
+    "grid";
+
+
+  currentTopic =
+    findTopic(
+      searchText
+    );
+
+
+  setStatus(
+    "Searching for learning visual..."
+  );
+
+
+  /* ======================================
+     KNOWN LOCAL TOPIC
+  ====================================== */
+
+  const loaded =
+  await tryLocalModel(currentTopic);
+
+if(loaded){
+
+  emptyState.style.display =
+    "none";
+
+  setStatus(
+    `${currentTopic.title} ready`
+  );
+
+  // Prepare relevant image also
+  findEducationalImage(searchText)
+    .then((imageUrl) => {
+
+      if(imageUrl){
+
+        currentImageUrl =
+          imageUrl;
+
+        console.log(
+          "HoloVision relevant image ready."
+        );
+
+      }
+
+    })
+    .catch((error) => {
+
+      console.warn(
+        "Background image search failed:",
+        error
+      );
+
+    });
+
+  return;
+}
+
+/* ======================================
+   IMAGE FALLBACK
+====================================== */
+
+setStatus(
+  `3D model unavailable. Finding ${searchText} visual...`
+);
+
+
+/* ----------------------------------------
+   1. TRY EDUCATIONAL IMAGE
+---------------------------------------- */
+
+let imageUrl =
+  await findEducationalImage(
+    searchText
+  );
+
+
+/* ----------------------------------------
+   2. IF NOT FOUND → TRY AI IMAGE
+---------------------------------------- */
+
+if(!imageUrl){
+
+  setStatus(
+    `Creating ${searchText} AI visual...`
+  );
+
+  console.log(
+    "HoloVision: Educational image unavailable. Trying AI image..."
+  );
+
+  imageUrl =
+    await generateAIImage(
+      searchText
+    );
+}
+
+
+/* ----------------------------------------
+   3. DISPLAY IMAGE
+---------------------------------------- */
+
+if(imageUrl){
+
+  currentImageUrl =
+    imageUrl;
+
+  showImage(
+    imageUrl
+  );
+
+  setMode(
+    "IMAGE"
+  );
+
+  setStatus(
+    `${searchText} visual ready`
+  );
+
+}
+else{
+
+  currentImageUrl =
+    "";
+
+  showImageMode();
+
+  emptyState.style.display =
+    "grid";
+
+  setStatus(
+    `No visual available for ${searchText}`
+  );
+
+}
+  /* ======================================
+     GENERIC TOPIC PARTS
+  ====================================== */
+
+  let parts = [];
+
+
+  if(currentTopic){
+
+    const registry =
+      MODEL_REGISTRY[
+        currentTopic.key
+      ];
+
+
+    if(registry){
+
+      parts =
+        registry.parts || [];
+
+    }
+
+  }
+  else{
+
+    parts =
+      await generateTopicParts(
+        searchText
+      );
+
+  }
+
+
+  buildPartsList(
+    parts
+  );
+
+}
+
+
+/* ========================================
+   CLEAR EVERYTHING - FULL RESET
+======================================== */
+
+function clearEverything(){
+
+  /* ======================================
+     1. REMOVE ALL PART MARKERS / ARROWS
+  ====================================== */
+
+  removePartArrow();
+
+  const partMarker =
+    document.querySelector(
+      ".hv-part-location"
+    );
+
+  if(partMarker){
+    partMarker.remove();
+  }
+
+
+  /* ======================================
+     2. CLEAR 3D MODEL
+  ====================================== */
+
+  clearModel();
+
+
+  /* ======================================
+     3. CLEAR TOPIC / IMAGE
+  ====================================== */
+
+  currentTopic =
+    null;
+
+  currentImageUrl =
+    "";
+
+  if(topicImage){
+
+    topicImage.removeAttribute("src");
+
+    topicImage.style.display =
+      "none";
+
+  }
+
+
+  imageRotation =
+    0;
+
+  imageScale =
+    1;
+
+  updateImageTransform();
+
+
+  /* ======================================
+     4. CLEAR SEARCH BOX
+  ====================================== */
+
+  if(topicInput){
+
+    topicInput.value =
+      "";
+
+  }
+
+
+  /* ======================================
+     5. CLEAR MODEL PARTS
+  ====================================== */
+
+  if(partsList){
+
+    partsList.innerHTML = `
+      <div class="empty-part">
+        No model selected
+      </div>
+    `;
+
+  }
+
+
+  /* ======================================
+     6. CLEAR AI ASSISTANT CHAT
+  ====================================== */
+
+  const aiChatContainers = document.querySelectorAll(
+    "#chatMessages, " +
+    ".chat-messages, " +
+    ".ai-chat-messages, " +
+    ".ai-chat-history, " +
+    ".chat-history"
+  );
+
+  aiChatContainers.forEach(container => {
+
+    container.innerHTML = "";
+
+  });
+
+
+  /* ======================================
+     CLEAR AI CHAT INPUT
+  ====================================== */
+
+  const aiInputs = document.querySelectorAll(
+    "#chatInput, " +
+    ".chat-input, " +
+    ".ai-chat-input, " +
+    "textarea[name='message']"
+  );
+
+  aiInputs.forEach(input => {
+
+    input.value =
+      "";
+
+  });
+
+
+  /* ======================================
+     7. CLEAR CHALLENGE
+  ====================================== */
+
+  const challengeContainers = document.querySelectorAll(
+    "#challengeContainer, " +
+    ".challenge-container, " +
+    ".challenge-content, " +
+    ".challenge-questions, " +
+    ".challenge-result"
+  );
+
+  challengeContainers.forEach(container => {
+
+    container.innerHTML =
+      "";
+
+  });
+
+
+  /* ======================================
+     CLEAR CHALLENGE ANSWER / SCORE
+  ====================================== */
+
+  const challengeInputs = document.querySelectorAll(
+    ".challenge-container input, " +
+    ".challenge-container button.selected"
+  );
+
+  challengeInputs.forEach(element => {
+
+    if(element.tagName === "INPUT"){
+
+      element.checked =
+        false;
+
+      element.value =
+        "";
+
+    }
+
+    element.classList.remove(
+      "selected",
+      "correct",
+      "wrong",
+      "active"
+    );
+
+  });
+
+
+  /* ======================================
+     8. CLEAR SELECTED PART BUTTONS
+  ====================================== */
+
+  document
+    .querySelectorAll(
+      ".part-btn.active"
+    )
+    .forEach(button => {
+
+      button.classList.remove(
+        "active"
+      );
+
+    });
+
+
+  /* ======================================
+     9. RESET VISUAL MODE
+  ====================================== */
+
+  show3D();
+
+  emptyState.style.display =
+    "grid";
+
+
+  /* ======================================
+     10. RESET STATUS
+  ====================================== */
+
+  setStatus(
+    "Ready"
+  );
+
+}
+/* ========================================
+   ADD AI CHAT MESSAGE
+======================================== */
+
+function addAiMessage(
+  text,
+  type = "ai"
+){
+
+  if(!aiChat){
+    return;
+  }
+
+
+  const message =
+    document.createElement(
+      "div"
+    );
+
+
+  message.className =
+    `chat-message ${type}`;
+
+
+  const label =
+    document.createElement(
+      "div"
+    );
+
+
+  label.className =
+    "chat-label";
+
+
+  label.textContent =
+    type === "ai"
+      ? "HV"
+      : "USER";
+
+
+  const body =
+    document.createElement(
+      "div"
+    );
+
+
+  body.className =
+    "chat-body";
+
+
+  const name =
+    document.createElement(
+      "div"
+    );
+
+
+  name.className =
+    "chat-name";
+
+
+  name.textContent =
+    type === "ai"
+      ? "HOLOVISION AI"
+      : "USER";
+
+
+  const content =
+    document.createElement(
+      "div"
+    );
+
+
+  content.className =
+    "chat-text";
+
+
+  content.textContent =
+    text || "";
+
+
+  body.appendChild(
+    name
+  );
+
+  body.appendChild(
+    content
+  );
+
+
+  message.appendChild(
+    label
+  );
+
+  message.appendChild(
+    body
+  );
+
+
+  aiChat.appendChild(
+    message
+  );
+
+
+  aiChat.scrollTop =
+    aiChat.scrollHeight;
+
+}
+
+
+/* ========================================
+   CURRENT TOPIC NAME
+======================================== */
+
+function getCurrentTopicName(){
+
+  if(
+    currentTopic &&
+    currentTopic.title
+  ){
+
+    return currentTopic.title;
+
+  }
+
+
+  if(topicInput){
+
+    const value =
+      topicInput.value.trim();
+
+    if(value){
+
+      return value;
+
+    }
+
+  }
+
+
+  return "General Learning";
+
+}
+
+
+/* ========================================
+   CALL GEMINI
+======================================== */
+
+async function callGemini(
+  question
+){
+
+  const topic =
+    getCurrentTopicName();
+
+
+  if(
+    typeof window.HV_GEMINI_GENERATE ===
+    "function"
+  ){
+
+    return await
+      window.HV_GEMINI_GENERATE(
+        question,
+        topic
+      );
+
+  }
+
+
+  return null;
+
+}
+
+
+/* ========================================
+   ASK AI
+======================================== */
+
+async function askAI(){
+
+  if(!aiQuestion){
+
+    return;
+
+  }
+
+
+  const question =
+    aiQuestion.value.trim();
+
+
+  if(!question){
+
+    return;
+
+  }
+
+
+  addAiMessage(
+    question,
+    "user"
+  );
+
+
+  aiQuestion.value =
+    "";
+
+
+  aiSendBtn.disabled =
+    true;
+
+
+  aiSendBtn.textContent =
+    "Thinking...";
+
+
+  addAiMessage(
+    "HoloVision AI is thinking..."
+  );
+
+
+  const thinkingMessage =
+    aiChat.lastElementChild;
+
+
+  try{
+
+    const answer =
+      await callGemini(
+        question
+      );
+
+
+    if(thinkingMessage){
+
+      thinkingMessage.remove();
+
+    }
+
+
+    if(answer){
+
+      addAiMessage(
+        answer,
+        "ai"
+      );
+
+    }
+    else{
+
+      addAiMessage(
+        "AI connection is unavailable right now. Please check your Firebase/Gemini configuration and internet connection.",
+        "ai"
+      );
+
+    }
+
+  }
+  catch(error){
+
+    console.error(
+      "HoloVision AI error:",
+      error
+    );
+
+
+    if(thinkingMessage){
+
+      thinkingMessage.remove();
+
+    }
+
+
+    addAiMessage(
+      "I couldn't connect to the AI service right now. Please check your connection.",
+      "ai"
+    );
+
+  }
+
+
+  aiSendBtn.disabled =
+    false;
+
+
+  aiSendBtn.textContent =
+    "Ask AI";
+
+}
+
+
+/* ========================================
+   CLEAR AI CHAT
+======================================== */
+
+function clearAiChat(){
+
+  if(!aiChat){
+
+    return;
+
+  }
+
+
+  aiChat.innerHTML = `
+    <div class="chat-message ai">
+
+      <div class="chat-label">
+        HV
+      </div>
+
+      <div class="chat-body">
+
+        <div class="chat-name">
+          HOLOVISION AI
+        </div>
+
+        <div class="chat-text">
+          Chat cleared. Select a topic and
+          ask me anything about it.
+        </div>
+
+      </div>
+
+    </div>
+  `;
+
+}
+
+
+/* ========================================
+   ENTER KEY
+======================================== */
+
+if(aiQuestion){
+
+  aiQuestion.addEventListener(
+    "keydown",
+    (event) => {
+
+      if(
+        event.key === "Enter" &&
+        !event.shiftKey
+      ){
+
+        event.preventDefault();
+
+        askAI();
+
+      }
+
+    }
+  );
+
+}
+
+
+/* ========================================
+   AI SEND BUTTON
+======================================== */
+
+if(aiSendBtn){
+
+  aiSendBtn.addEventListener(
+    "click",
+    askAI
+  );
+
+}
+
+
+/* ========================================
+   CLEAR AI BUTTON
+======================================== */
+
+if(clearAiBtn){
+
+  clearAiBtn.addEventListener(
+    "click",
+    clearAiChat
+  );
+
+}
+
+
+/* ========================================
+   VISUALISE BUTTON
+======================================== */
+
+if(visualiseBtn){
+
+  visualiseBtn.addEventListener(
+    "click",
+    () => {
+
+      visualiseTopic(
+        topicInput.value
+      );
+
+    }
+  );
+
+}
+
+
+/* ========================================
+   SEARCH ENTER
+======================================== */
+
+if(topicInput){
+
+  topicInput.addEventListener(
+    "keydown",
+    (event) => {
+
+      if(
+        event.key === "Enter"
+      ){
+
+        event.preventDefault();
+
+        visualiseTopic(
+          topicInput.value
+        );
+
+      }
+
+    }
+  );
+
+}
+
+
+/* ========================================
+   CLEAR BUTTON
+======================================== */
+
+if(clearBtn){
+
+  clearBtn.addEventListener(
+    "click",
+    clearEverything
+  );
+
+}
+
+
+/* ========================================
+   FIND VISUAL BUTTON
+======================================== */
+
+if(findVisualBtn){
+
+  findVisualBtn.addEventListener(
+    "click",
+    async () => {
+
+      const searchText =
+        topicInput.value.trim();
+
+      if(!searchText){
+
+        setStatus(
+          "Search a learning topic first"
+        );
+
+        return;
+      }
+
+
+      /* ------------------------------------
+         1. FIND EDUCATIONAL IMAGE
+      ------------------------------------ */
+
+      setStatus(
+        `Finding ${searchText} visual...`
+      );
+
+      let imageUrl =
+        await findEducationalImage(
+          searchText
+        );
+
+
+      /* ------------------------------------
+         2. IF NOT FOUND → GEMINI AI IMAGE
+      ------------------------------------ */
+
+      if(!imageUrl){
+
+        setStatus(
+          `Creating ${searchText} AI visual...`
+        );
+
+        console.log(
+          "HoloVision: Trying Gemini AI image..."
+        );
+
+        imageUrl =
+          await generateAIImage(
+            searchText
+          );
+
+      }
+
+
+      /* ------------------------------------
+         3. DISPLAY IMAGE
+      ------------------------------------ */
+
+      if(imageUrl){
+
+        currentImageUrl =
+          imageUrl;
+
+        showImage(
+          imageUrl
+        );
+
+        setMode(
+          "IMAGE"
+        );
+
+        setStatus(
+          `${searchText} visual ready`
+        );
+
+      }
+      else{
+
+        currentImageUrl =
+          "";
+
+        showImageMode();
+
+        emptyState.style.display =
+          "grid";
+
+        setStatus(
+          `No visual available for ${searchText}`
+        );
+
+      }
+
+    }
+  );
+
+}
+
+
+/* ========================================
+   3D MODE BUTTON
+======================================== */
+
+if(mode3DBtn){
+
+  mode3DBtn.addEventListener(
+    "click",
+    () => {
+
+      setMode(
+        "3D"
+      );
+
+    }
+  );
+
+}
+
+
+/* ========================================
+   IMAGE MODE BUTTON
+======================================== */
+
+if(modeImageBtn){
+
+  modeImageBtn.addEventListener(
+    "click",
+    () => {
+
+      setMode(
+        "IMAGE"
+      );
+
+    }
+  );
+
+}
+
+
+/* ========================================
+   ROTATE BUTTON
+======================================== */
+
+if(rotateBtn){
+
+  rotateBtn.addEventListener(
+    "click",
+    rotateModel
+  );
+
+}
+
+
+/* ========================================
+   ZOOM IN BUTTON
+======================================== */
+
+if(zoomInBtn){
+
+  zoomInBtn.addEventListener(
+    "click",
+    zoomIn
+  );
+
+}
+
+
+/* ========================================
+   ZOOM OUT BUTTON
+======================================== */
+
+if(zoomOutBtn){
+
+  zoomOutBtn.addEventListener(
+    "click",
+    zoomOut
+  );
+
+}
+
+
+/* ========================================
+   RESET BUTTON
+======================================== */
+
+if(resetBtn){
+
+  resetBtn.addEventListener(
+    "click",
+    resetView
+  );
+
+}
+/* ========================================
+   GENERATE 10 QUESTION CHALLENGE
+======================================== */
+
+async function generateChallenge(){
+
+  const topic =
+    getCurrentTopicName();
+
+
+  if(
+    !topic ||
+    topic === "General Learning"
+  ){
+
+    challengeStatus.textContent =
+      "Please select a learning topic first.";
+
+    return;
+
+  }
+
+
+  challengeBtn.disabled =
+    true;
+
+  challengeBtn.textContent =
+    "Generating...";
+
+
+  challengeStatus.textContent =
+    `Preparing 10 questions about ${topic}...`;
+
+
+  challengeQuestion.textContent =
+    "HoloVision AI is preparing your challenge...";
+
+
+  challengeOptions.innerHTML =
+    "";
+
+  challengeFeedback.textContent =
+    "";
+
+
+  try{
+
+    const prompt = `
+Create exactly 10 educational multiple-choice
+questions about "${topic}".
+
+Return ONLY valid JSON.
+
+Use exactly this structure:
+
+{
+  "questions": [
+    {
+      "question": "Question text",
+      "options": [
+        "Option A",
+        "Option B",
+        "Option C",
+        "Option D"
+      ],
+      "answer": 0,
+      "explanation": "Short explanation"
+    }
+  ]
+}
+
+Rules:
+- Exactly 10 questions.
+- Exactly 4 options per question.
+- "answer" must be 0, 1, 2, or 3.
+- Questions must be suitable for students.
+- Avoid duplicate questions.
+- Keep explanations short.
+`;
+
+
+    const answer = await generateChallengeAI(prompt);
+
+
+    if(!answer){
+
+      throw new Error(
+        "Gemini returned no challenge"
+      );
+
+    }
+
+
+    const cleaned =
+      answer
+        .replace(
+          /```json/gi,
+          ""
+        )
+        .replace(
+          /```/g,
+          ""
+        )
+        .trim();
+
+
+    const parsed =
+      JSON.parse(
+        cleaned
+      );
+
+
+    if(
+      !parsed ||
+      !Array.isArray(
+        parsed.questions
+      ) ||
+      parsed.questions.length < 10
+    ){
+
+      throw new Error(
+        "Invalid challenge format"
+      );
+
+    }
+
+
+    challengeQuestions =
+      parsed.questions
+        .slice(0,10);
+
+
+    challengeIndex =
+      0;
+
+
+    challengeScoreValue =
+      0;
+
+
+    challengeAnswered =
+      false;
+
+
+    challengeScore.textContent =
+      "Score: 0 / 10";
+
+
+    challengeStatus.textContent =
+      `10-question challenge: ${topic}`;
+
+
+    challengeBtn.textContent =
+      "Restart Challenge";
+
+
+    showChallengeQuestion();
+
+  }
+  catch(error){
+
+    console.error(
+      "Challenge generation error:",
+      error
+    );
+
+
+    challengeStatus.textContent =
+      "Unable to generate the challenge. Please try again.";
+
+    challengeQuestion.textContent =
+      "Challenge could not be loaded.";
+
+    challengeFeedback.textContent =
+      "Please check the AI connection and try again.";
+
+  }
+
+
+  challengeBtn.disabled =
+    false;
+
+}
+
+
+/* ========================================
+   SHOW CURRENT QUESTION
+======================================== */
+
+function showChallengeQuestion(){
+
+  if(
+    !challengeQuestions.length
+  ){
+
+    return;
+
+  }
+
+
+  if(
+    challengeIndex >=
+    challengeQuestions.length
+  ){
+
+    finishChallenge();
+
+    return;
+
+  }
+
+
+  const question =
+    challengeQuestions[
+      challengeIndex
+    ];
+
+
+  challengeAnswered =
+    false;
+
+
+  challengeQuestion.textContent =
+    `${challengeIndex + 1}. ${question.question}`;
+
+
+  challengeOptions.innerHTML =
+    "";
+
+
+  challengeFeedback.textContent =
+    "Choose the correct answer.";
+
+
+  question.options
+    .slice(0,4)
+    .forEach(
+      (option, index) => {
+
+        const button =
+          document.createElement(
+            "button"
+          );
+
+
+        button.type =
+          "button";
+
+
+        button.className =
+          "challenge-option";
+
+
+        const letter =
+          document.createElement(
+            "span"
+          );
+
+
+        letter.className =
+          "option-letter";
+
+
+        letter.textContent =
+          String.fromCharCode(
+            65 + index
+          );
+
+
+        const text =
+          document.createElement(
+            "span"
+          );
+
+
+        text.className =
+          "option-text";
+
+
+        text.textContent =
+          option;
+
+
+        button.appendChild(
+          letter
+        );
+
+
+        button.appendChild(
+          text
+        );
+
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            answerChallenge(
+              index
+            );
+
+          }
+        );
+
+
+        challengeOptions.appendChild(
+          button
+        );
+
+      }
+    );
+
+
+  challengeScore.textContent =
+    `Score: ${challengeScoreValue} / 10`;
+
+}
+
+
+/* ========================================
+   ANSWER QUESTION
+======================================== */
+
+function answerChallenge(
+  selectedIndex
+){
+
+  if(
+    challengeAnswered
+  ){
+
+    return;
+
+  }
+
+
+  const question =
+    challengeQuestions[
+      challengeIndex
+    ];
+
+
+  if(!question){
+
+    return;
+
+  }
+
+
+  challengeAnswered =
+    true;
+
+
+  const correctIndex =
+    Number(
+      question.answer
+    );
+
+
+  const optionButtons =
+    challengeOptions
+      .querySelectorAll(
+        ".challenge-option"
+      );
+
+
+  optionButtons.forEach(
+    (button, index) => {
+
+      button.disabled =
+        true;
+
+
+      if(
+        index === correctIndex
+      ){
+
+        button.classList.add(
+          "correct"
+        );
+
+      }
+
+
+      if(
+        index === selectedIndex &&
+        index !== correctIndex
+      ){
+
+        button.classList.add(
+          "wrong"
+        );
+
+      }
+
+    }
+  );
+
+
+  if(
+    selectedIndex ===
+    correctIndex
+  ){
+
+    challengeScoreValue++;
+
+
+    challengeFeedback.textContent =
+      `✓ Correct! ${
+        question.explanation ||
+        "Good job!"
+      }`;
+
+  }
+  else{
+
+    challengeFeedback.textContent =
+      `✗ Not quite. Correct answer: ${
+        question.options[
+          correctIndex
+        ]
+      }. ${
+        question.explanation ||
+        "Keep learning and try the next one!"
+      }`;
+
+  }
+
+
+  challengeScore.textContent =
+    `Score: ${challengeScoreValue} / 10`;
+
+
+  setTimeout(
+    () => {
+
+      challengeIndex++;
+
+      if(
+        challengeIndex <
+        challengeQuestions.length
+      ){
+
+        showChallengeQuestion();
+
+      }
+      else{
+
+        finishChallenge();
+
+      }
+
+    },
+    1300
+  );
+
+}
+
+
+/* ========================================
+   FINISH CHALLENGE
+======================================== */
+
+function finishChallenge(){
+
+  const total =
+    challengeQuestions.length || 10;
+
+
+  challengeQuestion.textContent =
+    "Challenge Completed!";
+
+
+  challengeOptions.innerHTML =
+    "";
+
+
+  challengeScore.textContent =
+    `Final Score: ${challengeScoreValue} / ${total}`;
+
+
+  let message =
+    "";
+
+
+  if(
+    challengeScoreValue === total
+  ){
+
+    message =
+      "Excellent! Perfect score! Keep exploring and learning.";
+
+  }
+  else if(
+    challengeScoreValue >= 8
+  ){
+
+    message =
+      "Great work! You have a strong understanding of this topic.";
+
+  }
+  else if(
+    challengeScoreValue >= 5
+  ){
+
+    message =
+      "Good effort! Review the topic once more and keep improving.";
+
+  }
+  else{
+
+    message =
+      "Keep going! Learning takes practice. Try the challenge again.";
+
+  }
+
+
+  challengeFeedback.textContent =
+    message;
+
+
+  challengeStatus.textContent =
+    `Challenge completed — ${challengeScoreValue} / ${total}`;
+
+
+  challengeBtn.textContent =
+    "Restart Challenge";
+
+}
+
+
+/* ========================================
+   CHALLENGE BUTTON
+======================================== */
+
+if(challengeBtn){
+
+  challengeBtn.addEventListener(
+    "click",
+    generateChallenge
+  );
+
+}
+
+
+/* ========================================
+   CLEAN INITIAL STATE
+======================================== */
+
+clearModel();
+
+removePartArrow();
+
+
+currentTopic =
+  null;
+
+
+currentImageUrl =
+  "";
+
+
+currentMode =
+  "3D";
+
+
+isRotating =
+  false;
+
+
+imageRotation =
+  0;
+
+
+imageScale =
+  1;
+
+
+topicImage.src =
+  "";
+
+
+updateImageTransform();
+
+
+partsList.innerHTML = `
+  <div class="empty-part">
+    No model selected
+  </div>
+`;
+
+
+emptyState.style.display =
+  "grid";
+
+
+setStatus(
+  "Ready"
+);
+
+
+/* ========================================
+   GLOBAL HOLOVISION API
+======================================== */
+
+window.HoloVision = {
+
+  visualiseTopic,
+
+  clearEverything,
+
+  show3D,
+
+  showImageMode,
+
+  rotateModel,
+
+  zoomIn,
+
+  zoomOut,
+
+  resetView,
+
+  askAI,
+
+  generateChallenge,
+
+  locatePart
+
+};
+
+
+/* ========================================
+   FINAL CONSOLE MESSAGE
+======================================== */
+
+console.log(
+  "HoloVision AI 3D Learning Lab loaded successfully."
+);
+
+console.log(
+  "Gemini AI:",
+  model
+    ? "Available"
+    : "Unavailable"
+);
+
+
+
+</script>
+
+
+</body>
+
+</html>
