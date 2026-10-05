@@ -1,0 +1,2701 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>HoloVision AI - AI Chat</title>
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700&family=Poppins:wght@400;500;600&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+
+        /* ==========================================
+           HOLOVISION AI - AI CHAT
+           CLEAN SINGLE CHAT VERSION
+           ========================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at 50% 0%,
+                    rgba(0, 210, 255, 0.07),
+                    transparent 35%
+                ),
+                #050912;
+
+            color: #eaf4ff;
+
+            font-family: "Poppins", sans-serif;
+
+            overflow-x: hidden;
+        }
+
+        button,
+        input {
+            font-family: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* ==========================================
+           APP
+           ========================================== */
+
+        .app {
+            width: 100%;
+            min-height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ==========================================
+           TOP HEADER
+           ========================================== */
+
+        .top-header {
+            width: 100%;
+            height: 72px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 32px;
+
+            background:
+                rgba(5, 9, 18, 0.97);
+
+            border-bottom:
+                1px solid rgba(0, 220, 255, 0.12);
+
+            backdrop-filter: blur(18px);
+
+            position: relative;
+            z-index: 20;
+        }
+
+        /* ==========================================
+           BRAND
+           ========================================== */
+
+        .brand-area {
+            display: flex;
+            align-items: center;
+
+            gap: 13px;
+
+            min-width: 0;
+        }
+
+        .hv-logo {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            flex-shrink: 0;
+
+            border-radius: 11px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(0, 225, 255, 0.16),
+                    rgba(108, 76, 255, 0.16)
+                );
+
+            border:
+                1px solid rgba(0, 225, 255, 0.35);
+
+            color: #00eaff;
+
+            font-family: "Orbitron", sans-serif;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            letter-spacing: 1px;
+
+            box-shadow:
+                0 0 18px rgba(0, 220, 255, 0.08);
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+
+            gap: 2px;
+        }
+
+        .brand-title {
+            font-family: "Orbitron", sans-serif;
+
+            font-size: 15px;
+            font-weight: 700;
+
+            letter-spacing: 1.5px;
+
+            color: #f2f8ff;
+
+            white-space: nowrap;
+        }
+
+        .brand-subtitle {
+            font-size: 8px;
+
+            letter-spacing: 2px;
+
+            color: #71849c;
+
+            text-transform: uppercase;
+        }
+
+        /* ==========================================
+           LOGGED USER - TOP RIGHT
+           ========================================== */
+
+        .user-area {
+            display: flex;
+            align-items: center;
+
+            gap: 10px;
+
+            flex-shrink: 0;
+
+            color: #9fb1c7;
+
+            font-size: 11px;
+        }
+
+        .user-icon {
+            width: 32px;
+            height: 32px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255, 255, 255, 0.04);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.10);
+
+            color: #aebed0;
+        }
+
+        #loggedUserName {
+            color: #dce9f7;
+
+            font-weight: 500;
+
+            white-space: nowrap;
+        }
+
+        /* ==========================================
+           TOP HORIZONTAL NAVIGATION
+           ========================================== */
+
+        .top-nav {
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 7px;
+
+            padding: 11px 20px;
+
+            background:
+                rgba(4, 8, 16, 0.94);
+
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.06);
+
+            backdrop-filter: blur(16px);
+
+            overflow-x: auto;
+
+            scrollbar-width: none;
+        }
+
+        .top-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-btn {
+            flex-shrink: 0;
+
+            min-height: 38px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 8px;
+
+            padding: 8px 15px;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.07);
+
+            border-radius: 9px;
+
+            background:
+                rgba(255, 255, 255, 0.025);
+
+            color: #8fa3bb;
+
+            font-size: 10px;
+            font-weight: 500;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease,
+                border-color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .nav-btn i {
+            font-size: 11px;
+        }
+
+        .nav-btn:hover {
+            color: #dffaff;
+
+            background:
+                rgba(0, 210, 255, 0.06);
+
+            border-color:
+                rgba(0, 210, 255, 0.20);
+
+            transform: translateY(-1px);
+        }
+
+        .nav-btn.active {
+            color: #00eaff;
+
+            background:
+                rgba(0, 210, 255, 0.08);
+
+            border-color:
+                rgba(0, 210, 255, 0.25);
+
+            box-shadow:
+                0 0 16px rgba(0, 210, 255, 0.05);
+        }
+
+        /* ==========================================
+           MAIN CHAT SECTION
+           ========================================== */
+
+        .chat-section {
+            width: 100%;
+            max-width: 1180px;
+
+            min-height:
+                calc(100vh - 133px);
+
+            margin: 0 auto;
+
+            padding:
+                22px 24px 20px;
+
+            display: flex;
+            flex-direction: column;
+
+            flex: 1;
+        }
+
+        /* ==========================================
+           DESKTOP
+           ========================================== */
+
+        @media (min-width: 1000px) {
+
+            .chat-section {
+                padding-left: 35px;
+                padding-right: 35px;
+            }
+
+        }
+
+        /* ==========================================
+           TABLET / MOBILE
+           ========================================== */
+
+        @media (max-width: 760px) {
+
+            .top-header {
+                height: 64px;
+
+                padding:
+                    0 16px;
+            }
+
+            .hv-logo {
+                width: 38px;
+                height: 38px;
+            }
+
+            .brand-title {
+                font-size: 12px;
+            }
+
+            .brand-subtitle {
+                font-size: 7px;
+
+                letter-spacing: 1.4px;
+            }
+
+            .user-area {
+                font-size: 10px;
+            }
+
+            .user-icon {
+                width: 29px;
+                height: 29px;
+            }
+
+            .top-nav {
+                justify-content: flex-start;
+
+                padding:
+                    9px 12px;
+            }
+
+            .nav-btn {
+                min-height: 36px;
+
+                padding:
+                    7px 12px;
+
+                font-size: 9px;
+            }
+
+            .chat-section {
+                min-height:
+                    calc(100vh - 119px);
+
+                padding:
+                    16px 14px 16px;
+            }
+
+        }
+
+        /* ==========================================
+           SMALL PHONE
+           ========================================== */
+
+        @media (max-width: 430px) {
+
+            .brand-subtitle {
+                display: none;
+            }
+
+            .brand-title {
+                font-size: 11px;
+
+                letter-spacing: 1px;
+            }
+
+            .user-area {
+                gap: 6px;
+            }
+
+            .user-icon {
+                width: 27px;
+                height: 27px;
+            }
+
+            .top-nav {
+                gap: 5px;
+            }
+
+            .nav-btn {
+                padding:
+                    7px 10px;
+
+                gap: 6px;
+            }
+
+            .chat-section {
+                padding:
+                    12px 10px;
+            }
+
+        }
+        
+                /* ==========================================
+           CHAT HEADER
+           ========================================== */
+
+        .chat-header {
+            width: 100%;
+
+            min-height: 64px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 4px 16px;
+
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .chat-header-left {
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+        }
+
+        .chat-header-icon {
+            width: 40px;
+            height: 40px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            flex-shrink: 0;
+
+            border-radius: 10px;
+
+            background:
+                rgba(0, 210, 255, 0.07);
+
+            border:
+                1px solid rgba(0, 210, 255, 0.18);
+
+            color: #00eaff;
+
+            font-size: 15px;
+        }
+
+        .chat-header-text h1 {
+            font-family: "Orbitron", sans-serif;
+
+            font-size: 16px;
+            font-weight: 600;
+
+            letter-spacing: 0.5px;
+
+            color: #edf7ff;
+        }
+
+        .chat-header-text p {
+            margin-top: 3px;
+
+            font-size: 9px;
+
+            color: #71849c;
+        }
+
+        .ai-status {
+            display: flex;
+            align-items: center;
+
+            gap: 7px;
+
+            font-size: 9px;
+
+            color: #7e92a9;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+
+            flex-shrink: 0;
+
+            border-radius: 50%;
+
+            background: #21e6a0;
+
+            box-shadow:
+                0 0 9px rgba(33, 230, 160, 0.55);
+        }
+
+
+        /* ==========================================
+           CHAT MESSAGE AREA
+           ========================================== */
+
+        .chat-messages {
+            width: 100%;
+
+            flex: 1;
+
+            min-height: 390px;
+
+            overflow-y: auto;
+
+            padding:
+                22px 4px;
+
+            scrollbar-width: thin;
+
+            scrollbar-color:
+                rgba(0, 210, 255, 0.18)
+                transparent;
+        }
+
+        .chat-messages::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background:
+                rgba(0, 210, 255, 0.18);
+
+            border-radius: 10px;
+        }
+
+
+        /* ==========================================
+           WELCOME SCREEN
+           ========================================== */
+
+        .welcome-box {
+            width: 100%;
+
+            min-height: 100%;
+
+            display: flex;
+            flex-direction: column;
+
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 30px 20px;
+        }
+
+        .welcome-icon {
+            width: 82px;
+            height: 82px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 18px;
+
+            border-radius: 22px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(0, 225, 255, 0.10),
+                    rgba(105, 75, 255, 0.10)
+                );
+
+            border:
+                1px solid rgba(0, 225, 255, 0.30);
+
+            box-shadow:
+                0 0 28px rgba(0, 210, 255, 0.07);
+
+            position: relative;
+        }
+
+        .welcome-icon::before {
+            content: "";
+
+            position: absolute;
+
+            inset: 7px;
+
+            border-radius: 17px;
+
+            border:
+                1px solid rgba(120, 90, 255, 0.18);
+        }
+
+        .hv-welcome-logo span {
+            position: relative;
+
+            z-index: 2;
+
+            font-family: "Orbitron", sans-serif;
+
+            font-size: 21px;
+            font-weight: 700;
+
+            letter-spacing: 2px;
+
+            color: #00eaff;
+
+            text-shadow:
+                0 0 14px rgba(0, 234, 255, 0.28);
+        }
+
+        .welcome-box h2 {
+            font-family: "Orbitron", sans-serif;
+
+            font-size: 19px;
+            font-weight: 500;
+
+            color: #e9f6ff;
+
+            letter-spacing: 0.3px;
+        }
+
+
+        /* ==========================================
+           USER / AI CHAT MESSAGES
+           ========================================== */
+
+        .chat-message {
+            width: 100%;
+
+            display: flex;
+
+            margin-bottom: 18px;
+        }
+
+        .chat-message.user {
+            justify-content: flex-end;
+        }
+
+        .chat-message.ai {
+            justify-content: flex-start;
+        }
+
+        .message-wrap {
+            display: flex;
+            align-items: flex-start;
+
+            gap: 9px;
+
+            max-width: 82%;
+        }
+
+        .chat-message.user .message-wrap {
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 32px;
+            height: 32px;
+
+            flex-shrink: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 9px;
+
+            font-family: "Orbitron", sans-serif;
+
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        .ai-avatar {
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(0, 225, 255, 0.13),
+                    rgba(105, 75, 255, 0.13)
+                );
+
+            border:
+                1px solid rgba(0, 225, 255, 0.25);
+
+            color: #00eaff;
+        }
+
+        .user-avatar {
+            background:
+                rgba(255, 255, 255, 0.06);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.10);
+
+            color: #b9c9da;
+        }
+
+        .message-content {
+            min-width: 0;
+        }
+
+        .message-name {
+            margin-bottom: 4px;
+
+            font-size: 8px;
+
+            color: #6f8399;
+        }
+
+        .chat-message.user .message-name {
+            text-align: right;
+        }
+
+        .message-bubble {
+            padding: 11px 14px;
+
+            border-radius: 12px;
+
+            font-size: 11px;
+
+            line-height: 1.65;
+
+            word-break: break-word;
+        }
+
+        .ai-bubble {
+            background:
+                rgba(9, 20, 34, 0.90);
+
+            border:
+                1px solid rgba(0, 210, 255, 0.12);
+
+            color: #d9e9f7;
+
+            border-top-left-radius: 4px;
+        }
+
+        .user-bubble {
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(0, 170, 210, 0.13),
+                    rgba(105, 75, 255, 0.13)
+                );
+
+            border:
+                1px solid rgba(0, 210, 255, 0.13);
+
+            color: #e8f4ff;
+
+            border-top-right-radius: 4px;
+        }
+
+        .message-bubble strong {
+            color: #00eaff;
+        }
+
+        .message-bubble ul {
+            margin:
+                6px 0 6px 18px;
+        }
+
+        .message-bubble li {
+            margin-bottom: 3px;
+        }
+
+        .message-time {
+            margin-top: 4px;
+
+            font-size: 7px;
+
+            color: #53667b;
+        }
+
+        .chat-message.user .message-time {
+            text-align: right;
+        }
+
+
+        /* ==========================================
+           AI LOADING
+           ========================================== */
+
+        .ai-loading {
+            display: flex;
+            align-items: center;
+
+            gap: 5px;
+
+            padding: 3px 0;
+        }
+
+        .ai-loading span {
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: #00dff5;
+
+            animation:
+                hvLoading 1.1s infinite ease-in-out;
+        }
+
+        .ai-loading span:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+
+        .ai-loading span:nth-child(3) {
+            animation-delay: 0.30s;
+        }
+
+        @keyframes hvLoading {
+
+            0%,
+            80%,
+            100% {
+                opacity: 0.25;
+                transform: translateY(0);
+            }
+
+            40% {
+                opacity: 1;
+                transform: translateY(-3px);
+            }
+
+        }
+
+
+        /* ==========================================
+           INPUT AREA
+           ========================================== */
+
+        .chat-input-area {
+            width: 100%;
+
+            padding-top: 8px;
+        }
+
+        .input-row {
+            width: 100%;
+
+            min-height: 56px;
+
+            display: flex;
+            align-items: center;
+
+            padding:
+                6px 7px 6px 15px;
+
+            background:
+                rgba(10, 17, 30, 0.92);
+
+            border:
+                1px solid rgba(0, 210, 255, 0.14);
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 12px 35px rgba(0, 0, 0, 0.18);
+
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .input-row:focus-within {
+            border-color:
+                rgba(0, 220, 255, 0.30);
+
+            box-shadow:
+                0 0 25px rgba(0, 210, 255, 0.06);
+        }
+
+        .input-icon {
+            width: 35px;
+            height: 35px;
+
+            flex-shrink: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #00dff5;
+
+            font-size: 14px;
+        }
+
+        #question {
+            flex: 1;
+
+            width: 100%;
+            min-width: 0;
+
+            height: 42px;
+
+            border: none;
+            outline: none;
+
+            background: transparent;
+
+            color: #edf7ff;
+
+            font-size: 12px;
+
+            padding:
+                0 10px;
+        }
+
+        #question::placeholder {
+            color: #657990;
+        }
+
+        #sendBtn {
+            width: 42px;
+            height: 42px;
+
+            flex-shrink: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: none;
+
+            border-radius: 11px;
+
+            background:
+              linear-gradient(
+                    135deg,
+                    rgba(0, 210, 255, 0.16),
+                    rgba(105, 75, 255, 0.18)
+                );
+
+            color: #00eaff;
+
+            font-size: 13px;
+
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease;
+        }
+
+        #sendBtn:hover {
+            transform: translateY(-1px);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(0, 210, 255, 0.25),
+                    rgba(105, 75, 255, 0.25)
+                );
+        }
+
+        #sendBtn:active {
+            transform: scale(0.96);
+        }
+        
+                /* ==========================================
+           TOOL BUTTONS
+           ========================================== */
+
+        .tool-row {
+            width: 100%;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(6, minmax(0, 1fr));
+
+            gap: 8px;
+
+            margin-top: 10px;
+        }
+
+        .tool-btn {
+            min-height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 7px;
+
+            padding: 7px 8px;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.07);
+
+            border-radius: 10px;
+
+            background:
+                rgba(255, 255, 255, 0.025);
+
+            color: #8195ac;
+
+            font-size: 9px;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease,
+                border-color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .tool-btn i {
+            font-size: 11px;
+        }
+
+        .tool-btn:hover {
+            color: #dffaff;
+
+            background:
+                rgba(0, 210, 255, 0.055);
+
+            border-color:
+                rgba(0, 210, 255, 0.18);
+
+            transform: translateY(-1px);
+        }
+
+        .tool-btn:active {
+            transform: scale(0.98);
+        }
+
+
+        /* ==========================================
+           IMAGE PREVIEW
+           ========================================== */
+
+        .image-preview {
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+
+            gap: 10px;
+
+            margin-top: 10px;
+        }
+
+        .image-preview img {
+            max-width: 160px;
+            max-height: 120px;
+
+            object-fit: cover;
+
+            border-radius: 10px;
+
+            border:
+                1px solid rgba(0, 210, 255, 0.18);
+        }
+
+
+        /* ==========================================
+           SETTINGS OVERLAY
+           ========================================== */
+
+        .settings-overlay {
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 100;
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                rgba(0, 0, 0, 0.65);
+
+            backdrop-filter: blur(10px);
+        }
+
+        .settings-overlay.show {
+            display: flex;
+        }
+
+        .settings-card {
+            width: min(480px, 100%);
+
+            background:
+                #09111e;
+
+            border:
+                1px solid rgba(0, 210, 255, 0.16);
+
+            border-radius: 16px;
+
+            box-shadow:
+                0 25px 70px rgba(0, 0, 0, 0.45);
+
+            overflow: hidden;
+        }
+
+        .settings-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 20px;
+
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .settings-header h2 {
+            font-family: "Orbitron", sans-serif;
+
+            font-size: 15px;
+
+            color: #edf7ff;
+        }
+
+        .settings-header p {
+            margin-top: 4px;
+
+            font-size: 9px;
+
+            color: #6f8298;
+        }
+
+        .settings-close {
+            width: 34px;
+            height: 34px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background:
+                rgba(255, 255, 255, 0.04);
+
+            color: #94a7bb;
+
+            font-size: 14px;
+        }
+
+        .settings-close:hover {
+            color: #00eaff;
+
+            background:
+                rgba(0, 210, 255, 0.07);
+        }
+
+        .settings-body {
+            padding:
+                8px 20px 20px;
+        }
+
+        .setting-item {
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 15px 0;
+
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+
+        .setting-icon {
+            width: 34px;
+            height: 34px;
+
+            flex-shrink: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 9px;
+
+            background:
+                rgba(0, 210, 255, 0.06);
+
+            color: #00dff5;
+
+            font-size: 12px;
+        }
+
+        .setting-info {
+            flex: 1;
+
+            min-width: 0;
+        }
+
+        .setting-info strong {
+            display: block;
+
+            font-size: 10px;
+
+            color: #dce9f7;
+        }
+
+        .setting-info span {
+            display: block;
+
+            margin-top: 3px;
+
+            font-size: 8px;
+
+            color: #6e8298;
+        }
+
+        .setting-active {
+            font-size: 8px;
+
+            color: #21e6a0;
+        }
+
+
+        /* ==========================================
+           TOGGLE
+           ========================================== */
+
+        .toggle {
+            position: relative;
+
+            width: 38px;
+            height: 21px;
+
+            flex-shrink: 0;
+        }
+
+        .toggle input {
+            opacity: 0;
+
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+
+            inset: 0;
+
+            border-radius: 20px;
+
+            background:
+                rgba(255, 255, 255, 0.10);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.08);
+
+            transition: 0.2s;
+        }
+
+        .toggle-slider::before {
+            content: "";
+
+            position: absolute;
+
+            width: 15px;
+            height: 15px;
+
+            left: 2px;
+            top: 2px;
+
+            border-radius: 50%;
+
+            background: #8193a8;
+
+            transition: 0.2s;
+        }
+
+        .toggle input:checked + .toggle-slider {
+            background:
+                rgba(0, 210, 255, 0.16);
+
+            border-color:
+                rgba(0, 210, 255, 0.25);
+        }
+
+        .toggle input:checked + .toggle-slider::before {
+            transform:
+                translateX(17px);
+
+            background:
+                #00eaff;
+        }
+
+
+        /* ==========================================
+           MOBILE CHAT
+           ========================================== */
+
+        @media (max-width: 760px) {
+
+            .chat-header {
+                min-height: 58px;
+
+                padding-bottom: 12px;
+            }
+
+            .chat-header-icon {
+                width: 36px;
+                height: 36px;
+            }
+
+            .chat-header-text h1 {
+                font-size: 13px;
+            }
+
+            .chat-header-text p {
+                font-size: 8px;
+            }
+
+            .ai-status {
+                font-size: 8px;
+            }
+
+            .chat-messages {
+                min-height: 350px;
+
+                padding:
+                    16px 2px;
+            }
+
+            .welcome-icon {
+                width: 70px;
+                height: 70px;
+            }
+
+            .hv-welcome-logo span {
+                font-size: 18px;
+            }
+
+            .welcome-box h2 {
+                font-size: 16px;
+            }
+
+            .message-wrap {
+                max-width: 90%;
+            }
+
+            .message-bubble {
+                font-size: 10px;
+
+                padding:
+                    10px 12px;
+            }
+
+            .tool-row {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+
+                gap: 7px;
+            }
+
+            .tool-btn {
+                min-height: 40px;
+
+                font-size: 9px;
+            }
+
+        }
+
+
+        /* ==========================================
+           SMALL PHONE
+           ========================================== */
+
+        @media (max-width: 430px) {
+
+            .chat-header-text p {
+                display: none;
+            }
+
+            .ai-status span:last-child {
+                display: none;
+            }
+
+            .input-row {
+                min-height: 52px;
+
+                padding-left: 10px;
+            }
+
+            .input-icon {
+                width: 30px;
+            }
+
+            #question {
+                font-size: 11px;
+            }
+
+            #sendBtn {
+                width: 38px;
+                height: 38px;
+            }
+
+            .tool-btn {
+                min-height: 39px;
+
+                padding:
+                    6px 5px;
+
+                gap: 6px;
+            }
+
+            .message-wrap {
+                max-width: 94%;
+            }
+
+        }
+
+
+        /* ==========================================
+           VERY SMALL PHONE
+           ========================================== */
+
+        @media (max-width: 360px) {
+
+            .top-header {
+                padding:
+                    0 10px;
+            }
+
+            .brand-area {
+                gap: 8px;
+            }
+
+            .brand-title {
+                font-size: 10px;
+            }
+
+            .user-area {
+                font-size: 9px;
+            }
+
+            .nav-btn {
+                font-size: 8px;
+
+                padding:
+                    7px 9px;
+            }
+
+            .chat-section {
+                padding:
+                    10px 8px;
+            }
+
+            .welcome-box {
+                padding:
+                    20px 10px;
+            }
+
+        }
+        
+        /* =========================================================
+   HOLOVISION AI - FINAL CHAT MESSAGE FIX
+   ========================================================= */
+
+/* Hide welcome screen when chat messages exist */
+#answer:has(.hv-chat-message) .welcome-box {
+    display: none !important;
+}
+
+
+/* =========================================================
+   MESSAGE CONTAINER
+   ========================================================= */
+
+#answer .hv-chat-message {
+    width: 100% !important;
+
+    display: flex !important;
+    align-items: flex-start !important;
+
+    gap: 9px !important;
+
+    margin: 0 0 18px 0 !important;
+
+    padding: 0 8px !important;
+}
+
+
+/* =========================================================
+   USER MESSAGE
+   ========================================================= */
+
+#answer .hv-user-message {
+    justify-content: flex-end !important;
+}
+
+#answer .hv-user-message .hv-message-content {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end !important;
+
+    max-width: 78% !important;
+}
+
+
+/* =========================================================
+   AI MESSAGE
+   ========================================================= */
+
+#answer .hv-ai-message {
+    justify-content: flex-start !important;
+}
+
+#answer .hv-ai-message .hv-message-content {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+
+    max-width: 82% !important;
+}
+
+
+/* =========================================================
+   MESSAGE BUBBLE
+   ========================================================= */
+
+#answer .hv-bubble {
+    display: block !important;
+
+    width: auto !important;
+    max-width: 100% !important;
+
+    padding: 12px 15px !important;
+
+    border-radius: 16px !important;
+
+    font-family: "Poppins", sans-serif !important;
+
+    font-size: 13px !important;
+
+    line-height: 1.65 !important;
+
+    text-align: left !important;
+
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+}
+
+
+/* USER BUBBLE */
+
+#answer .hv-user-message .hv-bubble {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0, 190, 230, 0.16),
+            rgba(75, 65, 170, 0.14)
+        ) !important;
+
+    border:
+        1px solid rgba(0, 220, 255, 0.24) !important;
+
+    border-radius:
+        17px 17px 4px 17px !important;
+
+    color: #eaf8ff !important;
+}
+
+
+/* AI BUBBLE */
+
+#answer .hv-ai-message .hv-bubble {
+    background:
+        rgba(8, 20, 34, 0.94) !important;
+
+    border:
+        1px solid rgba(0, 210, 255, 0.15) !important;
+
+    border-radius:
+        4px 17px 17px 17px !important;
+
+    color: #e5f4ff !important;
+}
+
+
+/* =========================================================
+   AVATAR
+   ========================================================= */
+
+#answer .hv-avatar {
+    width: 32px !important;
+    height: 32px !important;
+
+    min-width: 32px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    margin-top: 2px !important;
+
+    border-radius: 9px !important;
+
+    font-family: "Orbitron", sans-serif !important;
+
+    font-size: 9px !important;
+    font-weight: 700 !important;
+
+    letter-spacing: 1px !important;
+}
+
+
+#answer .hv-ai-avatar {
+    color: #00eaff !important;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0, 225, 255, 0.12),
+            rgba(105, 75, 255, 0.12)
+        ) !important;
+
+    border:
+        1px solid rgba(0, 225, 255, 0.28) !important;
+
+    box-shadow:
+        0 0 14px rgba(0, 225, 255, 0.08) !important;
+}
+
+
+/* User avatar should not be displayed */
+
+#answer .hv-user-message .hv-user-avatar {
+    display: none !important;
+}
+
+
+/* =========================================================
+   MESSAGE TIME
+   ========================================================= */
+
+#answer .hv-message-time {
+    margin-top: 5px !important;
+
+    padding: 0 3px !important;
+
+    color: #61758a !important;
+
+    font-size: 8px !important;
+
+    line-height: 1.2 !important;
+}
+
+
+/* =========================================================
+   REMOVE REPEATED AI TITLE
+   ========================================================= */
+
+#answer .hv-ai-name {
+    display: none !important;
+}
+
+
+/* =========================================================
+   AI ANSWER
+   ========================================================= */
+
+#answer .hv-answer-text {
+    color: #e5f4ff !important;
+
+    font-size: 13px !important;
+
+    line-height: 1.7 !important;
+
+    text-align: left !important;
+}
+
+
+/* =========================================================
+   AI HEADINGS
+   ========================================================= */
+
+#answer .hv-answer-text h3,
+#answer .hv-answer-text h4 {
+    margin: 14px 0 7px !important;
+
+    color: #00eaff !important;
+
+    font-weight: 600 !important;
+
+    line-height: 1.4 !important;
+}
+
+#answer .hv-answer-text h3 {
+    font-size: 16px !important;
+}
+
+#answer .hv-answer-text h4 {
+    font-size: 14px !important;
+}
+
+
+/* =========================================================
+   BULLETS
+   ========================================================= */
+
+#answer .hv-answer-text .hv-bullet {
+    margin: 5px 0 !important;
+
+    color: #dff8ff !important;
+
+    line-height: 1.6 !important;
+}
+
+
+/* =========================================================
+   NUMBERED POINTS
+   ========================================================= */
+
+#answer .hv-answer-text .hv-number-point {
+    margin: 6px 0 !important;
+
+    color: #dff8ff !important;
+
+    line-height: 1.65 !important;
+}
+
+#answer .hv-answer-text .hv-number-point strong {
+    color: #00eaff !important;
+}
+
+
+/* =========================================================
+   BOLD
+   ========================================================= */
+
+#answer .hv-answer-text strong {
+    color: #ffffff !important;
+}
+
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+#answer .hv-loading-bubble {
+    display: flex !important;
+
+    align-items: center !important;
+
+    gap: 8px !important;
+
+    padding: 10px 13px !important;
+
+    font-size: 11px !important;
+
+    color: #8196aa !important;
+}
+
+
+/* =========================================================
+   REMOVE GREEN ONLINE INDICATOR
+   ========================================================= */
+
+.ai-status {
+    display: none !important;
+}
+
+.status-dot {
+    display: none !important;
+}
+
+
+/* =========================================================
+   CHAT AREA SPACING
+   ========================================================= */
+
+#answer.chat-messages {
+    padding:
+        20px 4px 24px !important;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 760px) {
+
+    #answer .hv-chat-message {
+        padding: 0 4px !important;
+
+        margin-bottom: 15px !important;
+    }
+
+    #answer .hv-user-message .hv-message-content {
+        max-width: 84% !important;
+    }
+
+    #answer .hv-ai-message .hv-message-content {
+        max-width: 88% !important;
+    }
+
+    #answer .hv-bubble {
+        padding: 11px 13px !important;
+
+        font-size: 13px !important;
+
+        line-height: 1.65 !important;
+    }
+
+    #answer .hv-answer-text {
+        font-size: 13px !important;
+    }
+
+    #answer .hv-avatar {
+        width: 30px !important;
+        height: 30px !important;
+
+        min-width: 30px !important;
+    }
+
+    #answer .hv-answer-text h3 {
+        font-size: 15px !important;
+    }
+
+    #answer .hv-answer-text h4 {
+        font-size: 14px !important;
+    }
+}
+
+
+/* =========================================================
+   SMALL PHONE
+   ========================================================= */
+
+@media (max-width: 430px) {
+
+    #answer.chat-messages {
+        padding:
+            15px 0 20px !important;
+    }
+
+    #answer .hv-user-message .hv-message-content {
+        max-width: 86% !important;
+    }
+
+    #answer .hv-ai-message .hv-message-content {
+        max-width: 89% !important;
+    }
+
+    #answer .hv-bubble {
+        padding: 10px 12px !important;
+
+        font-size: 12.5px !important;
+    }
+
+    #answer .hv-answer-text {
+        font-size: 12.5px !important;
+
+        line-height: 1.65 !important;
+    }
+}
+/* ==========================================
+   FIX CHAT BOX / INPUT VISIBILITY
+   ========================================== */
+
+.chat-section {
+    height: calc(100vh - 133px);
+    min-height: 0;
+}
+
+.chat-messages {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+/* Keep input area visible */
+.chat-input-area {
+    flex-shrink: 0;
+}
+
+/* Mobile */
+@media (max-width: 760px) {
+
+    .chat-section {
+        height: calc(100dvh - 119px);
+        min-height: 0;
+        padding-bottom: 10px;
+    }
+
+    .chat-messages {
+        min-height: 0;
+        overflow-y: auto;
+    }
+
+    .chat-input-area {
+        flex-shrink: 0;
+    }
+}
+
+/* Small phone */
+@media (max-width: 430px) {
+
+    .chat-section {
+        height: calc(100dvh - 119px);
+        min-height: 0;
+    }
+
+    .chat-messages {
+        min-height: 0;
+    }
+}
+
+/* ==========================================
+   HOLOVISION AI - FINAL CHAT BOX FIX
+   ========================================== */
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.app {
+    width: 100%;
+    height: 100dvh;
+    min-height: 0 !important;
+    overflow: hidden;
+}
+
+.chat-section {
+    width: 100%;
+    max-width: 1180px;
+
+    height: calc(100dvh - 133px) !important;
+    min-height: 0 !important;
+
+    margin: 0 auto;
+    padding: 22px 24px 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    flex: 1 1 auto;
+
+    overflow: hidden;
+}
+
+.chat-header {
+    flex: 0 0 auto;
+}
+
+.chat-messages {
+    width: 100%;
+
+    flex: 1 1 auto !important;
+
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+
+    overflow-y: auto !important;
+    overflow-x: hidden;
+
+    padding: 22px 4px;
+
+    scrollbar-width: thin;
+}
+
+.chat-input-area {
+    width: 100%;
+
+    flex: 0 0 auto !important;
+
+    height: auto !important;
+    min-height: 0 !important;
+
+    padding-top: 8px;
+}
+
+
+/* ==========================================
+   MOBILE
+   ========================================== */
+
+@media (max-width: 760px) {
+
+    .app {
+        height: 100dvh;
+        min-height: 0 !important;
+    }
+
+    .chat-section {
+        height: calc(100dvh - 119px) !important;
+        min-height: 0 !important;
+
+        padding:
+            16px 14px 10px;
+
+        overflow: hidden;
+    }
+
+    .chat-header {
+        flex-shrink: 0;
+    }
+
+    .chat-messages {
+        flex: 1 1 0 !important;
+
+        height: 0 !important;
+        min-height: 0 !important;
+
+        overflow-y: auto !important;
+
+        padding:
+            16px 2px;
+    }
+
+    .chat-input-area {
+        flex-shrink: 0 !important;
+
+        width: 100%;
+        min-height: 0 !important;
+
+        padding-top: 8px;
+    }
+
+}
+
+
+/* ==========================================
+   SMALL PHONE
+   ========================================== */
+
+@media (max-width: 430px) {
+
+    .chat-section {
+        height: calc(100dvh - 119px) !important;
+        min-height: 0 !important;
+
+        padding:
+            12px 10px 8px;
+    }
+
+    .chat-messages {
+        flex: 1 1 0 !important;
+
+        height: 0 !important;
+        min-height: 0 !important;
+
+        padding:
+            12px 2px;
+    }
+
+    .chat-input-area {
+        flex-shrink: 0 !important;
+    }
+
+}
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- ======================================
+             TOP HEADER
+             ====================================== -->
+
+        <header class="top-header">
+
+            <div class="brand-area">
+
+                <div class="hv-logo">
+                    HV
+                </div>
+
+                <div class="brand-text">
+
+                    <div class="brand-title">
+                        HOLOVISION AI
+                    </div>
+
+                    <div class="brand-subtitle">
+                        LEARN · EXPLORE · GROW
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- LOGGED-IN USER -->
+
+            <div class="user-area">
+
+                <div class="user-icon">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+
+                <span id="loggedUserName">
+                    User
+                </span>
+
+            </div>
+
+        </header>
+
+
+        <!-- ======================================
+             HORIZONTAL NAVIGATION
+             ====================================== -->
+
+        <nav class="top-nav">
+
+            <button
+                type="button"
+                class="nav-btn active"
+                id="chatNavBtn"
+            >
+              <i class="fa-solid fa-comments"></i>
+                <span>AI Chat</span>
+            </button>
+
+
+            <button
+                type="button"
+                class="nav-btn"
+                id="studyNavBtn"
+            >
+                <i class="fa-solid fa-book-open"></i>
+                <span>Study Mode</span>
+            </button>
+
+
+            <button
+                type="button"
+                class="nav-btn"
+                id="labNavBtn"
+            >
+                <i class="fa-solid fa-cube"></i>
+                <span>3D Learning Lab</span>
+            </button>
+
+
+            <button
+                type="button"
+                class="nav-btn"
+                id="homeNavBtn"
+            >
+                <i class="fa-solid fa-house"></i>
+                <span>Home</span>
+            </button>
+
+
+            <button
+                type="button"
+                class="nav-btn"
+                id="settingsNavBtn"
+            >
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </button>
+
+        </nav>
+                <!-- ======================================
+             MAIN CHAT SECTION
+             ====================================== -->
+
+        <main class="chat-section">
+
+            <!-- ======================================
+                 CHAT HEADER
+                 ====================================== -->
+
+            <div class="chat-header">
+
+                <div class="chat-header-left">
+
+                    <div class="chat-header-icon">
+    <i class="fa-solid fa-comments"></i>
+</div>
+
+                    <div class="chat-header-text">
+
+                        <h1>
+                            AI Chat
+                        </h1>
+
+                        <p>
+                            Intelligent Learning Assistant
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="ai-status">
+
+                    <span class="status-dot"></span>
+
+                    <span>
+                        AI Online
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- ======================================
+                 CHAT MESSAGE AREA
+                 ====================================== -->
+
+            <div
+                class="chat-messages"
+                id="answer"
+            >
+
+                <!-- CENTER WELCOME -->
+
+                <div class="welcome-box">
+                
+                    <h2>
+                        How can I help you learn?
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <!-- ======================================
+                 CHAT INPUT AREA
+                 ====================================== -->
+
+            <div class="chat-input-area">
+
+                <!-- INPUT BOX -->
+
+                <div class="input-row">
+
+                    <div class="input-icon">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+
+
+                    <input
+                        type="text"
+                        id="question"
+                        placeholder="Ask your question..."
+                        autocomplete="off"
+                        spellcheck="true"
+                    >
+
+
+                    <button
+                        type="button"
+                        id="sendBtn"
+                        title="Send"
+                        aria-label="Send message"
+                    >
+
+                        <i class="fa-solid fa-paper-plane"></i>
+
+                    </button>
+
+                </div>
+
+
+                <!-- ==================================
+                     WORKING CHAT TOOLS
+                     ================================== -->
+
+                <div class="tool-row">
+
+                    <!-- SPEAK -->
+
+                    <button
+                        type="button"
+                        class="tool-btn"
+                        id="voiceToolBtn"
+                        title="Speak your question"
+                    >
+
+                        <i class="fa-solid fa-microphone"></i>
+
+                        <span>
+                            Speak
+                        </span>
+
+                    </button>
+
+
+                    <!-- READ ANSWER -->
+
+                    <button
+                        type="button"
+                        class="tool-btn"
+                        id="speakBtn"
+                        title="Read AI answer"
+                    >
+
+                        <i class="fa-solid fa-volume-high"></i>
+
+                        <span>
+                            Read Answer
+                        </span>
+
+                    </button>
+
+
+                    <!-- STUDY MODE -->
+
+                    <button
+                        type="button"
+                        class="tool-btn"
+                        id="studyBtn"
+                        title="Open Study Mode"
+                    >
+
+                        <i class="fa-solid fa-book-open"></i>
+
+                        <span>
+                            Study Mode
+                        </span>
+
+                    </button>
+
+
+                    <!-- CAMERA -->
+
+                    <button
+                        type="button"
+                        class="tool-btn"
+                        id="cameraBtn"
+                        title="Use Camera"
+                    >
+
+                        <i class="fa-solid fa-camera"></i>
+
+                        <span>
+                            Camera
+                        </span>
+
+                    </button>
+
+
+                    <!-- UPLOAD IMAGE -->
+
+                    <button
+                        type="button"
+                        class="tool-btn"
+                        id="uploadBtn"
+                        title="Upload Image"
+                    >
+
+                        <i class="fa-solid fa-image"></i>
+
+                        <span>
+                            Upload Image
+                        </span>
+
+                    </button>
+
+
+                    <!-- CLEAR CHAT -->
+
+                    <button
+                        type="button"
+                        class="tool-btn"
+                        id="clearBtn"
+                        title="Clear Chat"
+                    >
+
+                        <i class="fa-solid fa-trash-can"></i>
+
+                        <span>
+                            Clear Chat
+                        </span>
+
+                    </button>
+
+                </div>
+
+
+                <!-- ==================================
+                     HIDDEN IMAGE INPUT
+                     ================================== -->
+
+                <input
+                    type="file"
+                    id="imageInput"
+                    accept="image/*"
+                    capture="environment"
+                    hidden
+                >
+
+
+                <!-- ==================================
+                     IMAGE PREVIEW
+                     ================================== -->
+
+                <div
+                    id="imagePreview"
+                    class="image-preview"
+                ></div>
+
+            </div>
+
+        </main>
+        
+                <!-- ======================================
+             SETTINGS PANEL
+             ====================================== -->
+
+        <div
+            class="settings-overlay"
+            id="settingsPanel"
+        >
+
+            <div class="settings-card">
+
+                <!-- SETTINGS HEADER -->
+
+                <div class="settings-header">
+
+                    <div class="settings-title">
+
+                        <div class="settings-icon">
+                            <i class="fa-solid fa-gear"></i>
+                        </div>
+
+                        <div>
+                            <h2>Settings</h2>
+                            <p>HoloVision AI Preferences</p>
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        id="closeSettingsBtn"
+                        class="close-settings"
+                        title="Close Settings"
+                    >
+
+                        <i class="fa-solid fa-xmark"></i>
+
+                    </button>
+
+                </div>
+
+
+                <!-- SETTINGS BODY -->
+
+                <div class="settings-body">
+
+                    <!-- AI RESPONSE -->
+
+                    <div class="setting-item">
+
+                        <div class="setting-info">
+
+                            <div class="setting-item-icon">
+                                <i class="fa-solid fa-robot"></i>
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    AI Assistant
+                                </h3>
+
+                                <p>
+                                    Enable intelligent learning assistance
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <label class="switch">
+
+                            <input
+                                type="checkbox"
+                                id="aiToggle"
+                                checked
+                            >
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <!-- SPEECH -->
+
+                    <div class="setting-item">
+
+                        <div class="setting-info">
+
+                            <div class="setting-item-icon">
+                                <i class="fa-solid fa-volume-high"></i>
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Voice & Speech
+                                </h3>
+
+                                <p>
+                                    Enable voice input and answer reading
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <label class="switch">
+
+                            <input
+                                type="checkbox"
+                                id="speechToggle"
+                                checked
+                            >
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <!-- ANIMATIONS -->
+
+                    <div class="setting-item">
+
+                        <div class="setting-info">
+
+                            <div class="setting-item-icon">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Interface Effects
+                                </h3>
+
+                                <p>
+                                    Enable futuristic interface animations
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <label class="switch">
+
+                            <input
+                                type="checkbox"
+                                id="effectsToggle"
+                                checked
+                            >
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <!-- ACCOUNT -->
+
+                    <div class="setting-item account-setting">
+
+                        <div class="setting-info">
+
+                            <div class="setting-item-icon">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Account
+                                </h3>
+
+                                <p id="settingsUserName">
+                                    Signed in as User
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ======================================
+             END APP
+             ====================================== -->
+
+    </div>
+
+
+    <!-- ==========================================
+         CHAT JAVASCRIPT
+         ========================================== -->
+
+    <script type="module" src="./js/chat.js"></script>
+
+</body>
+</html>
+ 
