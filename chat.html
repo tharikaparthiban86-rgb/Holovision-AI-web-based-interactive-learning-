@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>HoloVision AI - Chat</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <!-- =========================
+         TITLE
+         ========================= -->
+
+    <h1>🤖 HoloVision AI Chat</h1>
+
+    <p>
+        Ask me anything about your studies! 👋
+    </p>
+
+
+    <!-- =========================
+         QUESTION
+         ========================= -->
+
+    <textarea
+        id="question"
+        placeholder="Ask anything..."
+        rows="4">
+    </textarea>
+
+
+    <!-- =========================
+         SEND
+         ========================= -->
+
+    <button
+        id="sendBtn"
+        type="button">
+
+        ✨ Send
+
+    </button>
+    
+    <button id="copyAnswerBtn" type="button">Copy</button>
+
+<button id="stopSpeakBtn" type="button">Stop</button>
+
+
+    <!-- =========================
+         VOICE
+         ========================= -->
+
+    <button
+        id="voiceBtn"
+        type="button">
+
+        🎤 Speak
+
+    </button>
+
+
+    <!-- =========================
+         READ ANSWER
+         ========================= -->
+
+    <button
+        id="speakBtn"
+        type="button">
+
+        🔊 Read Answer
+
+    </button>
+
+
+    <!-- =========================
+         STUDY MODE
+         ========================= -->
+
+    <button
+        id="studyBtn"
+        type="button">
+
+        🎓 Study Mode
+
+    </button>
+
+
+    <!-- =========================
+         3D VISUALISATION
+         ========================= -->
+
+    <button
+        id="visual3dBtn"
+        type="button">
+
+        🌐 3D Visualisation
+
+    </button>
+
+
+    <!-- =========================
+         CLEAR CHAT
+         ========================= -->
+
+    <button
+        id="clearBtn"
+        type="button">
+
+        🗑️ Clear Chat
+
+    </button>
+
+
+    <!-- =========================
+         CAMERA
+         ========================= -->
+
+    <button
+        id="cameraBtn"
+        type="button">
+
+        📷 Camera
+
+    </button>
+
+
+    <!-- =========================
+         UPLOAD IMAGE
+         ========================= -->
+
+    <button
+        id="uploadBtn"
+        type="button">
+
+        🖼️ Upload Image
+
+    </button>
+
+
+    <!-- =========================
+         IMAGE INPUT
+         ========================= -->
+
+    <input
+        type="file"
+        id="imageInput"
+        accept="image/*"
+        capture="environment"
+        style="display:none;"
+    >
+
+
+    <!-- =========================
+         IMAGE PREVIEW
+         ========================= -->
+
+    <div id="imagePreview"></div>
+
+
+    <!-- =========================
+         CHAT AREA
+         ========================= -->
+
+    <div class="chat-wrapper">
+
+
+        <!-- =========================
+             AI ANSWER
+             ========================= -->
+
+        <div id="answer">
+
+            <div class="ai-message">
+
+                👋 Hello! I'm your HoloVision AI
+                learning assistant.
+
+                <br><br>
+
+                Ask me anything about your studies!
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             3D VISUALISATION AREA
+             ========================= -->
+
+        <div
+            id="visual3dArea">
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =========================
+         BACK TO HOME
+         ========================= -->
+
+    <button
+        type="button"
+        onclick="window.location='home.html'">
+
+        ⬅️ Back to Home
+
+    </button>
+
+
+</div>
+
+
+<!-- =========================
+     CHAT JAVASCRIPT
+     ========================= -->
+
+<script
+    type="module"
+    src="js/chat.js">
+</script>
+
+
+</body>
+
+</html>
