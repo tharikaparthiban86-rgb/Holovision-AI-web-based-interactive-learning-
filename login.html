@@ -1,1 +1,1162 @@
 
+<!DOCTYPE html>
+
+<html lang="en">
+
+
+
+<head>
+
+
+
+    <meta charset="UTF-8">
+
+
+
+    <meta name="viewport"
+
+          content="width=device-width, initial-scale=1.0">
+
+
+
+    <title>HoloVision AI - Login</title>
+
+
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect"
+
+          href="https://fonts.googleapis.com">
+
+
+
+    <link rel="preconnect"
+
+          href="https://fonts.gstatic.com"
+
+          crossorigin>
+
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
+
+          rel="stylesheet">
+
+
+
+
+
+    <style>
+
+
+
+        * {
+
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+
+
+
+
+        html,
+
+        body {
+
+            width: 100%;
+
+            min-height: 100%;
+
+        }
+
+
+
+
+
+        body {
+
+
+
+            min-height: 100vh;
+
+
+
+            display: flex;
+
+
+
+            align-items: center;
+
+
+
+            justify-content: center;
+
+
+
+            padding: 20px;
+
+
+
+            background:
+
+
+
+                radial-gradient(
+
+                    circle at 50% 20%,
+
+                    rgba(0, 220, 255, 0.08),
+
+                    transparent 35%
+
+                ),
+
+
+
+                radial-gradient(
+
+                    circle at 20% 80%,
+
+                    rgba(120, 50, 255, 0.08),
+
+                    transparent 30%
+
+                ),
+
+
+
+                #020611;
+
+
+
+            color: white;
+
+
+
+            font-family: 'Poppins', sans-serif;
+
+
+
+            overflow-x: hidden;
+
+        }
+
+
+
+
+
+        /* =========================
+
+           BACKGROUND STARS
+
+           ========================= */
+
+
+
+        body::before {
+
+
+
+            content: "";
+
+
+
+            position: fixed;
+
+
+
+            inset: 0;
+
+
+
+            pointer-events: none;
+
+
+
+            background:
+
+
+
+                radial-gradient(
+
+                    circle at 10% 20%,
+
+                    #00d9ff 0,
+
+                    transparent 2px
+
+                ),
+
+
+
+                radial-gradient(
+
+                    circle at 85% 25%,
+
+                    #7c4dff 0,
+
+                    transparent 2px
+
+                ),
+
+
+
+                radial-gradient(
+
+                    circle at 70% 70%,
+
+                    #00eaff 0,
+
+                    transparent 2px
+
+                ),
+
+
+
+                radial-gradient(
+
+                    circle at 30% 80%,
+
+                    #b94cff 0,
+
+                    transparent 2px
+
+                );
+
+
+
+            opacity: 0.5;
+
+
+
+            animation: stars 5s ease-in-out infinite alternate;
+
+        }
+
+
+
+
+
+        @keyframes stars {
+
+
+
+            from {
+
+                transform: translateY(0);
+
+                opacity: 0.35;
+
+            }
+
+
+
+            to {
+
+                transform: translateY(-15px);
+
+                opacity: 0.7;
+
+            }
+
+        }
+
+
+
+
+
+        /* =========================
+
+           LOGIN BOX
+
+           ========================= */
+
+
+
+        .login-box {
+
+
+
+            position: relative;
+
+
+
+            z-index: 5;
+
+
+
+            width: 100%;
+
+
+
+            max-width: 400px;
+
+
+
+            padding: 35px 28px;
+
+
+
+            text-align: center;
+
+
+
+            background:
+
+                rgba(255, 255, 255, 0.07);
+
+
+
+            backdrop-filter: blur(18px);
+
+
+
+            -webkit-backdrop-filter: blur(18px);
+
+
+
+            border:
+
+                1px solid rgba(0, 229, 255, 0.25);
+
+
+
+            border-radius: 24px;
+
+
+
+            box-shadow:
+
+
+
+                0 0 25px
+
+                rgba(0, 229, 255, 0.15),
+
+
+
+                inset 0 0 20px
+
+                rgba(255, 255, 255, 0.03);
+
+        }
+
+
+
+
+
+        /* =========================
+
+           HV LOGO
+
+           ========================= */
+
+
+
+        .login-logo {
+
+
+
+            width: 75px;
+
+
+
+            height: 75px;
+
+
+
+            margin: 0 auto 18px;
+
+
+
+            display: flex;
+
+
+
+            align-items: center;
+
+
+
+            justify-content: center;
+
+
+
+            color: #00e5ff;
+
+
+
+            font-family: 'Orbitron', sans-serif;
+
+
+
+            font-size: 30px;
+
+
+
+            font-weight: 800;
+
+
+
+            letter-spacing: -3px;
+
+
+
+            border:
+
+                1px solid rgba(0, 229, 255, 0.45);
+
+
+
+            border-radius: 14px;
+
+
+
+            background:
+
+                rgba(0, 229, 255, 0.04);
+
+
+
+            text-shadow:
+
+
+
+                0 0 8px #00e5ff,
+
+
+
+                0 0 20px #00e5ff;
+
+
+
+            box-shadow:
+
+
+
+                0 0 15px
+
+                rgba(0, 229, 255, 0.25);
+
+
+
+            animation: loginLogoGlow 3s ease-in-out infinite;
+
+        }
+
+
+
+
+
+        @keyframes loginLogoGlow {
+
+
+
+            50% {
+
+
+
+                box-shadow:
+
+
+
+                    0 0 25px
+
+                    rgba(0, 229, 255, 0.45),
+
+
+
+                    0 0 40px
+
+                    rgba(150, 70, 255, 0.15);
+
+            }
+
+        }
+
+
+
+
+
+        /* =========================
+
+           TITLE
+
+           ========================= */
+
+
+
+        .login-box h1 {
+
+
+
+            margin: 10px 0 5px;
+
+
+
+            font-family: 'Orbitron', sans-serif;
+
+
+
+            font-size: 28px;
+
+
+
+            letter-spacing: 1px;
+
+
+
+            color: #00e5ff;
+
+
+
+            text-shadow:
+
+
+
+                0 0 8px #00e5ff,
+
+
+
+                0 0 20px
+
+                rgba(0, 229, 255, 0.4);
+
+        }
+
+
+
+
+
+        .subtitle {
+
+
+
+            margin-bottom: 25px;
+
+
+
+            color: #9bdff0;
+
+
+
+            font-size: 12px;
+
+
+
+            letter-spacing: 2px;
+
+        }
+
+
+
+
+
+        /* =========================
+
+           INPUTS
+
+           ========================= */
+
+
+
+        .login-box input {
+
+
+
+            width: 100%;
+
+
+
+            padding: 14px;
+
+
+
+            margin: 8px 0;
+
+
+
+            border:
+
+                1px solid
+
+                rgba(255, 255, 255, 0.15);
+
+
+
+            border-radius: 12px;
+
+
+
+            outline: none;
+
+
+
+            background:
+
+                rgba(255, 255, 255, 0.08);
+
+
+
+            color: white;
+
+
+
+            font-family: 'Poppins', sans-serif;
+
+
+
+            font-size: 15px;
+
+
+
+            transition: 0.3s;
+
+        }
+
+
+
+
+
+        .login-box input::placeholder {
+
+
+
+            color: #b7c5d4;
+
+        }
+
+
+
+
+
+        .login-box input:focus {
+
+
+
+            border-color: #00e5ff;
+
+
+
+            box-shadow:
+
+
+
+                0 0 12px
+
+                rgba(0, 229, 255, 0.25);
+
+        }
+
+
+
+
+
+        /* =========================
+
+           BUTTONS
+
+           ========================= */
+
+
+
+        .login-btn,
+
+        .signup-btn {
+
+
+
+            width: 100%;
+
+
+
+            padding: 14px;
+
+
+
+            margin-top: 12px;
+
+
+
+            border-radius: 12px;
+
+
+
+            font-family: 'Poppins', sans-serif;
+
+
+
+            font-size: 15px;
+
+
+
+            font-weight: bold;
+
+
+
+            cursor: pointer;
+
+
+
+            transition: 0.3s;
+
+        }
+
+
+
+
+
+        /* LOGIN BUTTON */
+
+
+
+        .login-btn {
+
+
+
+            border: none;
+
+
+
+            background:
+
+
+
+                linear-gradient(
+
+                    135deg,
+
+                    #0891b2,
+
+                    #00e5ff
+
+                );
+
+
+
+            color: #001018;
+
+
+
+            box-shadow:
+
+
+
+                0 0 15px
+
+                rgba(0, 229, 255, 0.2);
+
+        }
+
+
+
+
+
+        .login-btn:hover {
+
+
+
+            transform: translateY(-2px);
+
+
+
+            box-shadow:
+
+
+
+                0 0 25px
+
+                rgba(0, 229, 255, 0.55);
+
+        }
+
+
+
+
+
+        /* SIGN UP BUTTON */
+
+
+
+        .signup-btn {
+
+
+
+            border:
+
+                1px solid
+
+                rgba(0, 229, 255, 0.3);
+
+
+
+            background: transparent;
+
+
+
+            color: #dffaff;
+
+        }
+
+
+
+
+
+        .signup-btn:hover {
+
+
+
+            background:
+
+                rgba(0, 229, 255, 0.08);
+
+
+
+            border-color: #00e5ff;
+
+
+
+            box-shadow:
+
+
+
+                0 0 15px
+
+                rgba(0, 229, 255, 0.2);
+
+        }
+
+
+
+
+
+        /* =========================
+
+           FOOTER
+
+           ========================= */
+
+
+
+        .footer {
+
+
+
+            margin-top: 22px;
+
+
+
+            color: #64748b;
+
+
+
+            font-size: 10px;
+
+
+
+            letter-spacing: 1px;
+
+        }
+
+
+
+
+
+        /* =========================
+
+           MOBILE
+
+           ========================= */
+
+
+
+        @media (max-width: 480px) {
+
+
+
+            body {
+
+
+
+                padding: 15px;
+
+            }
+
+
+
+
+
+            .login-box {
+
+
+
+                padding: 30px 22px;
+
+            }
+
+
+
+
+
+            .login-logo {
+
+
+
+                width: 68px;
+
+
+
+                height: 68px;
+
+            }
+
+
+
+
+
+            .login-box h1 {
+
+
+
+                font-size: 25px;
+
+            }
+
+
+
+
+
+            .login-box input {
+
+
+
+                font-size: 14px;
+
+
+
+                padding: 13px;
+
+            }
+
+
+
+
+
+            .login-btn,
+
+            .signup-btn {
+
+
+
+                padding: 13px;
+
+            }
+
+        }
+
+
+
+    </style>
+
+
+
+</head>
+
+
+
+
+
+<body>
+
+
+
+
+
+    <!-- =========================
+
+         LOGIN BOX
+
+         ========================= -->
+
+
+
+    <div class="login-box">
+
+
+
+
+
+        <!-- LOGO -->
+
+
+
+        <div class="login-logo">
+
+            HV
+
+        </div>
+
+
+
+
+
+        <!-- TITLE -->
+
+
+
+        <h1>
+
+            HOLOVISION AI
+
+        </h1>
+
+
+
+
+
+        <p class="subtitle">
+
+            INTELLIGENT LEARNING SYSTEM
+
+        </p>
+
+
+
+
+
+        <!-- EMAIL -->
+
+
+
+        <input
+
+            type="email"
+
+            id="email"
+
+            placeholder="Enter your email"
+
+            autocomplete="email">
+
+
+
+
+
+        <!-- PASSWORD -->
+
+
+
+        <input
+
+            type="password"
+
+            id="password"
+
+            placeholder="Enter your password"
+
+            autocomplete="current-password">
+
+
+
+
+
+        <!-- LOGIN -->
+
+
+
+        <button
+
+    type="button"
+
+    class="login-btn"
+
+    onclick="window.login()">
+
+
+
+    Login
+
+
+
+</button>
+
+
+
+
+
+        <!-- SIGN UP -->
+
+
+
+        <button
+
+    type="button"
+
+    class="signup-btn"
+
+    onclick="window.signup()">
+
+
+
+    Create Account
+
+
+
+</button>
+
+
+
+        <!-- FOOTER -->
+
+
+
+        <p class="footer">
+
+
+
+            © 2026 HoloVision AI
+
+
+
+        </p>
+
+
+
+
+
+    </div>
+
+
+
+
+
+    <!-- =========================
+
+         FIREBASE AUTH
+
+         ========================= -->
+
+
+
+    <script
+
+        type="module"
+
+        src="js/auth.js">
+
+    </script>
+
+
+
+
+
+</body>
+
+
+
+</html>
