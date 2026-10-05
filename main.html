@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>HoloVision AI</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#020711;
+    color:white;
+    overflow:hidden;
+}
+
+.page{
+    min-height:100vh;
+    position:relative;
+    overflow:hidden;
+
+    background:
+    radial-gradient(
+        circle at 50% 45%,
+        rgba(0,210,255,.12),
+        transparent 32%
+    ),
+    radial-gradient(
+        circle at 50% 90%,
+        rgba(100,70,255,.12),
+        transparent 35%
+    ),
+    #020711;
+}
+
+
+/* BACKGROUND LIGHTS */
+
+.page::before{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(0,220,255,.7) 1px,
+        transparent 1.5px
+    );
+
+    background-size:120px 120px;
+
+    opacity:.15;
+
+    animation:
+    stars 18s linear infinite;
+
+    pointer-events:none;
+}
+
+@keyframes stars{
+
+    from{
+        background-position:0 0;
+    }
+
+    to{
+        background-position:120px 120px;
+    }
+}
+
+
+/* HEADER */
+
+.header{
+
+    height:95px;
+
+    padding:18px 35px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    position:relative;
+
+    z-index:20;
+}
+
+
+/* LOGO */
+
+.logo-area{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+}
+
+.logo-symbol{
+
+    font-size:60px;
+
+    font-weight:900;
+
+    font-style:italic;
+
+    letter-spacing:-12px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #00eaff,
+        #4c8dff 45%,
+        #b65cff
+    );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+    filter:
+    drop-shadow(
+        0 0 12px
+        rgba(0,220,255,.8)
+    );
+
+    animation:
+    logoGlow 3s ease-in-out infinite;
+}
+
+@keyframes logoGlow{
+
+    50%{
+
+        filter:
+        drop-shadow(
+            0 0 25px
+            rgba(0,220,255,1)
+        );
+    }
+}
+
+.logo-name{
+
+    font-size:25px;
+
+    font-weight:700;
+
+    letter-spacing:.5px;
+}
+
+.logo-sub{
+
+    margin-top:6px;
+
+    font-size:10px;
+
+    letter-spacing:2.2px;
+
+    color:#00eaff;
+}
+
+
+/* LOGOUT */
+
+.logout{
+
+    padding:11px 20px;
+
+    border:1px solid
+    rgba(0,220,255,.5);
+
+    border-radius:11px;
+
+    background:
+    rgba(2,20,38,.8);
+
+    color:white;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.logout:hover{
+
+    color:#00eaff;
+
+    border-color:#00eaff;
+
+    box-shadow:
+    0 0 22px
+    rgba(0,220,255,.4);
+
+    transform:
+    translateY(-2px);
+}
+
+
+/* MAIN */
+
+.main{
+
+    height:
+    calc(100vh - 95px);
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    position:relative;
+
+    z-index:5;
+}
+
+
+/* HOLOGRAM */
+
+.hologram{
+
+    width:500px;
+
+    height:500px;
+
+    position:relative;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    animation:
+    floating 4s ease-in-out infinite;
+}
+
+@keyframes floating{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-18px);
+    }
+}
+
+
+/* GLOW */
+
+.hologram::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:390px;
+
+    height:390px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(0,220,255,.22),
+        transparent 68%
+    );
+
+    filter:blur(18px);
+
+    animation:
+    glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse{
+
+    50%{
+        transform:scale(1.15);
+
+        opacity:.65;
+    }
+}
+
+
+/* HOLOGRAM RINGS */
+
+.ring{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    transform:rotateX(65deg);
+
+    border:1px solid
+    rgba(0,225,255,.6);
+}
+
+.ring-one{
+
+    width:430px;
+
+    height:125px;
+
+    animation:
+    ringRotate 8s linear infinite;
+}
+
+.ring-two{
+
+    width:350px;
+
+    height:105px;
+
+    border-color:
+    rgba(145,80,255,.7);
+
+    animation:
+    ringRotate 11s linear infinite reverse;
+}
+
+.ring-three{
+
+    width:500px;
+
+    height:150px;
+
+    border-color:
+    rgba(0,220,255,.22);
+
+    animation:
+    ringRotate 14s linear infinite;
+}
+
+@keyframes ringRotate{
+
+    from{
+
+        transform:
+        rotateX(65deg)
+        rotateZ(0deg);
+    }
+
+    to{
+
+        transform:
+        rotateX(65deg)
+        rotateZ(360deg);
+    }
+}
+
+
+/* 3D CUBE */
+
+.cube{
+
+    width:165px;
+
+    height:165px;
+
+    position:relative;
+
+    z-index:5;
+
+    transform-style:preserve-3d;
+
+    animation:
+    cubeRotate 10s linear infinite;
+}
+
+@keyframes cubeRotate{
+
+    from{
+
+        transform:
+        rotateX(-10deg)
+        rotateY(0deg);
+    }
+
+    to{
+
+        transform:
+        rotateX(-10deg)
+        rotateY(360deg);
+    }
+}
+
+
+/* CUBE FACES */
+
+.face{
+
+    position:absolute;
+
+    width:165px;
+
+    height:165px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border:2px solid #00eaff;
+
+    background:
+    rgba(0,130,200,.08);
+
+    box-shadow:
+
+    inset 0 0 30px
+    rgba(0,220,255,.18),
+
+    0 0 25px
+    rgba(0,220,255,.45);
+}
+
+.front{
+    transform:
+    translateZ(82.5px);
+}
+
+.back{
+    transform:
+    rotateY(180deg)
+    translateZ(82.5px);
+}
+
+.right{
+    transform:
+    rotateY(90deg)
+    translateZ(82.5px);
+}
+
+.left{
+    transform:
+    rotateY(-90deg)
+    translateZ(82.5px);
+}
+
+.top{
+    transform:
+    rotateX(90deg)
+    translateZ(82.5px);
+}
+
+.bottom{
+    transform:
+    rotateX(-90deg)
+    translateZ(82.5px);
+}
+
+
+/* HV */
+
+.hv{
+
+    font-size:62px;
+
+    font-weight:900;
+
+    font-style:italic;
+
+    letter-spacing:-11px;
+
+    color:#00eaff;
+
+    text-shadow:
+
+    0 0 10px #00eaff,
+
+    0 0 25px #00eaff,
+
+    0 0 50px #694cff;
+}
+
+
+/* BEAM */
+
+.beam{
+
+    position:absolute;
+
+    top:255px;
+
+    width:175px;
+
+    height:255px;
+
+    background:
+
+    linear-gradient(
+        to bottom,
+        transparent,
+        rgba(0,220,255,.32),
+        rgba(0,220,255,.02)
+    );
+
+    clip-path:
+    polygon(
+        35% 0,
+        65% 0,
+        100% 100%,
+        0 100%
+    );
+
+    filter:blur(2px);
+
+    animation:
+    beamPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes beamPulse{
+
+    50%{
+
+        opacity:.5;
+
+        transform:
+        scaleX(1.08);
+    }
+}
+
+
+/* PROJECTOR */
+
+.projector{
+
+    position:absolute;
+
+    bottom:5px;
+
+    width:360px;
+
+    height:85px;
+
+    border-radius:50%;
+
+    transform:rotateX(65deg);
+
+    background:
+
+    radial-gradient(
+        ellipse,
+        rgba(0,220,255,.28),
+        rgba(1,15,30,.9) 65%
+    );
+
+    border:2px solid
+    rgba(0,220,255,.65);
+
+    box-shadow:
+
+    0 0 30px
+    rgba(0,220,255,.5),
+
+    inset 0 0 30px
+    rgba(0,220,255,.25);
+}
+
+.projector::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:34px;
+
+    height:34px;
+
+    left:50%;
+
+    top:50%;
+
+    transform:
+    translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:#efffff;
+
+    box-shadow:
+
+    0 0 20px #00eaff,
+
+    0 0 50px #00eaff,
+
+    0 0 80px #704cff;
+
+    animation:
+    lightPulse 1.5s infinite;
+}
+
+@keyframes lightPulse{
+
+    50%{
+
+        transform:
+        translate(-50%,-50%)
+        scale(1.2);
+    }
+}
+/* WELCOME */
+
+.welcome{
+
+    text-align:center;
+
+    margin-top:-30px;
+
+    position:relative;
+
+    z-index:10;
+
+    animation:
+    welcomeIn 1s ease .5s both;
+}
+
+@keyframes welcomeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:
+        translateY(20px);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+        translateY(0);
+    }
+}
+
+
+.welcome h1{
+
+    font-size:40px;
+
+    font-weight:700;
+
+    color:#00eaff;
+
+    text-shadow:
+
+    0 0 12px
+    rgba(0,220,255,.7),
+
+    0 0 30px
+    rgba(0,220,255,.25);
+
+    margin-bottom:8px;
+}
+
+
+.welcome p{
+
+    font-size:16px;
+
+    color:#e5edf6;
+
+    margin-bottom:22px;
+}
+
+
+/* ENTER AI LAB */
+
+.enter-btn{
+
+    width:420px;
+
+    max-width:90vw;
+
+    height:65px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:24px;
+
+    margin:auto;
+
+    border:2px solid #00dfff;
+
+    border-radius:17px;
+
+    background:
+
+    linear-gradient(
+        90deg,
+        rgba(0,70,150,.35),
+        rgba(70,35,150,.38),
+        rgba(0,70,150,.35)
+    );
+
+    color:white;
+
+    font-family:inherit;
+
+    font-size:21px;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+    cursor:pointer;
+
+    position:relative;
+
+    overflow:hidden;
+
+    box-shadow:
+
+    0 0 20px
+    rgba(0,220,255,.45),
+
+    inset 0 0 20px
+    rgba(0,220,255,.08);
+
+    transition:.35s;
+}
+
+
+.enter-btn::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-60%;
+
+    width:45%;
+
+    height:100%;
+
+    background:
+
+    linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.3),
+        transparent
+    );
+
+    transform:skewX(-20deg);
+
+    animation:
+    buttonScan 3s linear infinite;
+}
+
+
+@keyframes buttonScan{
+
+    0%{
+        left:-60%;
+    }
+
+    55%,100%{
+        left:120%;
+    }
+}
+
+
+.enter-btn:hover{
+
+    transform:
+    translateY(-4px)
+    scale(1.02);
+
+    border-color:#8cfaff;
+
+    box-shadow:
+
+    0 0 35px
+    rgba(0,220,255,.75),
+
+    inset 0 0 25px
+    rgba(0,220,255,.12);
+}
+
+
+.arrow{
+
+    width:37px;
+
+    height:37px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border:1px solid #00eaff;
+
+    border-radius:50%;
+
+    color:#00eaff;
+
+    font-size:22px;
+
+    position:relative;
+
+    z-index:2;
+}
+
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+    body{
+        overflow:auto;
+    }
+
+
+    .header{
+
+        height:auto;
+
+        padding:15px 18px;
+    }
+
+
+    .logo-area{
+
+        gap:9px;
+    }
+
+
+    .logo-symbol{
+
+        font-size:45px;
+
+        letter-spacing:-9px;
+    }
+
+
+    .logo-name{
+
+        font-size:18px;
+    }
+
+
+    .logo-sub{
+
+        font-size:6px;
+
+        letter-spacing:1.4px;
+    }
+
+
+    .logout{
+
+        padding:9px 12px;
+
+        font-size:11px;
+    }
+
+
+    .main{
+
+        height:auto;
+
+        min-height:
+        calc(100vh - 80px);
+
+        padding-bottom:35px;
+    }
+
+
+    .hologram{
+
+        width:380px;
+
+        height:400px;
+
+        max-width:100vw;
+    }
+
+
+    .cube{
+
+        width:125px;
+
+        height:125px;
+    }
+
+
+    .face{
+
+        width:125px;
+
+        height:125px;
+    }
+
+
+    .front{
+        transform:
+        translateZ(62.5px);
+    }
+
+
+    .back{
+        transform:
+        rotateY(180deg)
+        translateZ(62.5px);
+    }
+
+
+    .right{
+        transform:
+        rotateY(90deg)
+        translateZ(62.5px);
+    }
+
+
+    .left{
+        transform:
+        rotateY(-90deg)
+        translateZ(62.5px);
+    }
+
+
+    .top{
+        transform:
+        rotateX(90deg)
+        translateZ(62.5px);
+    }
+
+
+    .bottom{
+        transform:
+        rotateX(-90deg)
+        translateZ(62.5px);
+    }
+
+
+    .hv{
+
+        font-size:48px;
+
+        letter-spacing:-8px;
+    }
+
+
+    .ring-one{
+
+        width:330px;
+    }
+
+
+    .ring-two{
+
+        width:270px;
+    }
+
+
+    .ring-three{
+
+        width:390px;
+    }
+      .projector{
+
+        width:290px;
+    }
+
+
+    .beam{
+
+        width:145px;
+
+        height:210px;
+
+        top:215px;
+    }
+
+
+    .welcome{
+
+        margin-top:-25px;
+    }
+
+
+    .welcome h1{
+
+        font-size:32px;
+    }
+
+
+    .welcome p{
+
+        font-size:14px;
+    }
+
+
+    .enter-btn{
+
+        width:90vw;
+
+        height:60px;
+
+        font-size:18px;
+    }
+
+}
+
+
+/* SMALL PHONE */
+
+@media(max-width:400px){
+
+    .logo-name{
+
+        font-size:15px;
+    }
+
+
+    .logo-sub{
+
+        font-size:5px;
+
+        letter-spacing:1px;
+    }
+
+
+    .logout{
+
+        padding:8px 10px;
+
+        font-size:10px;
+    }
+
+
+    .hologram{
+
+        height:370px;
+    }
+
+
+    .welcome h1{
+
+        font-size:29px;
+    }
+
+
+    .welcome p{
+
+        font-size:13px;
+    }
+
+}
+
+</style>
+
+
+<script type="module">
+
+import {
+    onAuthStateChanged,
+    signOut
+}
+from
+"https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+
+
+import {
+    auth
+}
+from "./js/firebase-config.js";
+
+
+/* LOGIN CHECK */
+
+onAuthStateChanged(
+    auth,
+    (user) => {
+
+        if(!user){
+
+            window.location.href =
+            "index.html";
+
+        }
+
+    }
+);
+
+
+/* LOGOUT */
+
+window.logout = async function(){
+
+    try{
+
+        await signOut(auth);
+
+        window.location.href =
+        "index.html";
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert(
+            "Logout failed. Please try again."
+        );
+
+    }
+
+};
+
+
+/* ENTER AI LAB */
+
+window.enterAILab = function(){
+
+    window.location.href =
+    "ai-chat.html";
+
+};
+
+</script>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+<!-- HEADER -->
+
+<header class="header">
+
+
+<div class="logo-area">
+
+
+<div class="logo-symbol">
+HV
+</div>
+
+
+<div>
+
+<div class="logo-name">
+HOLOVISION AI
+</div>
+
+
+<div class="logo-sub">
+INTELLIGENT LEARNING SYSTEM
+</div>
+
+</div>
+
+
+</div>
+
+
+<button
+class="logout"
+onclick="logout()">
+
+Logout
+
+</button>
+
+
+</header>
+
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+
+<!-- HOLOGRAM -->
+
+<div class="hologram">
+
+
+<div class="ring ring-one"></div>
+
+<div class="ring ring-two"></div>
+
+<div class="ring ring-three"></div>
+
+
+<div class="cube">
+
+
+<div class="face front">
+<span class="hv">HV</span>
+</div>
+
+
+<div class="face back">
+<span class="hv">HV</span>
+</div>
+
+
+<div class="face right">
+<span class="hv">HV</span>
+</div>
+
+
+<div class="face left">
+<span class="hv">HV</span>
+</div>
+
+
+<div class="face top">
+<span class="hv">HV</span>
+</div>
+
+
+<div class="face bottom">
+<span class="hv">HV</span>
+</div>
+
+
+</div>
+
+
+<div class="beam"></div>
+
+
+<div class="projector"></div>
+
+
+</div>
+
+
+
+<!-- WELCOME -->
+
+<section class="welcome">
+
+
+<h1>
+Welcome!
+</h1>
+
+
+<p>
+Your Intelligent Learning Assistant
+</p>
+
+
+<button
+class="enter-btn"
+onclick="enterAILab()">
+
+
+<span>
+ENTER AI LAB
+</span>
+
+
+<span class="arrow">
+→
+</span>
+
+
+</button>
+
+
+</section>
+
+
+</main>
+
+
+</div>
+
+
+</body>
+
+</html>
