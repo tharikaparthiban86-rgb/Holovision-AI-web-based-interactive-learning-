@@ -1,3236 +1,1990 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HoloVision AI - 3D Learning Lab</title>
 
-  <title>HoloVision AI - 3D Learning Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-  <!-- Three.js -->
-  <script type="importmap">
-  {
-    "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-    }
-  }
-  </script>
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 20% 10%, rgba(0,255,255,.08), transparent 30%),
+        radial-gradient(circle at 80% 80%, rgba(155,80,255,.10), transparent 35%),
+        #050814;
+    color: #fff;
+    font-family: "Poppins", sans-serif;
+}
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+header {
+    width: 100%;
+    padding: 18px 24px;
+    border-bottom: 1px solid rgba(0,255,255,.18);
+    background: rgba(5,8,20,.88);
+    backdrop-filter: blur(14px);
+}
 
-    body {
-      min-height: 100vh;
-      background:
-        radial-gradient(circle at top left, rgba(0, 255, 255, 0.10), transparent 35%),
-        radial-gradient(circle at bottom right, rgba(150, 0, 255, 0.12), transparent 35%),
-        #050712;
-      color: #ffffff;
-      font-family: "Poppins", sans-serif;
-      overflow-x: hidden;
-    }
+.logo {
+    font-family: "Orbitron", sans-serif;
+    font-size: 23px;
+    font-weight: 800;
+    color: #00f6ff;
+    letter-spacing: 1px;
+}
 
-    button,
-    input {
-      font-family: inherit;
-    }
+.logo span {
+    color: #a855f7;
+}
 
-    .page {
-      width: 100%;
-      max-width: 1500px;
-      margin: auto;
-      padding: 20px;
-    }
+.subtitle {
+    margin-top: 3px;
+    color: #9aa8c7;
+    font-size: 12px;
+}
 
-    /* HEADER */
+.container {
+    width: min(1450px, 96%);
+    margin: auto;
+    padding: 20px 0 35px;
+}
 
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-      margin-bottom: 20px;
-      padding: 16px 20px;
-      border: 1px solid rgba(0, 238, 255, 0.25);
-      border-radius: 18px;
-      background: rgba(7, 12, 30, 0.82);
-      backdrop-filter: blur(15px);
-      box-shadow:
-        0 0 25px rgba(0, 238, 255, 0.08),
-        inset 0 0 25px rgba(100, 0, 255, 0.04);
-    }
+.toolbar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+.search-box {
+    flex: 1;
+    display: flex;
+    gap: 8px;
+}
 
-    .brand-icon {
-      width: 45px;
-      height: 45px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid #00eaff;
-      color: #00eaff;
-      font-family: "Orbitron", sans-serif;
-      font-weight: 700;
-      box-shadow: 0 0 18px rgba(0, 234, 255, 0.35);
-    }
+input,
+textarea {
+    width: 100%;
+    background: rgba(12,18,38,.9);
+    border: 1px solid rgba(0,246,255,.25);
+    color: #fff;
+    border-radius: 10px;
+    outline: none;
+    font-family: "Poppins", sans-serif;
+}
 
-    .brand-text h1 {
-      font-family: "Orbitron", sans-serif;
-      font-size: 19px;
-      letter-spacing: 1px;
-      color: #00eaff;
-    }
+input {
+    padding: 12px 14px;
+}
 
-    .brand-text p {
-      font-size: 11px;
-      color: #8f9bb7;
-      margin-top: 2px;
-    }
+textarea {
+    min-height: 80px;
+    padding: 12px;
+    resize: vertical;
+}
 
-    .back-btn {
-      border: 1px solid rgba(0, 234, 255, 0.45);
-      background: rgba(0, 234, 255, 0.07);
-      color: #00eaff;
-      padding: 10px 16px;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: 0.25s;
-    }
+input:focus,
+textarea:focus {
+    border-color: #00f6ff;
+    box-shadow: 0 0 15px rgba(0,246,255,.12);
+}
 
-    .back-btn:hover {
-      background: rgba(0, 234, 255, 0.15);
-      box-shadow: 0 0 18px rgba(0, 234, 255, 0.2);
-    }
+button {
+    border: 1px solid rgba(0,246,255,.35);
+    background: linear-gradient(135deg, #071d2b, #17102d);
+    color: #fff;
+    padding: 11px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    transition: .2s;
+}
 
-    /* SEARCH */
+button:hover {
+    border-color: #00f6ff;
+    box-shadow: 0 0 18px rgba(0,246,255,.18);
+    transform: translateY(-1px);
+}
 
-    .control-bar {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 18px;
-    }
+button.primary {
+    background: linear-gradient(135deg, #007f89, #6d28d9);
+    border-color: transparent;
+}
 
-    .search-box {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      border: 1px solid rgba(0, 234, 255, 0.25);
-      border-radius: 13px;
-      background: rgba(8, 13, 30, 0.85);
-      overflow: hidden;
-    }
+.main-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 15px;
+}
 
-    .search-box input {
-      flex: 1;
-      width: 100%;
-      padding: 14px 16px;
-      background: transparent;
-      border: none;
-      outline: none;
-      color: white;
-      font-size: 14px;
-    }
+.card {
+    background: rgba(7,12,28,.86);
+    border: 1px solid rgba(0,246,255,.17);
+    border-radius: 15px;
+    box-shadow: 0 10px 35px rgba(0,0,0,.25);
+    overflow: hidden;
+}
 
-    .search-box input::placeholder {
-      color: #69738f;
-    }
+.viewer-card {
+    min-height: 610px;
+    position: relative;
+}
 
-    .btn {
-      border: none;
-      border-radius: 11px;
-      padding: 12px 18px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: 0.25s;
-      white-space: nowrap;
-    }
+.viewer-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 13px 15px;
+    border-bottom: 1px solid rgba(0,246,255,.12);
+}
 
-    .visualise-btn {
-      background: linear-gradient(135deg, #00d9ff, #006eff);
-      color: white;
-      box-shadow: 0 0 18px rgba(0, 217, 255, 0.22);
-    }
+.section-title {
+    font-family: "Orbitron", sans-serif;
+    color: #00f6ff;
+    font-size: 14px;
+}
 
-    .clear-btn {
-      background: rgba(255, 70, 130, 0.08);
-      border: 1px solid rgba(255, 70, 130, 0.35);
-      color: #ff78a8;
-    }
+.status {
+    color: #8ea0bf;
+    font-size: 11px;
+}
 
-    .btn:hover {
-      transform: translateY(-1px);
-      filter: brightness(1.12);
-    }
+#viewer {
+    position: relative;
+    width: 100%;
+    height: 550px;
+    background:
+        radial-gradient(circle at center, rgba(0,246,255,.06), transparent 45%),
+        #030611;
+}
 
-    /* MAIN GRID */
+#threeCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
 
+.image-fallback {
+    position: absolute;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    background: #030611;
+}
+
+.image-fallback img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 12px;
+    border: 1px solid rgba(0,246,255,.25);
+}
+
+.empty-view {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #6f7e9c;
+    pointer-events: none;
+}
+
+.empty-view div {
+    max-width: 400px;
+}
+
+.empty-view strong {
+    display: block;
+    color: #00f6ff;
+    font-family: "Orbitron", sans-serif;
+    margin-bottom: 8px;
+}
+
+.parts-card {
+    padding: 15px;
+    height: fit-content;
+}
+
+.parts-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.parts-count {
+    font-size: 11px;
+    color: #8090ad;
+}
+
+.parts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.part-btn {
+    width: 100%;
+    text-align: left;
+    padding: 10px 11px;
+    background: rgba(12,18,38,.8);
+    border: 1px solid rgba(168,85,247,.18);
+}
+
+.part-btn.active {
+    border-color: #00f6ff;
+    background: rgba(0,246,255,.08);
+    color: #00f6ff;
+}
+
+.part-note {
+    margin-top: 13px;
+    padding: 10px;
+    border-radius: 9px;
+    background: rgba(168,85,247,.07);
+    color: #8796b4;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.ai-card,
+.challenge-card {
+    margin-top: 15px;
+    padding: 15px;
+}
+
+.ai-header,
+.challenge-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.ai-chat {
+    max-height: 420px;
+    overflow-y: auto;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.message {
+    max-width: 85%;
+    padding: 10px 13px;
+    border-radius: 13px;
+    font-size: 13px;
+    line-height: 1.55;
+    white-space: pre-wrap;
+}
+
+.message.user {
+    align-self: flex-end;
+    background: linear-gradient(135deg, rgba(0,135,150,.55), rgba(35,80,130,.55));
+    border: 1px solid rgba(0,246,255,.22);
+}
+
+.message.hv {
+    align-self: flex-start;
+    background: linear-gradient(135deg, rgba(65,25,100,.6), rgba(25,20,55,.8));
+    border: 1px solid rgba(168,85,247,.25);
+}
+
+.message-label {
+    display: block;
+    font-size: 10px;
+    font-family: "Orbitron", sans-serif;
+    color: #00f6ff;
+    margin-bottom: 4px;
+}
+
+.ai-image {
+    display: none;
+    margin: 10px 0;
+    text-align: center;
+}
+
+.ai-image img {
+    width: min(500px, 100%);
+    max-height: 280px;
+    object-fit: contain;
+    border-radius: 12px;
+    border: 1px solid rgba(0,246,255,.25);
+}
+
+.ai-input-row {
+    display: flex;
+    gap: 8px;
+}
+
+.ai-input-row textarea {
+    flex: 1;
+}
+
+.ai-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 9px;
+}
+
+.challenge-area {
+    display: none;
+}
+
+.challenge-question {
+    margin: 12px 0;
+    font-size: 15px;
+    color: #dbe6ff;
+}
+
+.options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.option-btn {
+    text-align: left;
+}
+
+.challenge-info {
+    color: #8fa0bf;
+    font-size: 12px;
+}
+
+.result-box {
+    display: none;
+    margin-top: 15px;
+    padding: 18px;
+    border: 1px solid rgba(0,246,255,.2);
+    border-radius: 12px;
+    text-align: center;
+}
+
+.result-score {
+    font-family: "Orbitron", sans-serif;
+    color: #00f6ff;
+    font-size: 28px;
+    margin: 8px 0;
+}
+
+@media (max-width: 900px) {
     .main-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 310px;
-      gap: 18px;
+        grid-template-columns: 1fr;
     }
-
-    /* VIEWER */
 
     .viewer-card {
-      min-height: 590px;
-      border: 1px solid rgba(0, 234, 255, 0.23);
-      border-radius: 18px;
-      background: rgba(6, 11, 27, 0.86);
-      overflow: hidden;
-      position: relative;
-      box-shadow: inset 0 0 40px rgba(0, 234, 255, 0.025);
-    }
-
-    .viewer-title {
-      height: 55px;
-      display: flex;
-      align-items: center;
-      padding: 0 18px;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-      font-family: "Orbitron", sans-serif;
-      font-size: 13px;
-      color: #00eaff;
-      letter-spacing: 0.5px;
+        min-height: 520px;
     }
 
     #viewer {
-      width: 100%;
-      height: 535px;
-      position: relative;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at center, rgba(0, 234, 255, 0.07), transparent 42%),
-        #03050d;
+        height: 460px;
+    }
+}
+
+@media (max-width: 600px) {
+    header {
+        padding: 15px;
     }
 
-    #threeCanvas {
-      width: 100%;
-      height: 100%;
-      display: block;
+    .container {
+        width: 94%;
+        padding-top: 14px;
     }
 
-    .viewer-placeholder {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 30px;
-      color: #7c879e;
-      pointer-events: none;
+    .toolbar {
+        flex-direction: column;
     }
 
-    .viewer-placeholder.hidden {
-      display: none;
+    .search-box {
+        flex-direction: column;
     }
 
-    .placeholder-inner {
-      max-width: 450px;
+    #viewer {
+        height: 390px;
     }
 
-    .placeholder-inner h2 {
-      font-family: "Orbitron", sans-serif;
-      color: #00eaff;
-      font-size: 20px;
-      margin-bottom: 10px;
+    .viewer-card {
+        min-height: 450px;
     }
 
-    .placeholder-inner p {
-      font-size: 13px;
-      line-height: 1.7;
-    }
-
-    #imageFallback {
-      position: absolute;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      background: #03050d;
-    }
-
-    #imageFallback.show {
-      display: flex;
-    }
-
-    #fallbackImage {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      border-radius: 12px;
-      box-shadow: 0 0 35px rgba(0, 234, 255, 0.12);
-    }
-
-    .viewer-info {
-      position: absolute;
-      left: 15px;
-      bottom: 15px;
-      right: 15px;
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      pointer-events: none;
-    }
-
-    .status-pill {
-      padding: 7px 11px;
-      border-radius: 20px;
-      background: rgba(0,0,0,0.62);
-      border: 1px solid rgba(0,234,255,0.22);
-      color: #9befff;
-      font-size: 11px;
-      backdrop-filter: blur(8px);
-    }
-
-    /* SIDE PANEL */
-
-    .side-panel {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .panel {
-      border: 1px solid rgba(0, 234, 255, 0.2);
-      border-radius: 16px;
-      background: rgba(7, 12, 29, 0.88);
-      padding: 16px;
-      box-shadow: inset 0 0 25px rgba(0, 234, 255, 0.02);
-    }
-
-    .panel-title {
-      font-family: "Orbitron", sans-serif;
-      color: #00eaff;
-      font-size: 13px;
-      margin-bottom: 13px;
-      letter-spacing: 0.5px;
-    }
-
-    /* PARTS */
-
-    #partsList {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      max-height: 300px;
-      overflow-y: auto;
-    }
-
-    .part-btn {
-      width: 100%;
-      text-align: left;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.025);
-      color: #dce5f7;
-      border-radius: 9px;
-      padding: 10px 11px;
-      cursor: pointer;
-      font-size: 12px;
-      transition: 0.2s;
-    }
-
-    .part-btn:hover,
-    .part-btn.active {
-      border-color: rgba(0,234,255,0.5);
-      background: rgba(0,234,255,0.08);
-      color: #00eaff;
-    }
-
-    .no-parts {
-      color: #707b95;
-      font-size: 12px;
-      line-height: 1.5;
-    }
-
-    /* AI ASSISTANT */
-
-    .ai-panel {
-      border-color: rgba(155, 90, 255, 0.3);
-    }
-
-    .ai-panel .panel-title {
-      color: #c18aff;
-    }
-
-    #aiQuestion {
-      width: 100%;
-      min-height: 85px;
-      resize: vertical;
-      border: 1px solid rgba(155,90,255,0.25);
-      border-radius: 10px;
-      outline: none;
-      background: rgba(0,0,0,0.25);
-      color: white;
-      padding: 11px;
-      font-size: 12px;
-      margin-bottom: 9px;
-    }
-
-    #aiQuestion::placeholder {
-      color: #70758a;
-    }
-
-    .ai-actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 7px;
-    }
-
-    .ai-btn {
-      border: 1px solid rgba(155,90,255,0.3);
-      background: rgba(155,90,255,0.08);
-      color: #cba5ff;
-      padding: 9px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 11px;
-    }
-
-    .ai-btn.primary {
-      grid-column: 1 / -1;
-      background: linear-gradient(135deg, #7638d8, #a64dff);
-      color: white;
-      border: none;
-    }
-
-    .ai-answer {
-      margin-top: 10px;
-      padding: 10px;
-      border-radius: 9px;
-      background: rgba(0,0,0,0.25);
-      border: 1px solid rgba(155,90,255,0.18);
-      color: #d9d3e8;
-      font-size: 11px;
-      line-height: 1.6;
-      max-height: 180px;
-      overflow-y: auto;
-      white-space: pre-wrap;
-    }
-
-    /* CHALLENGE */
-
-    .challenge-panel {
-      margin-top: 18px;
-      border-color: rgba(255, 180, 70, 0.25);
-    }
-
-    .challenge-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .challenge-header .panel-title {
-      color: #ffc16b;
-      margin-bottom: 0;
-    }
-
-    .challenge-start {
-      border: 1px solid rgba(255,180,70,0.35);
-      background: rgba(255,180,70,0.08);
-      color: #ffc16b;
-      border-radius: 8px;
-      padding: 8px 12px;
-      cursor: pointer;
-      font-size: 11px;
-    }
-
-    #challengeArea {
-      display: none;
-      margin-top: 15px;
-    }
-
-    #challengeArea.show {
-      display: block;
-    }
-
-    .challenge-progress {
-      font-size: 11px;
-      color: #8994ab;
-      margin-bottom: 9px;
-    }
-
-    .question-box {
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 11px;
-      padding: 15px;
-      background: rgba(255,255,255,0.025);
-    }
-
-    #questionText {
-      font-size: 14px;
-      line-height: 1.6;
-      margin-bottom: 12px;
-      color: #f3f6ff;
-    }
-
-    .option {
-      width: 100%;
-      display: block;
-      text-align: left;
-      padding: 10px 12px;
-      margin-top: 7px;
-      border-radius: 8px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.025);
-      color: #cfd7e8;
-      cursor: pointer;
-      font-size: 12px;
-    }
-
-    .option:hover {
-      border-color: rgba(255,180,70,0.45);
-    }
-
-    .option.correct {
-      border-color: #32e39a;
-      background: rgba(50,227,154,0.1);
-      color: #62f0b4;
-    }
-
-    .option.wrong {
-      border-color: #ff668c;
-      background: rgba(255,102,140,0.1);
-      color: #ff91aa;
-    }
-
-    .next-question {
-      margin-top: 12px;
-      border: none;
-      background: #ffad42;
-      color: #14100a;
-      padding: 9px 14px;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      display: none;
-    }
-
-    .result-box {
-      text-align: center;
-      padding: 25px 10px;
-      display: none;
-    }
-
-    .result-box.show {
-      display: block;
-    }
-
-    .result-score {
-      font-family: "Orbitron", sans-serif;
-      font-size: 28px;
-      color: #ffc16b;
-      margin: 8px 0;
-    }
-
-    .result-message {
-      color: #aab4c9;
-      font-size: 12px;
-      line-height: 1.6;
-    }
-
-    /* TOAST */
-
-    #toast {
-      position: fixed;
-      left: 50%;
-      bottom: 25px;
-      transform: translate(-50%, 20px);
-      background: rgba(8, 14, 30, 0.95);
-      border: 1px solid rgba(0,234,255,0.3);
-      color: #dffbff;
-      padding: 10px 15px;
-      border-radius: 10px;
-      font-size: 12px;
-      opacity: 0;
-      pointer-events: none;
-      transition: 0.25s;
-      z-index: 9999;
-    }
-
-    #toast.show {
-      opacity: 1;
-      transform: translate(-50%, 0);
-    }
-
-    /* MOBILE */
-
-    @media (max-width: 900px) {
-      .main-grid {
+    .options {
         grid-template-columns: 1fr;
-      }
-
-      .side-panel {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .viewer-card {
-        min-height: 500px;
-      }
-
-      #viewer {
-        height: 445px;
-      }
-
-      .challenge-panel {
-        margin-top: 15px;
-      }
     }
 
-    @media (max-width: 620px) {
-      .page {
-        padding: 10px;
-      }
-
-      .topbar {
-        padding: 12px;
-      }
-
-      .brand-icon {
-        width: 38px;
-        height: 38px;
-      }
-
-      .brand-text h1 {
-        font-size: 15px;
-      }
-
-      .back-btn {
-        padding: 8px 10px;
-        font-size: 11px;
-      }
-
-      .control-bar {
-        flex-wrap: wrap;
-      }
-
-      .search-box {
-        flex-basis: 100%;
-      }
-
-      .visualise-btn,
-      .clear-btn {
-        flex: 1;
-      }
-
-      .viewer-card {
-        min-height: 430px;
-      }
-
-      #viewer {
-        height: 375px;
-      }
-
-      .side-panel {
-        grid-template-columns: 1fr;
-      }
-
-      .ai-actions {
-        grid-template-columns: 1fr 1fr;
-      }
+    .ai-input-row {
+        flex-direction: column;
     }
-  </style>
+
+    .message {
+        max-width: 94%;
+    }
+}
+</style>
 </head>
 
 <body>
 
-<div class="page">
+<header>
+    <div class="logo">HOLO<span>VISION</span> AI</div>
+    <div class="subtitle">3D Interactive Learning Lab</div>
+</header>
 
-  <!-- HEADER -->
-  <header class="topbar">
+<div class="container">
 
-    <div class="brand">
-      <div class="brand-icon">HV</div>
-
-      <div class="brand-text">
-        <h1>HOLOVISION AI</h1>
-        <p>3D Interactive Learning Lab</p>
-      </div>
+    <!-- SEARCH -->
+    <div class="toolbar">
+        <div class="search-box">
+            <input
+                id="topicInput"
+                type="text"
+                placeholder="Search: Heart, Brain, Lungs, Kidney, Ear, Skeleton..."
+            >
+            <button class="primary" id="visualiseBtn">Visualise</button>
+        </div>
+        <button id="clearBtn">Clear</button>
     </div>
 
-    <button class="back-btn" id="backBtn">← Back</button>
+    <!-- 3D + PARTS -->
+    <div class="main-grid">
 
-  </header>
+        <section class="card viewer-card">
+            <div class="viewer-title">
+                <div class="section-title" id="viewerTitle">3D VIEWER</div>
+                <div class="status" id="modelStatus">No topic selected</div>
+            </div>
 
+            <div id="viewer">
 
-  <!-- SEARCH -->
-  <section class="control-bar">
+                <canvas id="threeCanvas"></canvas>
 
-    <div class="search-box">
-      <input
-        type="text"
-        id="topicInput"
-        placeholder="Search a topic... e.g. Heart, Brain, Lungs"
-        autocomplete="off"
-      />
+                <div class="image-fallback" id="imageFallback">
+                    <img id="fallbackImage" alt="Educational visual">
+                </div>
+
+                <div class="empty-view" id="emptyView">
+                    <div>
+                        <strong>HOLOVISION 3D LAB</strong>
+                        Search a topic and press Visualise.
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <aside class="card parts-card">
+
+            <div class="parts-heading">
+                <div class="section-title">PARTS</div>
+                <div class="parts-count" id="partsCount">0 parts</div>
+            </div>
+
+            <div class="parts-list" id="partsList"></div>
+
+            <div class="part-note" id="partNote">
+                Select a topic first. Then click a part to locate it in the 3D model.
+            </div>
+
+        </aside>
+
     </div>
 
-    <button class="btn visualise-btn" id="visualiseBtn">
-      Visualise
-    </button>
+    <!-- AI CHAT -->
+    <section class="card ai-card">
 
-    <button class="btn clear-btn" id="clearBtn">
-      Clear
-    </button>
-
-  </section>
-
-
-  <!-- MAIN -->
-  <main class="main-grid">
-
-    <!-- VIEWER -->
-    <section class="viewer-card">
-
-      <div class="viewer-title">
-        3D VISUALISATION
-      </div>
-
-      <div id="viewer">
-
-        <canvas id="threeCanvas"></canvas>
-
-        <div
-          id="viewerPlaceholder"
-          class="viewer-placeholder"
-        >
-          <div class="placeholder-inner">
-
-            <h2>Interactive 3D Lab</h2>
-
-            <p>
-              Search for a learning topic and select
-              <strong>Visualise</strong> to explore the
-              3D model or educational image.
-            </p>
-
-          </div>
+        <div class="ai-header">
+            <div class="section-title">HV AI ASSISTANT</div>
+            <div class="status">User → HV</div>
         </div>
 
+        <div class="ai-chat" id="aiChat">
 
-        <!-- IMAGE FALLBACK -->
-        <div id="imageFallback">
-
-          <img
-            id="fallbackImage"
-            alt="Educational visualisation"
-          />
+            <div class="message hv">
+                <span class="message-label">HV</span>
+                Hi! Ask me anything about the selected learning topic.
+            </div>
 
         </div>
 
+        <!-- Instant related image -->
+        <div class="ai-image" id="aiImageBox">
+            <img id="aiImage" alt="Related educational image">
+        </div>
 
-        <div class="viewer-info">
+        <div class="ai-input-row">
 
-          <div
-            class="status-pill"
-            id="viewerStatus"
-          >
-            Ready
-          </div>
+            <textarea
+                id="aiQuestion"
+                placeholder="Ask HV about this topic..."
+            ></textarea>
 
-          <div
-            class="status-pill"
-            id="topicStatus"
-          >
-            No topic selected
-          </div>
+            <button class="primary" id="askAiBtn">Ask HV</button>
 
         </div>
 
-      </div>
+        <div class="ai-buttons">
+            <button id="copyAiBtn">Copy</button>
+            <button id="speakAiBtn">Speak</button>
+            <button id="stopSpeakBtn">Stop</button>
+        </div>
 
     </section>
 
+    <!-- CHALLENGE -->
+    <section class="card challenge-card">
 
-    <!-- RIGHT SIDE -->
-    <aside class="side-panel">
+        <div class="challenge-header">
+            <div>
+                <div class="section-title">CHALLENGE MODE</div>
+                <div class="challenge-info">10 questions</div>
+            </div>
 
-
-      <!-- PARTS -->
-      <section class="panel">
-
-        <div class="panel-title">
-          PARTS
+            <button class="primary" id="startChallengeBtn">
+                Start Challenge
+            </button>
         </div>
 
-        <div id="partsList">
+        <div class="challenge-area" id="challengeArea">
 
-          <div class="no-parts">
-            Select a topic to display its parts.
-          </div>
+            <div class="challenge-info" id="questionNumber"></div>
 
-        </div>
+            <div class="challenge-question" id="questionText"></div>
 
-      </section>
+            <div class="options" id="optionsContainer"></div>
 
-
-      <!-- AI ASSISTANT -->
-      <section class="panel ai-panel">
-
-        <div class="panel-title">
-          AI ASSISTANT
-        </div>
-
-        <textarea
-          id="aiQuestion"
-          placeholder="Ask something about this topic..."
-        ></textarea>
-
-        <div class="ai-actions">
-
-          <button
-            class="ai-btn primary"
-            id="askAiBtn"
-          >
-            Ask AI
-          </button>
-
-          <button
-            class="ai-btn"
-            id="copyAiBtn"
-          >
-            Copy
-          </button>
-
-          <button
-            class="ai-btn"
-            id="speakAiBtn"
-          >
-            Speak
-          </button>
-
-          <button
-            class="ai-btn"
-            id="stopSpeakBtn"
-          >
-            Stop
-          </button>
+            <button id="nextQuestionBtn" style="display:none;margin-top:12px;">
+                Next
+            </button>
 
         </div>
 
-        <div
-          class="ai-answer"
-          id="aiAnswer"
-        >
-          AI Assistant ready.
+        <div class="result-box" id="resultBox">
+            <div>Challenge Complete</div>
+            <div class="result-score" id="resultScore">0 / 10</div>
+            <div id="resultMessage"></div>
         </div>
 
-      </section>
-
-    </aside>
-
-  </main>
-
-
-  <!-- CHALLENGE MODE -->
-  <section class="panel challenge-panel">
-
-    <div class="challenge-header">
-
-      <div class="panel-title">
-        CHALLENGE MODE
-      </div>
-
-      <button
-        class="challenge-start"
-        id="startChallengeBtn"
-      >
-        Start Challenge
-      </button>
-
-    </div>
-
-
-    <div id="challengeArea">
-
-      <div
-        class="challenge-progress"
-        id="challengeProgress"
-      >
-        Question 1 of 10
-      </div>
-
-      <div class="question-box">
-
-        <div
-          id="questionText"
-        >
-          Question will appear here.
-        </div>
-
-        <div id="optionsContainer"></div>
-
-        <button
-          class="next-question"
-          id="nextQuestionBtn"
-        >
-          Next Question
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <div
-      class="result-box"
-      id="resultBox"
-    >
-
-      <div>Challenge Completed</div>
-
-      <div
-        class="result-score"
-        id="resultScore"
-      >
-        0 / 10
-      </div>
-
-      <div
-        class="result-message"
-        id="resultMessage"
-      >
-        Keep learning and try again!
-      </div>
-
-    </div>
-
-  </section>
+    </section>
 
 </div>
 
-
-<div id="toast"></div>
-
-
+<!-- THREE.JS -->
 <script type="module">
 
-  import * as THREE from "three";
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js";
 
-  import {
-    OrbitControls
-  } from "three/addons/controls/OrbitControls.js";
+import { OrbitControls }
+from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js";
 
-  import {
-    GLTFLoader
-  } from "three/addons/loaders/GLTFLoader.js";
+import { GLTFLoader }
+from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js";
 
 
-  /* =========================================================
-     GLOBAL VARIABLES
-  ========================================================= */
+/* =========================================================
+   TOPIC DATA
+========================================================= */
 
-  let scene;
-  let camera;
-  let renderer;
-  let controls;
-
-  let currentModel = null;
-  let currentTopic = "";
-
-  let selectedPart = null;
-
-  let mixer = null;
-
-  let aiSpeaking = false;
-
-
-  /* =========================================================
-     DOM
-  ========================================================= */
-
-  const canvas =
-    document.getElementById("threeCanvas");
-
-  const viewer =
-    document.getElementById("viewer");
-
-  const topicInput =
-    document.getElementById("topicInput");
-
-  const visualiseBtn =
-    document.getElementById("visualiseBtn");
-
-  const clearBtn =
-    document.getElementById("clearBtn");
-
-  const backBtn =
-    document.getElementById("backBtn");
-
-  const viewerPlaceholder =
-    document.getElementById("viewerPlaceholder");
-
-  const imageFallback =
-    document.getElementById("imageFallback");
-
-  const fallbackImage =
-    document.getElementById("fallbackImage");
-
-  const viewerStatus =
-    document.getElementById("viewerStatus");
-
-  const topicStatus =
-    document.getElementById("topicStatus");
-
-  const partsList =
-    document.getElementById("partsList");
-
-  const aiQuestion =
-    document.getElementById("aiQuestion");
-
-  const askAiBtn =
-    document.getElementById("askAiBtn");
-
-  const copyAiBtn =
-    document.getElementById("copyAiBtn");
-
-  const speakAiBtn =
-    document.getElementById("speakAiBtn");
-
-  const stopSpeakBtn =
-    document.getElementById("stopSpeakBtn");
-
-  const aiAnswer =
-    document.getElementById("aiAnswer");
-
-
-  /* =========================================================
-     TOPIC DATA
-  ========================================================= */
-
-  const TOPICS = {
+const TOPICS = {
 
     heart: {
-      name: "Heart",
-      model: "models/heart.glb",
-      image:
-        "https://commons.wikimedia.org/wiki/Special:FilePath/Heart_diagram-en.svg",
-      parts: [
-        "Aorta",
-        "Left Atrium",
-        "Right Atrium",
-        "Left Ventricle",
-        "Right Ventricle",
-        "Pulmonary Artery",
-        "Pulmonary Vein",
-        "Septum"
-      ]
+        name: "Heart",
+        model: "models/heart.glb",
+        image:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Diagram_of_the_human_heart.svg/800px-Diagram_of_the_human_heart.svg.png",
+
+        parts: [
+            ["Aorta", ["aorta", "aortic"]],
+            ["Left Ventricle", ["leftventricle", "ventricleleft", "lv"]],
+            ["Right Ventricle", ["rightventricle", "ventricleright", "rv"]],
+            ["Left Atrium", ["leftatrium", "atriumleft", "la"]],
+            ["Right Atrium", ["rightatrium", "atriumright", "ra"]],
+            ["Septum", ["septum"]],
+            ["Pulmonary Artery", ["pulmonaryartery"]],
+            ["Vena Cava", ["venacava", "superiorvenacava", "inferiorvenacava"]]
+        ]
     },
 
     brain: {
-      name: "Brain",
-      model: "models/Brain.glb",
-      image:
-        "https://commons.wikimedia.org/wiki/Special:FilePath/Brain_human_normal.svg",
-      parts: [
-        "Cerebrum",
-        "Cerebellum",
-        "Brain Stem",
-        "Frontal Lobe",
-        "Parietal Lobe",
-        "Temporal Lobe",
-        "Occipital Lobe"
-      ]
+        name: "Brain",
+        model: "models/Brain.glb",
+        image:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Brain_human_sagittal_section.svg/800px-Brain_human_sagittal_section.svg.png",
+
+        parts: [
+            ["Cerebrum", ["cerebrum", "cerebral"]],
+            ["Cerebellum", ["cerebellum"]],
+            ["Brain Stem", ["brainstem", "brainstem"]],
+            ["Frontal Lobe", ["frontallobe", "frontal"]],
+            ["Temporal Lobe", ["temporallobe", "temporal"]],
+            ["Parietal Lobe", ["parietallobe", "parietal"]],
+            ["Occipital Lobe", ["occipitallobe", "occipital"]]
+        ]
     },
 
     lungs: {
-      name: "Lungs",
-      model: "models/lungs.glb",
-      image:
-        "https://commons.wikimedia.org/wiki/Special:FilePath/Lungs_diagram_detailed.svg",
-      parts: [
-        "Right Lung",
-        "Left Lung",
-        "Trachea",
-        "Bronchi",
-        "Bronchioles",
-        "Alveoli"
-      ]
+        name: "Lungs",
+        model: "models/lungs.glb",
+        image:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Lungs_diagram_detailed.svg/800px-Lungs_diagram_detailed.svg.png",
+
+        parts: [
+            ["Right Lung", ["rightlung", "lungright"]],
+            ["Left Lung", ["leftlung", "lungleft"]],
+            ["Trachea", ["trachea"]],
+            ["Bronchi", ["bronchus", "bronchi"]],
+            ["Alveoli", ["alveoli", "alveolus"]],
+            ["Diaphragm", ["diaphragm"]]
+        ]
     },
 
     kidney: {
-      name: "Kidney",
-      model: "models/kidney.glb",
-      image:
-        "https://commons.wikimedia.org/wiki/Special:FilePath/Kidney_diagram.svg",
-      parts: [
-        "Renal Cortex",
-        "Renal Medulla",
-        "Renal Pelvis",
-        "Ureter",
-        "Renal Artery",
-        "Renal Vein",
-        "Nephron"
-      ]
+        name: "Kidney",
+        model: "models/kidney.glb",
+        image:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Illu_kidney.jpg/700px-Illu_kidney.jpg",
+
+        parts: [
+            ["Renal Cortex", ["renalcortex", "cortex"]],
+            ["Renal Medulla", ["renalmedulla", "medulla"]],
+            ["Renal Pelvis", ["renalpelvis", "pelvis"]],
+            ["Ureter", ["ureter"]],
+            ["Renal Artery", ["renalartery"]],
+            ["Renal Vein", ["renalvein"]]
+        ]
     },
 
     ear: {
-      name: "Ear",
-      model: "models/ear.glb",
-      image:
-        "https://commons.wikimedia.org/wiki/Special:FilePath/Anatomy_of_the_Human_Ear.svg",
-      parts: [
-        "Outer Ear",
-        "Ear Canal",
-        "Eardrum",
-        "Middle Ear",
-        "Cochlea",
-        "Semicircular Canals",
-        "Auditory Nerve"
-      ]
+        name: "Ear",
+        model: "models/ear.glb",
+        image:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Anatomy_of_the_Human_Ear.svg/800px-Anatomy_of_the_Human_Ear.svg.png",
+
+        parts: [
+            ["Pinna", ["pinna", "auricle"]],
+            ["Ear Canal", ["earcanal", "auditorycanal"]],
+            ["Eardrum", ["eardrum", "tympanic"]],
+            ["Cochlea", ["cochlea"]],
+            ["Semicircular Canals", ["semicircular", "canals"]],
+            ["Auditory Nerve", ["auditorynerve", "vestibulocochlear"]]
+        ]
     },
 
     skeleton: {
-      name: "Human Skeleton",
-      model: "models/human skeleton.glb",
-      image:
-        "https://commons.wikimedia.org/wiki/Special:FilePath/Human_skeleton_front_en.svg",
-      parts: [
-        "Skull",
-        "Spine",
-        "Rib Cage",
-        "Pelvis",
-        "Humerus",
-        "Femur",
-        "Tibia"
-      ]
+        name: "Human Skeleton",
+        model: "models/human skeleton.glb",
+        image:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Human_skeleton_front_en.svg/800px-Human_skeleton_front_en.svg.png",
+
+        parts: [
+            ["Skull", ["skull", "cranium"]],
+            ["Spine", ["spine", "vertebra", "vertebrae"]],
+            ["Rib Cage", ["ribcage", "ribs"]],
+            ["Humerus", ["humerus"]],
+            ["Radius", ["radius"]],
+            ["Ulna", ["ulna"]],
+            ["Femur", ["femur"]],
+            ["Tibia", ["tibia"]],
+            ["Fibula", ["fibula"]]
+        ]
     }
 
-  };
+};
 
 
-  /* =========================================================
-     CHALLENGE QUESTIONS
-  ========================================================= */
+/* =========================================================
+   THREE.JS SETUP
+========================================================= */
 
-  const CHALLENGES = [
+const canvas = document.getElementById("threeCanvas");
+const viewer = document.getElementById("viewer");
 
-    {
-      q: "Which organ pumps blood throughout the body?",
-      options: [
-        "Brain",
-        "Heart",
-        "Kidney",
-        "Lung"
-      ],
-      answer: 1
-    },
+const renderer = new THREE.WebGLRenderer({
+    canvas,
+    antialias: true,
+    alpha: true
+});
 
-    {
-      q: "Which organ is mainly responsible for controlling the body?",
-      options: [
-        "Brain",
-        "Heart",
-        "Kidney",
-        "Ear"
-      ],
-      answer: 0
-    },
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setSize(viewer.clientWidth, viewer.clientHeight);
 
-    {
-      q: "Where does gas exchange mainly occur in the lungs?",
-      options: [
-        "Trachea",
-        "Alveoli",
-        "Bronchi",
-        "Nose"
-      ],
-      answer: 1
-    },
+renderer.outputColorSpace = THREE.SRGBColorSpace;
 
-    {
-      q: "Which organ filters waste from the blood?",
-      options: [
-        "Heart",
-        "Kidney",
-        "Brain",
-        "Ear"
-      ],
-      answer: 1
-    },
+const scene = new THREE.Scene();
 
-    {
-      q: "Which part of the ear helps with hearing?",
-      options: [
-        "Cochlea",
-        "Femur",
-        "Aorta",
-        "Pelvis"
-      ],
-      answer: 0
-    },
+const camera = new THREE.PerspectiveCamera(
+    45,
+    viewer.clientWidth / viewer.clientHeight,
+    0.01,
+    1000
+);
 
-    {
-      q: "What is the longest bone in the human body?",
-      options: [
-        "Humerus",
-        "Femur",
-        "Tibia",
-        "Radius"
-      ],
-      answer: 1
-    },
+camera.position.set(0, 0, 5);
 
-    {
-      q: "Which blood vessel carries blood away from the heart?",
-      options: [
-        "Vein",
-        "Artery",
-        "Capillary",
-        "Ureter"
-      ],
-      answer: 1
-    },
+const controls = new OrbitControls(camera, renderer.domElement);
 
-    {
-      q: "Which structure protects the brain?",
-      options: [
-        "Rib cage",
-        "Pelvis",
-        "Skull",
-        "Femur"
-      ],
-      answer: 2
-    },
+controls.enableDamping = true;
+controls.dampingFactor = 0.07;
 
-    {
-      q: "Which organ is responsible for breathing?",
-      options: [
-        "Lungs",
-        "Kidney",
-        "Heart",
-        "Brain"
-      ],
-      answer: 0
-    },
+const ambient = new THREE.AmbientLight(0xffffff, 2.2);
+scene.add(ambient);
 
-    {
-      q: "What connects the kidney to the bladder?",
-      options: [
-        "Ureter",
-        "Trachea",
-        "Bronchus",
-        "Aorta"
-      ],
-      answer: 0
+const light1 = new THREE.DirectionalLight(0x00ffff, 3);
+light1.position.set(4, 5, 6);
+scene.add(light1);
+
+const light2 = new THREE.DirectionalLight(0xa855f7, 2);
+light2.position.set(-4, -2, 4);
+scene.add(light2);
+
+const loader = new GLTFLoader();
+
+let currentModel = null;
+let currentTopic = null;
+let selectedMesh = null;
+let modelMeshes = [];
+
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+
+
+/* =========================================================
+   DOM
+========================================================= */
+
+const topicInput = document.getElementById("topicInput");
+const visualiseBtn = document.getElementById("visualiseBtn");
+const clearBtn = document.getElementById("clearBtn");
+
+const viewerTitle = document.getElementById("viewerTitle");
+const modelStatus = document.getElementById("modelStatus");
+
+const emptyView = document.getElementById("emptyView");
+
+const imageFallback = document.getElementById("imageFallback");
+const fallbackImage = document.getElementById("fallbackImage");
+
+const partsList = document.getElementById("partsList");
+const partsCount = document.getElementById("partsCount");
+const partNote = document.getElementById("partNote");
+
+const aiChat = document.getElementById("aiChat");
+const aiQuestion = document.getElementById("aiQuestion");
+const askAiBtn = document.getElementById("askAiBtn");
+
+const aiImageBox = document.getElementById("aiImageBox");
+const aiImage = document.getElementById("aiImage");
+
+const copyAiBtn = document.getElementById("copyAiBtn");
+const speakAiBtn = document.getElementById("speakAiBtn");
+const stopSpeakBtn = document.getElementById("stopSpeakBtn");
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function normalize(value) {
+
+    return String(value || "")
+        .toLowerCase()
+        .replace(/[\s_\-.:/\\()]+/g, "")
+        .replace(/[^a-z0-9]/g, "");
+
+}
+
+
+function topicFromInput(value) {
+
+    const q = normalize(value);
+
+    if (!q) return null;
+
+    const names = {
+        heart: ["heart", "cardiac"],
+        brain: ["brain", "cerebrum", "cerebellum"],
+        lungs: ["lung", "lungs", "respiratory"],
+        kidney: ["kidney", "renal"],
+        ear: ["ear", "hearing"],
+        skeleton: ["skeleton", "bone", "bones", "human skeleton"]
+    };
+
+    for (const key of Object.keys(names)) {
+
+        for (const word of names[key]) {
+
+            if (q.includes(normalize(word))) {
+                return key;
+            }
+
+        }
+
     }
 
-  ];
+    return null;
+}
 
 
-  let challengeIndex = 0;
-  let challengeScore = 0;
-  let challengeAnswered = false;
+function removeCurrentModel() {
 
+    if (!currentModel) return;
 
-  /* =========================================================
-     THREE.JS INITIALIZATION
-  ========================================================= */
+    scene.remove(currentModel);
 
-  function initThree() {
+    currentModel.traverse(obj => {
 
-    scene = new THREE.Scene();
+        if (obj.geometry) {
+            obj.geometry.dispose();
+        }
 
-    scene.background = new THREE.Color(0x03050d);
+        if (obj.material) {
 
+            const materials = Array.isArray(obj.material)
+                ? obj.material
+                : [obj.material];
 
-    camera = new THREE.PerspectiveCamera(
-      45,
-      viewer.clientWidth / viewer.clientHeight,
-      0.1,
-      1000
-    );
+            materials.forEach(mat => {
 
-    camera.position.set(0, 1.2, 4);
+                if (mat.map) mat.map.dispose();
 
+                mat.dispose();
 
-    renderer = new THREE.WebGLRenderer({
-      canvas: canvas,
-      antialias: true,
-      alpha: true
+            });
+
+        }
+
     });
 
-    renderer.setPixelRatio(
-      Math.min(window.devicePixelRatio, 2)
+    currentModel = null;
+    modelMeshes = [];
+    selectedMesh = null;
+}
+
+
+function calculateModelBounds(object) {
+
+    const box = new THREE.Box3().setFromObject(object);
+
+    const center = box.getCenter(new THREE.Vector3());
+
+    const size = box.getSize(new THREE.Vector3());
+
+    const maxSize = Math.max(size.x, size.y, size.z);
+
+    return {
+        box,
+        center,
+        size,
+        maxSize
+    };
+}
+
+
+function frameModel(object) {
+
+    const data = calculateModelBounds(object);
+
+    const center = data.center;
+    const size = data.maxSize || 1;
+
+    object.position.x -= center.x;
+    object.position.y -= center.y;
+    object.position.z -= center.z;
+
+    const distance = size * 2.5;
+
+    camera.position.set(
+        0,
+        0,
+        Math.max(distance, 2)
     );
 
-    renderer.setSize(
-      viewer.clientWidth,
-      viewer.clientHeight
-    );
+    camera.near = Math.max(size / 1000, 0.001);
+    camera.far = Math.max(size * 100, 100);
+    camera.updateProjectionMatrix();
+
+    controls.target.set(0, 0, 0);
+    controls.update();
+}
 
 
-    renderer.outputColorSpace =
-      THREE.SRGBColorSpace;
+/* =========================================================
+   LOAD TOPIC
+========================================================= */
 
+async function loadTopic(topicKey) {
 
-    controls = new OrbitControls(
-      camera,
-      renderer.domElement
-    );
+    const topic = TOPICS[topicKey];
 
-    controls.enableDamping = true;
+    if (!topic) {
 
-    controls.dampingFactor = 0.07;
+        modelStatus.textContent = "Topic not found";
 
-    controls.minDistance = 1;
-
-    controls.maxDistance = 15;
-
-
-    /* LIGHTS */
-
-    const ambient =
-      new THREE.AmbientLight(
-        0xffffff,
-        2.1
-      );
-
-    scene.add(ambient);
-
-
-    const keyLight =
-      new THREE.DirectionalLight(
-        0xffffff,
-        2.5
-      );
-
-    keyLight.position.set(
-      3,
-      5,
-      4
-    );
-
-    scene.add(keyLight);
-
-
-    const fillLight =
-      new THREE.DirectionalLight(
-        0x55ddff,
-        1.5
-      );
-
-    fillLight.position.set(
-      -4,
-      2,
-      2
-    );
-
-    scene.add(fillLight);
-
-
-    const rimLight =
-      new THREE.DirectionalLight(
-        0x9955ff,
-        1.4
-      );
-
-    rimLight.position.set(
-      2,
-      2,
-      -4
-    );
-
-    scene.add(rimLight);
-
-
-    animate();
-
-  }
-
-
-  /* =========================================================
-     ANIMATION
-  ========================================================= */
-
-  function animate() {
-
-    requestAnimationFrame(animate);
-
-    if (controls) {
-      controls.update();
-    }
-
-    if (mixer) {
-      mixer.update(0.016);
-    }
-
-    if (
-      currentModel &&
-      currentModel.userData.autoRotate
-    ) {
-
-      currentModel.rotation.y += 0.002;
+        return;
 
     }
 
-    renderer.render(
-      scene,
-      camera
-    );
+    currentTopic = topicKey;
 
-  }
+    topicInput.value = topic.name;
+
+    viewerTitle.textContent =
+        topic.name.toUpperCase() + " 3D VIEWER";
+
+    emptyView.style.display = "none";
+
+    imageFallback.style.display = "none";
+
+    modelStatus.textContent = "Loading 3D model...";
+
+    removeCurrentModel();
+
+    renderParts(topic);
+
+    showEducationalImage(topic.image);
+
+    try {
+
+        const gltf = await loader.loadAsync(topic.model);
+
+        currentModel = gltf.scene;
+
+        currentModel.traverse(obj => {
+
+            if (obj.isMesh) {
+
+                modelMeshes.push(obj);
+
+                obj.castShadow = true;
+                obj.receiveShadow = true;
+
+                if (obj.material) {
+
+                    if (Array.isArray(obj.material)) {
+
+                        obj.material.forEach(mat => {
+                            mat.transparent = false;
+                        });
+
+                    } else {
+
+                        obj.material.transparent = false;
+
+                    }
+
+                }
+
+            }
+
+        });
+
+        scene.add(currentModel);
+
+        frameModel(currentModel);
+
+        modelStatus.textContent =
+            "3D model loaded • " + modelMeshes.length + " mesh";
+
+        imageFallback.style.display = "none";
+
+        partNote.textContent =
+            "Click a part. HV will try to locate the matching mesh in the 3D model.";
+
+    }
+    catch (error) {
+
+        console.error("GLB LOAD ERROR:", error);
+
+        modelStatus.textContent =
+            "3D unavailable • Educational image shown";
+
+        imageFallback.style.display = "flex";
+
+        partNote.textContent =
+            "This model could not be loaded. Educational image fallback is active.";
+
+    }
+
+}
 
 
-  /* =========================================================
-     RESIZE
-  ========================================================= */
+/* =========================================================
+   EDUCATIONAL IMAGE
+========================================================= */
 
-  function resizeViewer() {
+function showEducationalImage(url) {
 
-    if (!camera || !renderer) return;
+    if (!url) return;
+
+    fallbackImage.src = url;
+
+    fallbackImage.onerror = () => {
+
+        imageFallback.style.display = "none";
+
+    };
+
+}
+
+
+/* =========================================================
+   PART LIST
+========================================================= */
+
+function renderParts(topic) {
+
+    partsList.innerHTML = "";
+
+    partsCount.textContent =
+        topic.parts.length + " parts";
+
+    topic.parts.forEach(([label, aliases]) => {
+
+        const btn = document.createElement("button");
+
+        btn.className = "part-btn";
+
+        btn.textContent = label;
+
+        btn.dataset.part = label;
+
+        btn.addEventListener("click", () => {
+
+            document
+                .querySelectorAll(".part-btn")
+                .forEach(x => x.classList.remove("active"));
+
+            btn.classList.add("active");
+
+            locatePart(label, aliases);
+
+        });
+
+        partsList.appendChild(btn);
+
+    });
+
+}
+
+
+/* =========================================================
+   FIND PART MESH
+========================================================= */
+
+function meshText(mesh) {
+
+    let text = "";
+
+    let node = mesh;
+
+    let depth = 0;
+
+    while (node && depth < 6) {
+
+        text += " " + (node.name || "");
+
+        if (node.userData) {
+
+            text += " " + JSON.stringify(node.userData);
+
+        }
+
+        node = node.parent;
+
+        depth++;
+
+    }
+
+    return normalize(text);
+
+}
+
+
+function findPartMesh(label, aliases) {
+
+    if (!currentModel || modelMeshes.length === 0) {
+        return null;
+    }
+
+    const searchWords = [
+        normalize(label),
+        ...(aliases || []).map(normalize)
+    ];
+
+    /* Exact / strong match */
+    for (const mesh of modelMeshes) {
+
+        const name = meshText(mesh);
+
+        for (const word of searchWords) {
+
+            if (word.length >= 4 && name.includes(word)) {
+                return mesh;
+            }
+
+        }
+
+    }
+
+    return null;
+
+}
+
+
+/* =========================================================
+   LOCATE PART
+========================================================= */
+
+function locatePart(label, aliases) {
+
+    const mesh = findPartMesh(label, aliases);
+
+    if (!mesh) {
+
+        partNote.textContent =
+            label +
+            ": exact separate 3D mesh was not found in this GLB. " +
+            "The model may contain the anatomy as one combined mesh.";
+
+        showPartImage(label);
+
+        return;
+
+    }
+
+    selectedMesh = mesh;
+
+    /* Highlight */
+    if (selectedMesh.material) {
+
+        const materials = Array.isArray(selectedMesh.material)
+            ? selectedMesh.material
+            : [selectedMesh.material];
+
+        materials.forEach(mat => {
+
+            if (!mat.emissive) return;
+
+            mat.userData = mat.userData || {};
+
+            if (!mat.userData.hvOriginalEmissive) {
+
+                mat.userData.hvOriginalEmissive =
+                    mat.emissive.clone();
+
+            }
+
+            mat.emissive.set(0x00ffff);
+
+            if (mat.emissiveIntensity !== undefined) {
+                mat.emissiveIntensity = 2;
+            }
+
+        });
+
+    }
+
+    /* Camera focus */
+    const box = new THREE.Box3().setFromObject(mesh);
+
+    const center =
+        box.getCenter(new THREE.Vector3());
+
+    const size =
+        box.getSize(new THREE.Vector3());
+
+    const radius =
+        Math.max(size.x, size.y, size.z, 0.2);
+
+    const direction =
+        new THREE.Vector3(0, 0, 1);
+
+    const targetPosition =
+        center.clone().add(
+            direction.multiplyScalar(radius * 4)
+        );
+
+    camera.position.copy(targetPosition);
+
+    controls.target.copy(center);
+
+    controls.update();
+
+    partNote.textContent =
+        "Located: " + label;
+
+    showPartImage(label);
+
+}
+
+
+function showPartImage(label) {
+
+    if (!currentTopic) return;
+
+    /*
+       For a part that cannot be found as a separate GLB mesh,
+       show the topic educational diagram instead of falsely
+       claiming that the 3D mesh was located.
+    */
+
+    const topic = TOPICS[currentTopic];
+
+    if (topic && topic.image) {
+
+        fallbackImage.src = topic.image;
+
+        imageFallback.style.display = "flex";
+
+    }
+
+}
+
+
+/* =========================================================
+   CLEAR
+========================================================= */
+
+function clearEverything() {
+
+    removeCurrentModel();
+
+    currentTopic = null;
+
+    topicInput.value = "";
+
+    viewerTitle.textContent = "3D VIEWER";
+
+    modelStatus.textContent = "No topic selected";
+
+    partsList.innerHTML = "";
+
+    partsCount.textContent = "0 parts";
+
+    partNote.textContent =
+        "Select a topic first. Then click a part to locate it.";
+
+    imageFallback.style.display = "none";
+
+    emptyView.style.display = "flex";
+
+    camera.position.set(0, 0, 5);
+
+    controls.target.set(0, 0, 0);
+
+    controls.update();
+
+}
+
+
+visualiseBtn.addEventListener("click", () => {
+
+    const key = topicFromInput(topicInput.value);
+
+    if (!key) {
+
+        modelStatus.textContent =
+            "Try Heart, Brain, Lungs, Kidney, Ear or Skeleton.";
+
+        return;
+
+    }
+
+    loadTopic(key);
+
+});
+
+
+topicInput.addEventListener("keydown", event => {
+
+    if (event.key === "Enter") {
+
+        visualiseBtn.click();
+
+    }
+
+});
+
+
+clearBtn.addEventListener("click", clearEverything);
+
+
+/* =========================================================
+   MOUSE CLICK ON 3D MODEL
+========================================================= */
+
+canvas.addEventListener("click", event => {
+
+    if (!currentModel) return;
+
+    const rect =
+        canvas.getBoundingClientRect();
+
+    mouse.x =
+        ((event.clientX - rect.left) / rect.width) * 2 - 1;
+
+    mouse.y =
+        -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+    raycaster.setFromCamera(mouse, camera);
+
+    const hits =
+        raycaster.intersectObjects(modelMeshes, true);
+
+    if (hits.length) {
+
+        const mesh = hits[0].object;
+
+        selectedMesh = mesh;
+
+        partNote.textContent =
+            "Selected mesh: " +
+            (mesh.name || "Unnamed part");
+
+        const box =
+            new THREE.Box3().setFromObject(mesh);
+
+        const center =
+            box.getCenter(new THREE.Vector3());
+
+        controls.target.copy(center);
+
+        controls.update();
+
+    }
+
+});
+
+
+/* =========================================================
+   AI CHAT
+========================================================= */
+
+let lastAiAnswer = "";
+
+
+function addMessage(sender, text) {
+
+    const message =
+        document.createElement("div");
+
+    message.className =
+        "message " +
+        (sender === "User" ? "user" : "hv");
+
+    const label =
+        document.createElement("span");
+
+    label.className = "message-label";
+
+    label.textContent = sender;
+
+    const body =
+        document.createElement("span");
+
+    body.textContent = text;
+
+    message.appendChild(label);
+    message.appendChild(body);
+
+    aiChat.appendChild(message);
+
+    aiChat.scrollTop =
+        aiChat.scrollHeight;
+
+}
+
+
+function getLocalAnswer(question) {
+
+    const q = question.toLowerCase();
+
+    if (currentTopic === "heart" || q.includes("heart")) {
+
+        return "The heart is a muscular organ that pumps blood throughout the body. It has four chambers: two atria and two ventricles.";
+
+    }
+
+    if (currentTopic === "brain" || q.includes("brain")) {
+
+        return "The brain controls body activities, processes information, and supports functions such as memory, movement, learning, and emotions.";
+
+    }
+
+    if (currentTopic === "lungs" || q.includes("lung")) {
+
+        return "The lungs are respiratory organs. They exchange oxygen and carbon dioxide between the air and blood. Tiny structures called alveoli help with this exchange.";
+
+    }
+
+    if (currentTopic === "kidney" || q.includes("kidney")) {
+
+        return "The kidneys filter the blood, remove waste, balance fluids and electrolytes, and produce urine.";
+
+    }
+
+    if (currentTopic === "ear" || q.includes("ear")) {
+
+        return "The ear is involved in hearing and balance. It includes the outer ear, middle ear, and inner ear.";
+
+    }
+
+    if (currentTopic === "skeleton" || q.includes("bone")) {
+
+        return "The human skeleton provides support, protects internal organs, enables movement, and stores minerals such as calcium.";
+
+    }
+
+    return "Ask me about the selected topic, its parts, function, structure, or importance.";
+}
+
+
+/* =========================================================
+   AI BRIDGE
+========================================================= */
+
+async function askRealAI(question) {
+
+    try {
+
+        if (typeof window.HV_GEMINI_GENERATE === "function") {
+
+            return await window.HV_GEMINI_GENERATE(
+                question,
+                currentTopic || ""
+            );
+
+        }
+
+        if (typeof window.HV_3D_GEMINI === "function") {
+
+            return await window.HV_3D_GEMINI(
+                question,
+                currentTopic || ""
+            );
+
+        }
+
+        if (
+            window.HV_3D_GEMINI &&
+            typeof window.HV_3D_GEMINI.generate === "function"
+        ) {
+
+            return await window.HV_3D_GEMINI.generate(
+                question,
+                currentTopic || ""
+            );
+
+        }
+
+    }
+    catch (error) {
+
+        console.error("AI BRIDGE ERROR:", error);
+
+    }
+
+    return null;
+
+}
+
+
+/* =========================================================
+   INSTANT IMAGE
+========================================================= */
+
+function showInstantAIImage(question) {
+
+    let topic = currentTopic;
+
+    if (!topic) {
+
+        topic = topicFromInput(question);
+
+    }
+
+    if (!topic || !TOPICS[topic]) {
+
+        aiImageBox.style.display = "none";
+
+        return;
+
+    }
+
+    const url =
+        TOPICS[topic].image;
+
+    aiImage.src = url;
+
+    aiImageBox.style.display = "block";
+
+}
+
+
+async function handleAiQuestion() {
+
+    const question =
+        aiQuestion.value.trim();
+
+    if (!question) return;
+
+    addMessage("User", question);
+
+    aiQuestion.value = "";
+
+    /* IMAGE APPEARS IMMEDIATELY */
+    showInstantAIImage(question);
+
+    const thinking =
+        document.createElement("div");
+
+    thinking.className =
+        "message hv";
+
+    thinking.innerHTML =
+        '<span class="message-label">HV</span>Thinking...';
+
+    aiChat.appendChild(thinking);
+
+    aiChat.scrollTop =
+        aiChat.scrollHeight;
+
+    let answer =
+        await askRealAI(question);
+
+    if (!answer) {
+
+        answer =
+            getLocalAnswer(question);
+
+    }
+
+    thinking.remove();
+
+    addMessage("HV", answer);
+
+    lastAiAnswer = answer;
+
+}
+
+
+askAiBtn.addEventListener(
+    "click",
+    handleAiQuestion
+);
+
+
+aiQuestion.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key === "Enter" &&
+            !event.shiftKey
+        ) {
+
+            event.preventDefault();
+
+            handleAiQuestion();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   COPY
+========================================================= */
+
+copyAiBtn.addEventListener("click", async () => {
+
+    if (!lastAiAnswer) return;
+
+    try {
+
+        await navigator.clipboard.writeText(
+            lastAiAnswer
+        );
+
+        copyAiBtn.textContent = "Copied";
+
+        setTimeout(() => {
+            copyAiBtn.textContent = "Copy";
+        }, 1200);
+
+    }
+    catch (error) {
+
+        console.error(error);
+
+    }
+
+});
+
+
+/* =========================================================
+   SPEECH
+========================================================= */
+
+speakAiBtn.addEventListener("click", () => {
+
+    if (!lastAiAnswer) return;
+
+    if (!("speechSynthesis" in window)) return;
+
+    window.speechSynthesis.cancel();
+
+    const speech =
+        new SpeechSynthesisUtterance(
+            lastAiAnswer
+        );
+
+    speech.lang = "en-IN";
+    speech.rate = 0.95;
+
+    window.speechSynthesis.speak(speech);
+
+});
+
+
+stopSpeakBtn.addEventListener("click", () => {
+
+    if ("speechSynthesis" in window) {
+
+        window.speechSynthesis.cancel();
+
+    }
+
+});
+
+
+/* =========================================================
+   CHALLENGE MODE - EXACTLY 10 QUESTIONS
+========================================================= */
+
+const QUESTIONS = [
+
+    {
+        q: "Which organ pumps blood around the body?",
+        a: ["Brain", "Heart", "Kidney", "Lung"],
+        correct: 1
+    },
+
+    {
+        q: "How many chambers does the human heart have?",
+        a: ["2", "3", "4", "5"],
+        correct: 2
+    },
+
+    {
+        q: "Which organ is mainly responsible for breathing?",
+        a: ["Heart", "Liver", "Lungs", "Brain"],
+        correct: 2
+    },
+
+    {
+        q: "Which part of the brain helps coordinate movement?",
+        a: ["Cerebellum", "Aorta", "Cochlea", "Kidney"],
+        correct: 0
+    },
+
+    {
+        q: "What is the functional filtering unit of the kidney?",
+        a: ["Neuron", "Nephron", "Alveolus", "Atrium"],
+        correct: 1
+    },
+
+    {
+        q: "Which structure is involved in hearing?",
+        a: ["Cochlea", "Femur", "Aorta", "Cortex"],
+        correct: 0
+    },
+
+    {
+        q: "What does the skeleton mainly provide?",
+        a: ["Support", "Digestion", "Blood pumping", "Hearing"],
+        correct: 0
+    },
+
+    {
+        q: "Where does gas exchange occur in the lungs?",
+        a: ["Alveoli", "Atria", "Femur", "Skull"],
+        correct: 0
+    },
+
+    {
+        q: "Which blood vessel carries oxygen-rich blood from the heart to the body?",
+        a: ["Aorta", "Vena cava", "Ureter", "Trachea"],
+        correct: 0
+    },
+
+    {
+        q: "Which bone is located in the upper leg?",
+        a: ["Radius", "Femur", "Ulna", "Fibula"],
+        correct: 1
+    }
+
+];
+
+
+const startChallengeBtn =
+    document.getElementById("startChallengeBtn");
+
+const challengeArea =
+    document.getElementById("challengeArea");
+
+const questionNumber =
+    document.getElementById("questionNumber");
+
+const questionText =
+    document.getElementById("questionText");
+
+const optionsContainer =
+    document.getElementById("optionsContainer");
+
+const nextQuestionBtn =
+    document.getElementById("nextQuestionBtn");
+
+const resultBox =
+    document.getElementById("resultBox");
+
+const resultScore =
+    document.getElementById("resultScore");
+
+const resultMessage =
+    document.getElementById("resultMessage");
+
+
+let challengeIndex = 0;
+let challengeScore = 0;
+let answered = false;
+
+
+function showQuestion() {
+
+    const item =
+        QUESTIONS[challengeIndex];
+
+    answered = false;
+
+    questionNumber.textContent =
+        "Question " +
+        (challengeIndex + 1) +
+        " / 10";
+
+    questionText.textContent =
+        item.q;
+
+    optionsContainer.innerHTML = "";
+
+    nextQuestionBtn.style.display =
+        "none";
+
+    item.a.forEach((option, index) => {
+
+        const btn =
+            document.createElement("button");
+
+        btn.className =
+            "option-btn";
+
+        btn.textContent =
+            option;
+
+        btn.addEventListener(
+            "click",
+            () => {
+
+                if (answered) return;
+
+                answered = true;
+
+                if (index === item.correct) {
+
+                    challengeScore++;
+
+                    btn.style.borderColor =
+                        "#00f6ff";
+
+                }
+                else {
+
+                    btn.style.borderColor =
+                        "#a855f7";
+
+                }
+
+                nextQuestionBtn.style.display =
+                    "block";
+
+            }
+        );
+
+        optionsContainer.appendChild(btn);
+
+    });
+
+}
+
+
+startChallengeBtn.addEventListener(
+    "click",
+    () => {
+
+        challengeIndex = 0;
+        challengeScore = 0;
+
+        resultBox.style.display =
+            "none";
+
+        challengeArea.style.display =
+            "block";
+
+        showQuestion();
+
+    }
+);
+
+
+nextQuestionBtn.addEventListener(
+    "click",
+    () => {
+
+        challengeIndex++;
+
+        if (challengeIndex >= 10) {
+
+            challengeArea.style.display =
+                "none";
+
+            resultBox.style.display =
+                "block";
+
+            resultScore.textContent =
+                challengeScore + " / 10";
+
+            if (challengeScore >= 8) {
+
+                resultMessage.textContent =
+                    "Excellent work! Keep learning.";
+
+            }
+            else if (challengeScore >= 5) {
+
+                resultMessage.textContent =
+                    "Good effort! Review the topics and try again.";
+
+            }
+            else {
+
+                resultMessage.textContent =
+                    "Keep practising. You can improve!";
+
+            }
+
+            return;
+
+        }
+
+        showQuestion();
+
+    }
+);
+
+
+/* =========================================================
+   RESPONSIVE RESIZE
+========================================================= */
+
+window.addEventListener("resize", () => {
 
     const width =
-      viewer.clientWidth;
+        viewer.clientWidth;
 
     const height =
-      viewer.clientHeight;
+        viewer.clientHeight;
 
     camera.aspect =
-      width / height;
+        width / height;
 
     camera.updateProjectionMatrix();
 
     renderer.setSize(
-      width,
-      height
+        width,
+        height
     );
 
-  }
+});
 
-  window.addEventListener(
-    "resize",
-    resizeViewer
-  );
 
+/* =========================================================
+   ANIMATION
+========================================================= */
 
-  /* =========================================================
-     NORMALIZE TOPIC
-  ========================================================= */
+function animate() {
 
-  function normalizeTopic(value) {
-
-    const text =
-      String(value || "")
-        .toLowerCase()
-        .trim();
-
-    if (
-      text.includes("heart") ||
-      text.includes("cardiac")
-    ) {
-      return "heart";
-    }
-
-    if (
-      text.includes("brain") ||
-      text.includes("cerebr")
-    ) {
-      return "brain";
-    }
-
-    if (
-      text.includes("lung") ||
-      text.includes("respiratory")
-    ) {
-      return "lungs";
-    }
-
-    if (
-      text.includes("kidney") ||
-      text.includes("renal")
-    ) {
-      return "kidney";
-    }
-
-    if (
-      text.includes("ear") ||
-      text.includes("hearing")
-    ) {
-      return "ear";
-    }
-
-    if (
-      text.includes("skeleton") ||
-      text.includes("bone") ||
-      text.includes("human skeleton")
-    ) {
-      return "skeleton";
-    }
-
-    return null;
-
-  }
-
-
-  /* =========================================================
-     SHOW TOAST
-  ========================================================= */
-
-  function showToast(message) {
-
-    const toast =
-      document.getElementById("toast");
-
-    toast.textContent = message;
-
-    toast.classList.add("show");
-
-    setTimeout(() => {
-
-      toast.classList.remove("show");
-
-    }, 2200);
-
-  }
-
-
-  /* =========================================================
-     UPDATE STATUS
-  ========================================================= */
-
-  function setStatus(message) {
-
-    viewerStatus.textContent =
-      message;
-
-  }
-
-
-  /* =========================================================
-     CLEAR MODEL
-  ========================================================= */
-
-  function removeCurrentModel() {
-
-    if (!currentModel) return;
-
-    scene.remove(
-      currentModel
-    );
-
-    currentModel.traverse(
-      object => {
-
-        if (object.geometry) {
-          object.geometry.dispose();
-        }
-
-        if (object.material) {
-
-          if (
-            Array.isArray(object.material)
-          ) {
-
-            object.material.forEach(
-              material => {
-
-                if (material.map) {
-                  material.map.dispose();
-                }
-
-                material.dispose();
-
-              }
-            );
-
-          } else {
-
-            if (object.material.map) {
-              object.material.map.dispose();
-            }
-
-            object.material.dispose();
-
-          }
-
-        }
-
-      }
-    );
-
-    currentModel = null;
-
-  }
-
-
-  /* =========================================================
-     LOAD GLB
-  ========================================================= */
-
-  function loadGLB(topicKey) {
-
-    const topic =
-      TOPICS[topicKey];
-
-    if (!topic) return;
-
-    return new Promise(
-      (resolve, reject) => {
-
-        const loader =
-          new GLTFLoader();
-
-        loader.load(
-
-          topic.model,
-
-          gltf => {
-
-            removeCurrentModel();
-
-            currentModel =
-              gltf.scene;
-
-            currentModel.userData.autoRotate =
-              true;
-
-
-            /* CENTER MODEL */
-
-            const box =
-              new THREE.Box3()
-                .setFromObject(
-                  currentModel
-                );
-
-            const center =
-              box.getCenter(
-                new THREE.Vector3()
-              );
-
-            const size =
-              box.getSize(
-                new THREE.Vector3()
-              );
-
-            currentModel.position.sub(
-              center
-            );
-
-
-            const maxDimension =
-              Math.max(
-                size.x,
-                size.y,
-                size.z
-              );
-
-            const scale =
-              2.5 / maxDimension;
-
-            currentModel.scale.setScalar(
-              scale
-            );
-
-
-            scene.add(
-              currentModel
-            );
-
-
-            camera.position.set(
-              0,
-              0.6,
-              4
-            );
-
-            controls.target.set(
-              0,
-              0,
-              0
-            );
-
-            controls.update();
-
-
-            if (
-              gltf.animations &&
-              gltf.animations.length
-            ) {
-
-              mixer =
-                new THREE.AnimationMixer(
-                  currentModel
-                );
-
-              gltf.animations.forEach(
-                clip => {
-
-                  mixer
-                    .clipAction(clip)
-                    .play();
-
-                }
-              );
-
-            }
-
-
-            findAndPrepareMeshes();
-
-            resolve(gltf);
-
-          },
-
-          xhr => {
-
-            if (xhr.total) {
-
-              const percent =
-                Math.round(
-                  xhr.loaded /
-                  xhr.total *
-                  100
-                );
-
-              setStatus(
-                "Loading 3D " +
-                percent +
-                "%"
-              );
-
-            }
-
-          },
-
-          error => {
-
-            reject(error);
-
-          }
-
-        );
-
-      }
-    );
-
-  }
-
-
-  /* =========================================================
-     PREPARE MODEL MESHES
-  ========================================================= */
-
-  function findAndPrepareMeshes() {
-
-    if (!currentModel) return;
-
-    currentModel.traverse(
-      object => {
-
-        if (!object.isMesh) return;
-
-        object.userData.originalMaterial =
-          object.material;
-
-        object.userData.originalPosition =
-          object.position.clone();
-
-        object.userData.originalScale =
-          object.scale.clone();
-
-        object.userData.originalRotation =
-          object.rotation.clone();
-
-        object.castShadow = true;
-        object.receiveShadow = true;
-
-      }
-    );
-
-  }
-
-
-  /* =========================================================
-     FIND PART MESH
-  ========================================================= */
-
-  function findPartMesh(partName) {
-
-    if (!currentModel) {
-      return null;
-    }
-
-    const search =
-      partName
-        .toLowerCase()
-        .replace(/[^a-z0-9]/g, "");
-
-    let found = null;
-
-
-    currentModel.traverse(
-      object => {
-
-        if (found || !object.name) {
-          return;
-        }
-
-        const objectName =
-          object.name
-            .toLowerCase()
-            .replace(/[^a-z0-9]/g, "");
-
-
-        if (
-          objectName.includes(search) ||
-          search.includes(objectName)
-        ) {
-
-          found = object;
-
-        }
-
-      }
-    );
-
-
-    /* ALIASES */
-
-    if (!found) {
-
-      const aliases = {
-
-        "leftventricle": [
-          "leftventricle",
-          "ventricle",
-          "lv"
-        ],
-
-        "rightventricle": [
-          "rightventricle",
-          "ventricle",
-          "rv"
-        ],
-
-        "leftatrium": [
-          "leftatrium",
-          "atrium"
-        ],
-
-        "rightatrium": [
-          "rightatrium",
-          "atrium"
-        ],
-
-        "brainstem": [
-          "brainstem",
-          "stem"
-        ],
-
-        "cerebellum": [
-          "cerebellum"
-        ],
-
-        "cochlea": [
-          "cochlea"
-        ],
-
-        "femur": [
-          "femur"
-        ],
-
-        "skull": [
-          "skull"
-        ]
-
-      };
-
-
-      const list =
-        aliases[search];
-
-      if (list) {
-
-        currentModel.traverse(
-          object => {
-
-            if (found || !object.name) {
-              return;
-            }
-
-            const name =
-              object.name
-                .toLowerCase()
-                .replace(
-                  /[^a-z0-9]/g,
-                  ""
-                );
-
-            for (
-              const alias of list
-            ) {
-
-              if (
-                name.includes(alias)
-              ) {
-
-                found = object;
-                break;
-
-              }
-
-            }
-
-          }
-        );
-
-      }
-
-    }
-
-
-    return found;
-
-  }
-
-
-  /* =========================================================
-     LOCATE PART
-  ========================================================= */
-
-  function locatePart(partName) {
-
-    document
-      .querySelectorAll(".part-btn")
-      .forEach(button => {
-
-        button.classList.remove(
-          "active"
-        );
-
-        if (
-          button.dataset.part ===
-          partName
-        ) {
-
-          button.classList.add(
-            "active"
-          );
-
-        }
-
-      });
-
-
-    if (!currentModel) {
-
-      showToast(
-        "3D model is not available for locating."
-      );
-
-      return;
-
-    }
-
-
-    const mesh =
-      findPartMesh(
-        partName
-      );
-
-
-    if (!mesh) {
-
-      showToast(
-        partName +
-        " location is not identified in this model."
-      );
-
-      return;
-
-    }
-
-
-    /* GET WORLD POSITION */
-
-    const worldPosition =
-      new THREE.Vector3();
-
-    mesh.getWorldPosition(
-      worldPosition
-    );
-
-
-    controls.target.copy(
-      worldPosition
-    );
-
-
-    /* MOVE CAMERA */
-
-    const direction =
-      new THREE.Vector3()
-        .subVectors(
-          camera.position,
-          controls.target
-        )
-        .normalize();
-
-
-    const distance = 3;
-
-    camera.position.copy(
-      worldPosition
-        .clone()
-        .add(
-          direction.multiplyScalar(
-            distance
-          )
-        )
-    );
-
+    requestAnimationFrame(animate);
 
     controls.update();
 
-
-    highlightMesh(
-      mesh
+    renderer.render(
+        scene,
+        camera
     );
 
+}
 
-    showToast(
-      "Located: " +
-      partName
-    );
+animate();
 
-  }
 
+/* =========================================================
+   GLOBAL HOLOVISION BRIDGE
+========================================================= */
 
-  /* =========================================================
-     HIGHLIGHT MESH
-  ========================================================= */
+window.HoloVision = {
 
-  function highlightMesh(mesh) {
+    loadTopic,
 
-    if (!mesh) return;
+    clearEverything,
 
+    locatePart,
 
-    currentModel.traverse(
-      object => {
+    getCurrentTopic: () => currentTopic
 
-        if (
-          object.isMesh &&
-          object.userData.originalMaterial
-        ) {
+};
 
-          object.material =
-            object.userData.originalMaterial;
+window.HV_GET_PARTS = () => {
 
-        }
+    if (!currentTopic) return [];
 
-      }
-    );
+    return TOPICS[currentTopic]
+        .parts
+        .map(x => x[0]);
 
+};
 
-    if (!mesh.userData.originalMaterial) {
-      return;
-    }
 
+/* =========================================================
+   INITIAL STATE
+========================================================= */
 
-    const original =
-      mesh.userData.originalMaterial;
-
-
-    const highlight =
-      original.clone();
-
-
-    highlight.emissive =
-      new THREE.Color(
-        0x00eaff
-      );
-
-    highlight.emissiveIntensity =
-      2;
-
-
-    mesh.material =
-      highlight;
-
-
-    setTimeout(() => {
-
-      if (
-        mesh &&
-        mesh.userData.originalMaterial
-      ) {
-
-        mesh.material =
-          mesh.userData.originalMaterial;
-
-      }
-
-    }, 1800);
-
-  }
-
-
-  /* =========================================================
-     PARTS UI
-  ========================================================= */
-
-  function displayParts(topicKey) {
-
-    const topic =
-      TOPICS[topicKey];
-
-    partsList.innerHTML = "";
-
-
-    if (!topic) {
-
-      partsList.innerHTML =
-        '<div class="no-parts">Select a topic to display its parts.</div>';
-
-      return;
-
-    }
-
-
-    topic.parts.forEach(
-      part => {
-
-        const button =
-          document.createElement(
-            "button"
-          );
-
-        button.className =
-          "part-btn";
-
-        button.textContent =
-          part;
-
-        button.dataset.part =
-          part;
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            locatePart(
-              part
-            );
-
-          }
-        );
-
-        partsList.appendChild(
-          button
-        );
-
-      }
-    );
-
-  }
-
-
-  /* =========================================================
-     IMAGE FALLBACK
-  ========================================================= */
-
-  function showImageFallback(
-    topicKey
-  ) {
-
-    const topic =
-      TOPICS[topicKey];
-
-    if (!topic) return;
-
-
-    removeCurrentModel();
-
-
-    canvas.style.display =
-      "none";
-
-    imageFallback.classList.add(
-      "show"
-    );
-
-
-    fallbackImage.src =
-      topic.image;
-
-
-    fallbackImage.onerror =
-      () => {
-
-        /* SECOND FALLBACK */
-
-        const search =
-          encodeURIComponent(
-            topic.name +
-            " anatomy diagram"
-          );
-
-        fallbackImage.src =
-          "https://image.pollinations.ai/prompt/" +
-          search;
-
-      };
-
-
-    viewerPlaceholder.classList.add(
-      "hidden"
-    );
-
-
-    setStatus(
-      "Educational image"
-    );
-
-  }
-
-
-  /* =========================================================
-     SHOW 3D
-  ========================================================= */
-
-  async function visualiseTopic(
-    topicKey
-  ) {
-
-    const topic =
-      TOPICS[topicKey];
-
-    if (!topic) {
-
-      showToast(
-        "Topic not found."
-      );
-
-      return;
-
-    }
-
-
-    currentTopic =
-      topicKey;
-
-
-    topicStatus.textContent =
-      topic.name;
-
-
-    viewerPlaceholder.classList.add(
-      "hidden"
-    );
-
-
-    imageFallback.classList.remove(
-      "show"
-    );
-
-    canvas.style.display =
-      "block";
-
-
-    setStatus(
-      "Loading 3D..."
-    );
-
-
-    displayParts(
-      topicKey
-    );
-
-
-    try {
-
-      await loadGLB(
-        topicKey
-      );
-
-      setStatus(
-        "3D Model Ready"
-      );
-
-      showToast(
-        topic.name +
-        " 3D model loaded."
-      );
-
-    } catch (error) {
-
-      console.warn(
-        "3D model unavailable:",
-        error
-      );
-
-
-      showImageFallback(
-        topicKey
-      );
-
-
-      showToast(
-        "3D unavailable - educational image loaded."
-      );
-
-    }
-
-  }
-
-
-  /* =========================================================
-     CLEAR EVERYTHING
-  ========================================================= */
-
-  function clearEverything() {
-
-    removeCurrentModel();
-
-
-    if (mixer) {
-
-      mixer.stopAllAction();
-
-      mixer = null;
-
-    }
-
-
-    canvas.style.display =
-      "block";
-
-
-    imageFallback.classList.remove(
-      "show"
-    );
-
-
-    fallbackImage.removeAttribute(
-      "src"
-    );
-
-
-    viewerPlaceholder.classList.remove(
-      "hidden"
-    );
-
-
-    topicInput.value = "";
-
-    currentTopic = "";
-
-    topicStatus.textContent =
-      "No topic selected";
-
-
-    setStatus(
-      "Ready"
-    );
-
-
-    partsList.innerHTML =
-      '<div class="no-parts">Select a topic to display its parts.</div>';
-
-
-    aiQuestion.value = "";
-
-    aiAnswer.textContent =
-      "AI Assistant ready.";
-
-
-    stopSpeaking();
-
-  }
-
-
-  /* =========================================================
-     AI BRIDGE
-  ========================================================= */
-
-  async function askHoloVisionAI(
-    question
-  ) {
-
-    /*
-      Existing HoloVision AI connection
-      is detected automatically.
-
-      Supported bridges:
-      window.HV_GEMINI_GENERATE
-      window.HV_3D_GEMINI
-    */
-
-
-    try {
-
-      if (
-        typeof window.HV_GEMINI_GENERATE ===
-        "function"
-      ) {
-
-        return await window.HV_GEMINI_GENERATE(
-          question
-        );
-
-      }
-
-
-      if (
-        typeof window.HV_3D_GEMINI ===
-        "function"
-      ) {
-
-        return await window.HV_3D_GEMINI(
-          question
-        );
-
-      }
-
-
-      if (
-        window.HV_3D_GEMINI &&
-        typeof window.HV_3D_GEMINI.generate ===
-        "function"
-      ) {
-
-        return await window.HV_3D_GEMINI.generate(
-          question
-        );
-
-      }
-
-
-    } catch (error) {
-
-      console.warn(
-        "AI bridge error:",
-        error
-      );
-
-    }
-
-
-    return null;
-
-  }
-
-
-  /* =========================================================
-     LOCAL AI FALLBACK
-  ========================================================= */
-
-  function localAnswer(
-    question
-  ) {
-
-    const text =
-      question.toLowerCase();
-
-
-    if (
-      text.includes("heart")
-    ) {
-
-      return (
-        "The heart is a muscular organ that pumps blood throughout the body. " +
-        "It has four chambers: two atria and two ventricles."
-      );
-
-    }
-
-
-    if (
-      text.includes("brain")
-    ) {
-
-      return (
-        "The brain is the main control center of the nervous system. " +
-        "It helps control movement, memory, thinking, senses and many body functions."
-      );
-
-    }
-
-
-    if (
-      text.includes("lung")
-    ) {
-
-      return (
-        "The lungs are organs of the respiratory system. " +
-        "They help exchange oxygen and carbon dioxide between the air and blood."
-      );
-
-    }
-
-
-    if (
-      text.includes("kidney")
-    ) {
-
-      return (
-        "The kidneys filter the blood, remove waste and help maintain the body's fluid and chemical balance."
-      );
-
-    }
-
-
-    if (
-      text.includes("ear")
-    ) {
-
-      return (
-        "The ear helps with hearing and balance. " +
-        "The cochlea is important for hearing, while the inner ear also supports balance."
-      );
-
-    }
-
-
-    if (
-      text.includes("skeleton") ||
-      text.includes("bone")
-    ) {
-
-      return (
-        "The human skeleton supports the body, protects internal organs and helps movement together with muscles."
-      );
-
-    }
-
-
-    return (
-      "This topic can be explored using the 3D visualisation and Parts panel. " +
-      "Try asking about its structure, function or important parts."
-    );
-
-  }
-
-
-  /* =========================================================
-     ASK AI
-  ========================================================= */
-
-  async function askAI() {
-
-    let question =
-      aiQuestion.value.trim();
-
-
-    if (!question) {
-
-      if (currentTopic) {
-
-        question =
-          "Explain the " +
-          TOPICS[currentTopic].name +
-          " in a simple student-friendly way.";
-
-      } else {
-
-        showToast(
-          "Enter a question first."
-        );
-
-        return;
-
-      }
-
-    }
-
-
-    const finalQuestion =
-      currentTopic
-        ? "Topic: " +
-          TOPICS[currentTopic].name +
-          "\nStudent question: " +
-          question
-        : question;
-
-
-    aiAnswer.textContent =
-      "Thinking...";
-
-
-    askAiBtn.disabled =
-      true;
-
-
-    try {
-
-      const response =
-        await askHoloVisionAI(
-          finalQuestion
-        );
-
-
-      if (response) {
-
-        if (
-          typeof response ===
-          "string"
-        ) {
-
-          aiAnswer.textContent =
-            response;
-
-        } else if (
-          response.text
-        ) {
-
-          aiAnswer.textContent =
-            response.text;
-
-        } else {
-
-          aiAnswer.textContent =
-            JSON.stringify(
-              response
-            );
-
-        }
-
-      } else {
-
-        aiAnswer.textContent =
-          localAnswer(
-            finalQuestion
-          );
-
-      }
-
-    } catch (error) {
-
-      console.error(
-        error
-      );
-
-
-      aiAnswer.textContent =
-        localAnswer(
-          finalQuestion
-        );
-
-    }
-
-
-    askAiBtn.disabled =
-      false;
-
-  }
-
-
-  /* =========================================================
-     COPY AI ANSWER
-  ========================================================= */
-
-  async function copyAnswer() {
-
-    const text =
-      aiAnswer.textContent.trim();
-
-
-    if (!text) return;
-
-
-    try {
-
-      await navigator.clipboard.writeText(
-        text
-      );
-
-      showToast(
-        "Answer copied."
-      );
-
-    } catch {
-
-      showToast(
-        "Copy is not available."
-      );
-
-    }
-
-  }
-
-
-  /* =========================================================
-     SPEECH
-  ========================================================= */
-
-  function speakAnswer() {
-
-    const text =
-      aiAnswer.textContent.trim();
-
-
-    if (
-      !text ||
-      !("speechSynthesis" in window)
-    ) {
-
-      showToast(
-        "Speech is not available."
-      );
-
-      return;
-
-    }
-
-
-    speechSynthesis.cancel();
-
-
-    const utterance =
-      new SpeechSynthesisUtterance(
-        text
-      );
-
-
-    utterance.lang =
-      "en-IN";
-
-    utterance.rate =
-      0.95;
-
-    utterance.pitch =
-      1;
-
-
-    utterance.onstart =
-      () => {
-
-        aiSpeaking = true;
-
-      };
-
-
-    utterance.onend =
-      () => {
-
-        aiSpeaking = false;
-
-      };
-
-
-    speechSynthesis.speak(
-      utterance
-    );
-
-  }
-
-
-  function stopSpeaking() {
-
-    if (
-      "speechSynthesis" in window
-    ) {
-
-      speechSynthesis.cancel();
-
-    }
-
-    aiSpeaking = false;
-
-  }
-
-
-  /* =========================================================
-     CHALLENGE
-  ========================================================= */
-
-  const startChallengeBtn =
-    document.getElementById(
-      "startChallengeBtn"
-    );
-
-  const challengeArea =
-    document.getElementById(
-      "challengeArea"
-    );
-
-  const challengeProgress =
-    document.getElementById(
-      "challengeProgress"
-    );
-
-  const questionText =
-    document.getElementById(
-      "questionText"
-    );
-
-  const optionsContainer =
-    document.getElementById(
-      "optionsContainer"
-    );
-
-  const nextQuestionBtn =
-    document.getElementById(
-      "nextQuestionBtn"
-    );
-
-  const resultBox =
-    document.getElementById(
-      "resultBox"
-    );
-
-  const resultScore =
-    document.getElementById(
-      "resultScore"
-    );
-
-  const resultMessage =
-    document.getElementById(
-      "resultMessage"
-    );
-
-
-  function startChallenge() {
-
-    challengeIndex = 0;
-
-    challengeScore = 0;
-
-    challengeAnswered =
-      false;
-
-
-    challengeArea.classList.add(
-      "show"
-    );
-
-    resultBox.classList.remove(
-      "show"
-    );
-
-
-    showChallengeQuestion();
-
-  }
-
-
-  function showChallengeQuestion() {
-
-    const item =
-      CHALLENGES[
-        challengeIndex
-      ];
-
-
-    challengeAnswered =
-      false;
-
-
-    challengeProgress.textContent =
-      "Question " +
-      (challengeIndex + 1) +
-      " of 10";
-
-
-    questionText.textContent =
-      item.q;
-
-
-    optionsContainer.innerHTML =
-      "";
-
-
-    nextQuestionBtn.style.display =
-      "none";
-
-
-    item.options.forEach(
-      (option, index) => {
-
-        const button =
-          document.createElement(
-            "button"
-          );
-
-        button.className =
-          "option";
-
-        button.textContent =
-          option;
-
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            answerChallenge(
-              index,
-              button
-            );
-
-          }
-        );
-
-
-        optionsContainer.appendChild(
-          button
-        );
-
-      }
-    );
-
-  }
-
-
-  function answerChallenge(
-    selected,
-    selectedButton
-  ) {
-
-    if (challengeAnswered) {
-      return;
-    }
-
-
-    challengeAnswered =
-      true;
-
-
-    const item =
-      CHALLENGES[
-        challengeIndex
-      ];
-
-
-    const buttons =
-      optionsContainer.querySelectorAll(
-        ".option"
-      );
-
-
-    buttons.forEach(
-      (button, index) => {
-
-        if (
-          index ===
-          item.answer
-        ) {
-
-          button.classList.add(
-            "correct"
-          );
-
-        }
-
-      }
-    );
-
-
-    if (
-      selected ===
-      item.answer
-    ) {
-
-      challengeScore++;
-
-      selectedButton.classList.add(
-        "correct"
-      );
-
-    } else {
-
-      selectedButton.classList.add(
-        "wrong"
-      );
-
-    }
-
-
-    nextQuestionBtn.style.display =
-      "inline-block";
-
-  }
-
-
-  function nextChallengeQuestion() {
-
-    if (!challengeAnswered) {
-      return;
-    }
-
-
-    challengeIndex++;
-
-
-    if (
-      challengeIndex >=
-      CHALLENGES.length
-    ) {
-
-      finishChallenge();
-
-      return;
-
-    }
-
-
-    showChallengeQuestion();
-
-  }
-
-
-  function finishChallenge() {
-
-    challengeArea.classList.remove(
-      "show"
-    );
-
-    resultBox.classList.add(
-      "show"
-    );
-
-
-    resultScore.textContent =
-      challengeScore +
-      " / 10";
-
-
-    let message;
-
-
-    if (
-      challengeScore === 10
-    ) {
-
-      message =
-        "Excellent! You got all 10 correct. Great work!";
-
-    } else if (
-      challengeScore >= 7
-    ) {
-
-      message =
-        "Great job! Your understanding is strong. Keep learning!";
-
-    } else if (
-      challengeScore >= 5
-    ) {
-
-      message =
-        "Good effort! Review the topics and try the challenge again.";
-
-    } else {
-
-      message =
-        "Keep learning! Explore the 3D Lab and try again.";
-
-    }
-
-
-    resultMessage.textContent =
-      message;
-
-  }
-
-
-  /* =========================================================
-     BUTTON EVENTS
-  ========================================================= */
-
-  visualiseBtn.addEventListener(
-    "click",
-    () => {
-
-      const topicKey =
-        normalizeTopic(
-          topicInput.value
-        );
-
-
-      if (!topicKey) {
-
-        showToast(
-          "Try Heart, Brain, Lungs, Kidney, Ear or Skeleton."
-        );
-
-        return;
-
-      }
-
-
-      visualiseTopic(
-        topicKey
-      );
-
-    }
-  );
-
-
-  topicInput.addEventListener(
-    "keydown",
-    event => {
-
-      if (
-        event.key ===
-        "Enter"
-      ) {
-
-        visualiseBtn.click();
-
-      }
-
-    }
-  );
-
-
-  clearBtn.addEventListener(
-    "click",
-    clearEverything
-  );
-
-
-  askAiBtn.addEventListener(
-    "click",
-    askAI
-  );
-
-
-  copyAiBtn.addEventListener(
-    "click",
-    copyAnswer
-  );
-
-
-  speakAiBtn.addEventListener(
-    "click",
-    speakAnswer
-  );
-
-
-  stopSpeakBtn.addEventListener(
-    "click",
-    stopSpeaking
-  );
-
-
-  startChallengeBtn.addEventListener(
-    "click",
-    startChallenge
-  );
-
-
-  nextQuestionBtn.addEventListener(
-    "click",
-    nextChallengeQuestion
-  );
-
-
-  backBtn.addEventListener(
-    "click",
-    () => {
-
-      if (
-        history.length >
-        1
-      ) {
-
-        history.back();
-
-      } else {
-
-        window.location.href =
-          "home.html";
-
-      }
-
-    }
-  );
-
-
-  /* =========================================================
-     GLOBAL HOLOVISION BRIDGE
-  ========================================================= */
-
-  window.HoloVision = {
-
-    loadTopic: function(topic) {
-
-      const topicKey =
-        normalizeTopic(
-          topic
-        );
-
-      if (topicKey) {
-
-        topicInput.value =
-          TOPICS[
-            topicKey
-          ].name;
-
-        visualiseTopic(
-          topicKey
-        );
-
-      }
-
-    },
-
-
-    clearEverything:
-      clearEverything,
-
-
-    locatePart:
-      locatePart
-
-  };
-
-
-  window.HV_GET_PARTS =
-    function() {
-
-      if (
-        !currentTopic ||
-        !TOPICS[currentTopic]
-      ) {
-
-        return [];
-
-      }
-
-      return TOPICS[
-        currentTopic
-      ].parts;
-
-    };
-
-
-  /* =========================================================
-     INITIALIZE
-  ========================================================= */
-
-  initThree();
-
-
-  console.log(
-    "HoloVision 3D Lab loaded successfully."
-  );
-
-  console.log(
-    "Experiment section: REMOVED"
-  );
+clearEverything();
 
 </script>
 
