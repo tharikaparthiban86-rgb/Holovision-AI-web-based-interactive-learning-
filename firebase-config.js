@@ -1,6 +1,7 @@
 // ========================================
 // HOLOVISION AI - FIREBASE CONFIG
 // TEXT AI + IMAGE AI
+// GitHub Pages Safe Version
 // ========================================
 
 import {
@@ -51,44 +52,97 @@ export const auth = getAuth(app);
 // FIREBASE AI
 // ========================================
 
-const ai = getAI(
-    app,
-    {
+let ai = null;
+let model = null;
+let imageModel = null;
+
+
+// ========================================
+// INITIALIZE AI SAFELY
+// ========================================
+
+try {
+
+    ai = getAI(app, {
         backend: new GoogleAIBackend()
+    });
+
+    console.log("HoloVision Firebase AI connected.");
+
+} catch (error) {
+
+    console.error(
+        "Firebase AI initialization failed:",
+        error
+    );
+
+}
+
+
+// ========================================
+// TEXT AI
+// ========================================
+
+try {
+
+    if (ai) {
+
+        model = getGenerativeModel(ai, {
+            model: "gemini-3.8-flash"
+        });
+
+        console.log(
+            "HoloVision Text AI READY."
+        );
+
     }
-);
+
+} catch (error) {
+
+    console.error(
+        "Text AI initialization failed:",
+        error
+    );
+
+}
 
 
 // ========================================
-// HOLOVISION TEXT AI
+// IMAGE AI
 // ========================================
-// Main educational / chat / explanation model
 
-export const model = getGenerativeModel(
-    ai,
-    {
-        model: "gemini-3.8-flash"
+try {
+
+    if (ai) {
+
+        imageModel = getGenerativeModel(ai, {
+
+            model: "gemini-3.1-flash-image",
+
+            generationConfig: {
+
+                responseModalities: [
+                    ResponseModality.IMAGE
+                ]
+
+            }
+
+        });
+
+        console.log(
+            "HoloVision Image AI READY."
+        );
+
     }
-);
 
+} catch (error) {
 
-// ========================================
-// HOLOVISION IMAGE AI
-// ========================================
-// Dedicated Gemini image-generation model
+    console.error(
+        "Image AI initialization failed:",
+        error
+    );
 
-export const imageModel = getGenerativeModel(
-    ai,
-    {
-        model: "gemini-3.1-flash-image",
-
-        generationConfig: {
-            responseModalities: [
-                ResponseModality.IMAGE
-            ]
-        }
-    }
-);
+}
 
 
 // ========================================
@@ -97,16 +151,18 @@ export const imageModel = getGenerativeModel(
 
 export {
     app,
-    ai
+    ai,
+    model,
+    imageModel
 };
 
 
 // ========================================
-// DEBUG
+// FINAL STATUS
 // ========================================
 
 console.log(
-    "HoloVision Firebase initialized successfully."
+    "HoloVision Firebase initialized."
 );
 
 console.log(
@@ -114,21 +170,5 @@ console.log(
 );
 
 console.log(
-    "HoloVision Text AI initialized."
-);
-
-console.log(
-    "HoloVision Text Model: gemini-3.8-flash"
-);
-
-console.log(
-    "HoloVision Image AI initialized."
-);
-
-console.log(
-    "HoloVision Image Model: gemini-3.1-flash-image"
-);
-
-console.log(
-    "HoloVision AI system READY."
+    "HoloVision AI configuration loaded."
 );
