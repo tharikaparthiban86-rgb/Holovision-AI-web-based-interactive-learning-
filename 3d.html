@@ -6959,7 +6959,42 @@ if(challengeBtn){
   );
 
 }
+if(clearChallengeBtn){
 
+  clearChallengeBtn.addEventListener(
+    "click",
+    () => {
+
+      challengeQuestions = [];
+      challengeIndex = 0;
+      challengeScoreValue = 0;
+      challengeAnswered = false;
+
+      challengeStatus.textContent =
+        "Start the 10-question challenge for the selected topic.";
+
+      challengeQuestion.textContent =
+        "No challenge started.";
+
+      challengeOptions.innerHTML =
+        "";
+
+      challengeFeedback.textContent =
+        "Your feedback will appear here.";
+
+      challengeScore.textContent =
+        "Score: 0 / 10";
+
+      challengeBtn.disabled =
+        false;
+
+      challengeBtn.textContent =
+        "Start 10 Question Challenge";
+
+    }
+  );
+
+}
 
 /* ========================================
    CLEAN INITIAL STATE
