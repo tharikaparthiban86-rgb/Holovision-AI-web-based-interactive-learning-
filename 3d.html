@@ -1717,25 +1717,41 @@ import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/
    FIREBASE / GEMINI AI
 ======================================== */
 
-/*
-   Firebase/Gemini is optional on the 3D Lab page.
-   If Firebase has a quota/configuration error, the 3D model
-   page must still load and local GLB models must still work.
-*/
-
 let model = null;
 let imageModel = null;
 
-try {
-  const firebaseConfig = await import("./js/firebase-config.js");
-  model = firebaseConfig.model || null;
-  imageModel = firebaseConfig.imageModel || null;
-} catch (error) {
+/* Firebase/Gemini is optional for the 3D page.
+   If Firebase has a temporary error, Three.js, local models
+   and educational-image search must still continue working. */
+(async function loadHoloVisionAI(){
+  const paths = [
+    "./js/firebase-config.js",
+    "./JS/firebase-config.js",
+    "./firebase-config.js"
+  ];
+
+  for(const path of paths){
+    try{
+      const firebaseAI = await import(path);
+      model = firebaseAI.model || null;
+      imageModel = firebaseAI.imageModel || null;
+      console.log(
+        "HoloVision AI modules loaded from:",
+        path,
+        model ? "Text AI ready" : "Text AI unavailable",
+        imageModel ? "Image AI ready" : "Image AI unavailable"
+      );
+      return;
+    }
+    catch(error){
+      console.warn("HoloVision AI path unavailable:", path);
+    }
+  }
+
   console.warn(
-    "HoloVision: Firebase/Gemini unavailable. 3D features will continue.",
-    error
+    "HoloVision Firebase AI could not be loaded. 3D models and educational images will continue without AI."
   );
-}
+})();
 
 
 /* ========================================
@@ -1912,18 +1928,6 @@ const MODEL_REGISTRY = {
     ]
   },
 
-  kidney: {
-    file: "models/Human kidneys.glb",
-
-    title: "Human Kidney",
-
-    parts: [
-      "Cortex",
-      "Medulla",
-      "Renal Pelvis",
-      "Ureter"
-    ]
-  },
 
   skeleton: {
     file: "models/human skeleton.glb",
@@ -1976,10 +1980,6 @@ const TOPICS = {
     key: "lungs"
   },
 
-  kidney: {
-    title: "Human Kidney",
-    key: "kidney"
-  },
 
   skeleton: {
     title: "Human Skeleton",
@@ -2595,11 +2595,32 @@ Requirements:
       return null;
     }
 
-    /*
-      Firebase Gemini image response
-      contains inline image data.
-    */
+    /* Firebase AI Logic current Web response API. */
+    try{
+      if(typeof response.inlineDataParts === "function"){
+        const inlineParts = response.inlineDataParts();
 
+        if(inlineParts?.length){
+          const inlineData = inlineParts[0]?.inlineData;
+
+          if(inlineData?.data){
+            const mimeType =
+              inlineData.mimeType ||
+              "image/png";
+
+            return `data:${mimeType};base64,${inlineData.data}`;
+          }
+        }
+      }
+    }
+    catch(inlineError){
+      console.warn(
+        "HoloVision: inlineDataParts() could not be read.",
+        inlineError
+      );
+    }
+
+    /* Compatibility fallback for older response shapes. */
     const parts =
       response.candidates?.[0]?.content?.parts || [];
 
@@ -2617,14 +2638,8 @@ Requirements:
           inlineData.mimeType ||
           "image/png";
 
-        const imageData =
+        return
           `data:${mimeType};base64,${inlineData.data}`;
-
-        console.log(
-          "✅ HoloVision AI image generated."
-        );
-
-        return imageData;
       }
     }
 
@@ -3176,9 +3191,6 @@ async function loadGLB(
   filePath,
   topic
 ){
-
-  /* GitHub Pages: resolve models relative to this 3d.html page. */
-  filePath = new URL(filePath, import.meta.url).href;
 
   if(!filePath){
 
@@ -5400,36 +5412,26 @@ async function visualiseTopic(
 
 if(loaded){
 
-  emptyState.style.display =
-    "none";
+  emptyState.style.display = "none";
 
   setStatus(
-    `${currentTopic.title} ready`
+    `${currentTopic.title} 3D model ready`
   );
 
-  // Prepare relevant image also
+  /* Prepare an educational image in the background.
+     The 3D model stays visible until the user chooses Image. */
   findEducationalImage(searchText)
-    .then((imageUrl) => {
-
-      if(imageUrl){
-
-        currentImageUrl =
-          imageUrl;
-
-        console.log(
-          "HoloVision relevant image ready."
-        );
-
+    .then(async (imageUrl) => {
+      if(!imageUrl){
+        imageUrl = await generateAIImage(searchText);
       }
-
+      if(imageUrl){
+        currentImageUrl = imageUrl;
+        console.log(`HoloVision image ready for ${currentTopic.title}`);
+      }
     })
     .catch((error) => {
-
-      console.warn(
-        "Background image search failed:",
-        error
-      );
-
+      console.warn("HoloVision background image preparation failed:", error);
     });
 
   return;
@@ -6241,6 +6243,7 @@ if(findVisualBtn){
       );
 
       let imageUrl =
+        currentImageUrl ||
         await findEducationalImage(
           searchText
         );
