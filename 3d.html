@@ -1717,10 +1717,25 @@ import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/
    FIREBASE / GEMINI AI
 ======================================== */
 
-import {
-  model,
-  imageModel
-} from "./js/firebase-config.js";
+/*
+   Firebase/Gemini is optional on the 3D Lab page.
+   If Firebase has a quota/configuration error, the 3D model
+   page must still load and local GLB models must still work.
+*/
+
+let model = null;
+let imageModel = null;
+
+try {
+  const firebaseConfig = await import("./js/firebase-config.js");
+  model = firebaseConfig.model || null;
+  imageModel = firebaseConfig.imageModel || null;
+} catch (error) {
+  console.warn(
+    "HoloVision: Firebase/Gemini unavailable. 3D features will continue.",
+    error
+  );
+}
 
 
 /* ========================================
@@ -3161,6 +3176,9 @@ async function loadGLB(
   filePath,
   topic
 ){
+
+  /* GitHub Pages: resolve models relative to this 3d.html page. */
+  filePath = new URL(filePath, import.meta.url).href;
 
   if(!filePath){
 
